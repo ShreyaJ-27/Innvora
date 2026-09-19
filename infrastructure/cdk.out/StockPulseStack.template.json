@@ -807,9 +807,15 @@
        "Effect": "Allow",
        "Principal": {
         "AWS": {
-         "Fn::GetAtt": [
-          "inventoryeventprocessorServiceRole1F5D5057",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::119618549031:role/stockpulse-inventory-event-processor"
+          ]
          ]
         }
        },
@@ -843,9 +849,15 @@
        "Effect": "Allow",
        "Principal": {
         "AWS": {
-         "Fn::GetAtt": [
-          "searchapiServiceRoleEC986FD2",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::119618549031:role/stockpulse-search-api"
+          ]
          ]
         }
        },
@@ -881,9 +893,15 @@
        "Effect": "Allow",
        "Principal": {
         "AWS": {
-         "Fn::GetAtt": [
-          "OpenSearchIndexInitializerServiceRole58CEAEDA",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::119618549031:role/stockpulse-opensearch-index-initializer"
+          ]
          ]
         }
        },
@@ -1057,6 +1075,394 @@
     "aws:asset:path": "asset.9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
+   }
+  },
+  "InventoryEventProcessorRole23705660": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "stockpulse-inventory-event-processor"
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/InventoryEventProcessorRole/Resource"
+   }
+  },
+  "InventoryEventProcessorRoleDefaultPolicyB17F0FFB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "es:ESHttpPut",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:ChangeMessageVisibility",
+        "sqs:GetQueueUrl",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StockPulseInventoryEventsEF006865",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "InventoryEventProcessorRoleDefaultPolicyB17F0FFB",
+    "Roles": [
+     {
+      "Ref": "InventoryEventProcessorRole23705660"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/InventoryEventProcessorRole/DefaultPolicy/Resource"
+   }
+  },
+  "SearchApiRoleD68B6CC7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "stockpulse-search-api"
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/SearchApiRole/Resource"
+   }
+  },
+  "SearchApiRoleDefaultPolicy0F06D41C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpPost"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SearchApiRoleDefaultPolicy0F06D41C",
+    "Roles": [
+     {
+      "Ref": "SearchApiRoleD68B6CC7"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/SearchApiRole/DefaultPolicy/Resource"
+   }
+  },
+  "OpenSearchIndexInitializerRoleCAF56335": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "stockpulse-opensearch-index-initializer"
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializerRole/Resource"
+   }
+  },
+  "OpenSearchIndexInitializerRoleDefaultPolicyE5C1A88A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpPut"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "OpenSearchIndexInitializerRoleDefaultPolicyE5C1A88A",
+    "Roles": [
+     {
+      "Ref": "OpenSearchIndexInitializerRoleCAF56335"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializerRole/DefaultPolicy/Resource"
    }
   },
   "inventoryapiLogGroup7EAC42A9": {
@@ -1314,171 +1720,6 @@
     "aws:cdk:path": "StockPulseStack/inventory-event-processorLogGroup/Resource"
    }
   },
-  "inventoryeventprocessorServiceRole1F5D5057": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "lambda.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     },
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-       ]
-      ]
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/inventory-event-processor/ServiceRole/Resource"
-   }
-  },
-  "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "xray:PutTraceSegments",
-        "xray:PutTelemetryRecords"
-       ],
-       "Effect": "Allow",
-       "Resource": "*"
-      },
-      {
-       "Action": [
-        "dynamodb:BatchGetItem",
-        "dynamodb:Query",
-        "dynamodb:GetItem",
-        "dynamodb:Scan",
-        "dynamodb:ConditionCheckItem",
-        "dynamodb:BatchWriteItem",
-        "dynamodb:PutItem",
-        "dynamodb:UpdateItem",
-        "dynamodb:DeleteItem",
-        "dynamodb:DescribeTable"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseInventory3E2CFBD5",
-          "Arn"
-         ]
-        }
-       ]
-      },
-      {
-       "Action": [
-        "dynamodb:GetRecords",
-        "dynamodb:GetShardIterator"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseInventory3E2CFBD5",
-          "Arn"
-         ]
-        }
-       ]
-      },
-      {
-       "Action": "es:ESHttpPut",
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
-         ]
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
-           },
-           "/*"
-          ]
-         ]
-        }
-       ]
-      },
-      {
-       "Action": [
-        "sqs:ReceiveMessage",
-        "sqs:ChangeMessageVisibility",
-        "sqs:GetQueueUrl",
-        "sqs:DeleteMessage",
-        "sqs:GetQueueAttributes"
-       ],
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "StockPulseInventoryEventsEF006865",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9",
-    "Roles": [
-     {
-      "Ref": "inventoryeventprocessorServiceRole1F5D5057"
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/inventory-event-processor/ServiceRole/DefaultPolicy/Resource"
-   }
-  },
   "inventoryeventprocessor9B924DAD": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
@@ -1530,7 +1771,7 @@
     "MemorySize": 512,
     "Role": {
      "Fn::GetAtt": [
-      "inventoryeventprocessorServiceRole1F5D5057",
+      "InventoryEventProcessorRole23705660",
       "Arn"
      ]
     },
@@ -1559,8 +1800,8 @@
     }
    },
    "DependsOn": [
-    "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9",
-    "inventoryeventprocessorServiceRole1F5D5057",
+    "InventoryEventProcessorRoleDefaultPolicyB17F0FFB",
+    "InventoryEventProcessorRole23705660",
     "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
     "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
     "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
@@ -1610,155 +1851,6 @@
    "DeletionPolicy": "Delete",
    "Metadata": {
     "aws:cdk:path": "StockPulseStack/search-apiLogGroup/Resource"
-   }
-  },
-  "searchapiServiceRoleEC986FD2": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "lambda.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     },
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-       ]
-      ]
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/search-api/ServiceRole/Resource"
-   }
-  },
-  "searchapiServiceRoleDefaultPolicyE611E30C": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "xray:PutTraceSegments",
-        "xray:PutTelemetryRecords"
-       ],
-       "Effect": "Allow",
-       "Resource": "*"
-      },
-      {
-       "Action": [
-        "dynamodb:BatchGetItem",
-        "dynamodb:Query",
-        "dynamodb:GetItem",
-        "dynamodb:Scan",
-        "dynamodb:ConditionCheckItem",
-        "dynamodb:DescribeTable"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseInventory3E2CFBD5",
-          "Arn"
-         ]
-        }
-       ]
-      },
-      {
-       "Action": [
-        "dynamodb:GetRecords",
-        "dynamodb:GetShardIterator"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseInventory3E2CFBD5",
-          "Arn"
-         ]
-        }
-       ]
-      },
-      {
-       "Action": [
-        "es:ESHttpGet",
-        "es:ESHttpHead",
-        "es:ESHttpPost"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
-         ]
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
-           },
-           "/*"
-          ]
-         ]
-        }
-       ]
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "searchapiServiceRoleDefaultPolicyE611E30C",
-    "Roles": [
-     {
-      "Ref": "searchapiServiceRoleEC986FD2"
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/search-api/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "searchapi1877647C": {
@@ -1812,7 +1904,7 @@
     "MemorySize": 512,
     "Role": {
      "Fn::GetAtt": [
-      "searchapiServiceRoleEC986FD2",
+      "SearchApiRoleD68B6CC7",
       "Arn"
      ]
     },
@@ -1841,8 +1933,8 @@
     }
    },
    "DependsOn": [
-    "searchapiServiceRoleDefaultPolicyE611E30C",
-    "searchapiServiceRoleEC986FD2",
+    "SearchApiRoleDefaultPolicy0F06D41C",
+    "SearchApiRoleD68B6CC7",
     "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
     "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
     "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
@@ -2080,113 +2172,6 @@
     "aws:asset:property": "Code"
    }
   },
-  "OpenSearchIndexInitializerServiceRole58CEAEDA": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "lambda.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     },
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-       ]
-      ]
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializer/ServiceRole/Resource"
-   }
-  },
-  "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "es:ESHttpGet",
-        "es:ESHttpHead",
-        "es:ESHttpPut"
-       ],
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
-         ]
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
-           },
-           "/*"
-          ]
-         ]
-        }
-       ]
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C",
-    "Roles": [
-     {
-      "Ref": "OpenSearchIndexInitializerServiceRole58CEAEDA"
-     }
-    ]
-   },
-   "DependsOn": [
-    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
-    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
-    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
-    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializer/ServiceRole/DefaultPolicy/Resource"
-   }
-  },
   "OpenSearchIndexInitializer1B2BAA1C": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
@@ -2221,7 +2206,7 @@
     "MemorySize": 256,
     "Role": {
      "Fn::GetAtt": [
-      "OpenSearchIndexInitializerServiceRole58CEAEDA",
+      "OpenSearchIndexInitializerRoleCAF56335",
       "Arn"
      ]
     },
@@ -2247,8 +2232,8 @@
     }
    },
    "DependsOn": [
-    "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C",
-    "OpenSearchIndexInitializerServiceRole58CEAEDA",
+    "OpenSearchIndexInitializerRoleDefaultPolicyE5C1A88A",
+    "OpenSearchIndexInitializerRoleCAF56335",
     "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
     "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
     "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",

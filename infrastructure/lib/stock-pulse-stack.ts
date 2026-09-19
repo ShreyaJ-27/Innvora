@@ -96,7 +96,30 @@ export class StockPulseStack extends cdk.Stack {
       DEFAULT_PACK_SIZE: '1'
     };
 
-    const createFunction = (id: string, entry: string, description: string): NodejsFunction => {
+    const processorRoleName = 'stockpulse-inventory-event-processor';
+    const searchApiRoleName = 'stockpulse-search-api';
+    const indexInitializerRoleName = 'stockpulse-opensearch-index-initializer';
+    const lambdaManagedPolicies = [
+      iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'),
+      iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaVPCAccessExecutionRole')
+    ];
+    const processorRole = new iam.Role(this, 'InventoryEventProcessorRole', {
+      roleName: processorRoleName,
+      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+      managedPolicies: lambdaManagedPolicies
+    });
+    const searchApiRole = new iam.Role(this, 'SearchApiRole', {
+      roleName: searchApiRoleName,
+      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+      managedPolicies: lambdaManagedPolicies
+    });
+    const indexInitializerRole = new iam.Role(this, 'OpenSearchIndexInitializerRole', {
+      roleName: indexInitializerRoleName,
+      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+      managedPolicies: lambdaManagedPolicies
+    });
+
+    const createFunction = (id: string, entry: string, description: string, role?: iam.IRole): NodejsFunction => {
       const fn = new NodejsFunction(this, id, {
         functionName: id,
         description,
@@ -111,6 +134,7 @@ export class StockPulseStack extends cdk.Stack {
         securityGroups: [lambdaSecurityGroup],
         vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
         environment: commonEnvironment,
+        role,
         logGroup: new logs.LogGroup(this, `${id}LogGroup`, {
           logGroupName: `/aws/lambda/${id}`,
           retention: logs.RetentionDays.ONE_WEEK,
@@ -122,8 +146,8 @@ export class StockPulseStack extends cdk.Stack {
     };
 
     const inventoryApi = createFunction('inventory-api', 'inventory-api.ts', 'StockPulse inventory and event ingestion API');
-    const processor = createFunction('inventory-event-processor', 'inventory-event-processor.ts', 'Processes inventory events from SQS');
-    const searchApi = createFunction('search-api', 'search-api.ts', 'Searches historical inventory events');
+    const processor = createFunction('inventory-event-processor', 'inventory-event-processor.ts', 'Processes inventory events from SQS', processorRole);
+    const searchApi = createFunction('search-api', 'search-api.ts', 'Searches historical inventory events', searchApiRole);
     const reorderApi = createFunction('reorder-api', 'reorder-api.ts', 'Generates smart reorder recommendations');
     const indexInitializer = new NodejsFunction(this, 'OpenSearchIndexInitializer', {
       functionName: 'stockpulse-opensearch-index-initializer',
@@ -137,6 +161,7 @@ export class StockPulseStack extends cdk.Stack {
       vpc,
       securityGroups: [lambdaSecurityGroup],
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
+      role: indexInitializerRole,
       environment: {
         OPENSEARCH_ENDPOINT: `https://${domain.domainEndpoint}`
       },
@@ -165,24 +190,27 @@ export class StockPulseStack extends cdk.Stack {
     }));
 
     const domainResource = domain.node.defaultChild as opensearch.CfnDomain;
+    const processorPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: processorRoleName });
+    const searchApiPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: searchApiRoleName });
+    const indexInitializerPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: indexInitializerRoleName });
     domainResource.accessPolicies = {
       Version: '2012-10-17',
       Statement: [
         {
           Effect: 'Allow',
-          Principal: { AWS: processor.role!.roleArn },
+          Principal: { AWS: processorPrincipalArn },
           Action: ['es:ESHttpPut'],
           Resource: [domain.domainArn, `${domain.domainArn}/*`]
         },
         {
           Effect: 'Allow',
-          Principal: { AWS: searchApi.role!.roleArn },
+          Principal: { AWS: searchApiPrincipalArn },
           Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPost'],
           Resource: [domain.domainArn, `${domain.domainArn}/*`]
         },
         {
           Effect: 'Allow',
-          Principal: { AWS: indexInitializer.role!.roleArn },
+          Principal: { AWS: indexInitializerPrincipalArn },
           Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPut'],
           Resource: [domain.domainArn, `${domain.domainArn}/*`]
         }
