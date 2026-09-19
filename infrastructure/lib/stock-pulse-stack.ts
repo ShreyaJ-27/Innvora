@@ -125,14 +125,75 @@ export class StockPulseStack extends cdk.Stack {
     const processor = createFunction('inventory-event-processor', 'inventory-event-processor.ts', 'Processes inventory events from SQS');
     const searchApi = createFunction('search-api', 'search-api.ts', 'Searches historical inventory events');
     const reorderApi = createFunction('reorder-api', 'reorder-api.ts', 'Generates smart reorder recommendations');
+    const indexInitializer = new NodejsFunction(this, 'OpenSearchIndexInitializer', {
+      functionName: 'stockpulse-opensearch-index-initializer',
+      description: 'Creates the inventory-events OpenSearch index with its required mapping',
+      entry: path.join(lambdaCodePath, 'opensearch-index-initializer.ts'),
+      handler: 'handler',
+      runtime: lambda.Runtime.NODEJS_22_X,
+      architecture: lambda.Architecture.ARM_64,
+      timeout: cdk.Duration.seconds(30),
+      memorySize: 256,
+      vpc,
+      securityGroups: [lambdaSecurityGroup],
+      vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
+      environment: {
+        OPENSEARCH_ENDPOINT: `https://${domain.domainEndpoint}`
+      },
+      bundling: { minify: true, sourceMap: true, target: 'es2022' }
+    });
 
     inventoryTable.grantReadWriteData(inventoryApi);
     inventoryTable.grantReadWriteData(processor);
     inventoryTable.grantReadData(searchApi);
     inventoryTable.grantReadData(reorderApi);
     inventoryEventsQueue.grantSendMessages(inventoryApi);
-    domain.grantReadWrite(processor);
-    domain.grantRead(searchApi);
+    processor.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['es:ESHttpPut'],
+      resources: [domain.domainArn, `${domain.domainArn}/*`]
+    }));
+    searchApi.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPost'],
+      resources: [domain.domainArn, `${domain.domainArn}/*`]
+    }));
+    indexInitializer.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPut'],
+      resources: [domain.domainArn, `${domain.domainArn}/*`]
+    }));
+
+    const domainResource = domain.node.defaultChild as opensearch.CfnDomain;
+    domainResource.accessPolicies = {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { AWS: processor.role!.roleArn },
+          Action: ['es:ESHttpPut'],
+          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+        },
+        {
+          Effect: 'Allow',
+          Principal: { AWS: searchApi.role!.roleArn },
+          Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPost'],
+          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+        },
+        {
+          Effect: 'Allow',
+          Principal: { AWS: indexInitializer.role!.roleArn },
+          Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPut'],
+          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+        }
+      ]
+    };
+
+    const indexInitialization = new cdk.CustomResource(this, 'OpenSearchIndexInitialization', {
+      serviceToken: indexInitializer.functionArn,
+      properties: { IndexName: 'inventory-events', MappingVersion: '1' }
+    });
+    indexInitialization.node.addDependency(domain);
 
     processor.addEventSource(new SqsEventSource(inventoryEventsQueue, {
       batchSize: 10,

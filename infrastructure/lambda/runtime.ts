@@ -23,8 +23,7 @@ const openSearch = new Client({
     service: 'es',
     getCredentials: defaultProvider()
   }),
-  node: required('OPENSEARCH_ENDPOINT'),
-  ssl: { rejectUnauthorized: false }
+  node: required('OPENSEARCH_ENDPOINT')
 });
 const eventRepository = new OpenSearchInventoryEventRepository(openSearch, required('OPENSEARCH_INDEX'));
 const inventoryService = new InventoryService(inventoryRepository);

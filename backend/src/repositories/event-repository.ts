@@ -1,4 +1,6 @@
 import { Client } from '@opensearch-project/opensearch';
+import { AwsSigv4Signer } from '@opensearch-project/opensearch/aws';
+import { defaultProvider } from '@aws-sdk/credential-provider-node';
 
 import { getEnv } from '../config/env.js';
 import { InventoryEvent } from '../domain/models.js';
@@ -186,11 +188,12 @@ export function createOpenSearchClient(): Client {
   const { OPENSEARCH_ENDPOINT } = getEnv();
 
   return new Client({
-    node: OPENSEARCH_ENDPOINT,
-    auth: undefined,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    ...AwsSigv4Signer({
+      region: process.env.AWS_REGION ?? 'ap-south-1',
+      service: 'es',
+      getCredentials: defaultProvider()
+    }),
+    node: OPENSEARCH_ENDPOINT
   });
 }
 

@@ -21,14 +21,7 @@
   "StockPulseVpcPublicSubnet1Subnet96866511": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
+    "AvailabilityZone": "ap-south-1a",
     "CidrBlock": "10.0.0.0/18",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -147,14 +140,7 @@
   "StockPulseVpcPublicSubnet2Subnet42F6EAAC": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      1,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
+    "AvailabilityZone": "ap-south-1b",
     "CidrBlock": "10.0.64.0/18",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -231,14 +217,7 @@
   "StockPulseVpcPrivateSubnet1SubnetC140FC60": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
+    "AvailabilityZone": "ap-south-1a",
     "CidrBlock": "10.0.128.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -312,14 +291,7 @@
   "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      1,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
+    "AvailabilityZone": "ap-south-1b",
     "CidrBlock": "10.0.192.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -828,6 +800,123 @@
   "StockPulseOpenSearchE1A70830": {
    "Type": "AWS::OpenSearchService::Domain",
    "Properties": {
+    "AccessPolicies": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "inventoryeventprocessorServiceRole1F5D5057",
+          "Arn"
+         ]
+        }
+       },
+       "Action": [
+        "es:ESHttpPut"
+       ],
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "searchapiServiceRoleEC986FD2",
+          "Arn"
+         ]
+        }
+       },
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpPost"
+       ],
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "OpenSearchIndexInitializerServiceRole58CEAEDA",
+          "Arn"
+         ]
+        }
+       },
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpPut"
+       ],
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ]
+    },
     "ClusterConfig": {
      "DedicatedMasterEnabled": false,
      "InstanceCount": 1,
@@ -947,9 +1036,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
-     },
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
      "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip"
     },
     "Handler": "index.handler",
@@ -1128,10 +1215,8 @@
      "arm64"
     ],
     "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
-     },
-     "S3Key": "3cefec28163b48162d0dca3184107ffee72e74a407433c99f7d8998d9023861c.zip"
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
+     "S3Key": "68ecb128a171c9c7977c60719455eecf8c3d9a76af64f37ca9c1ec8888f00dbb.zip"
     },
     "Description": "StockPulse inventory and event ingestion API",
     "Environment": {
@@ -1212,7 +1297,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "StockPulseStack/inventory-api/Resource",
-    "aws:asset:path": "asset.3cefec28163b48162d0dca3184107ffee72e74a407433c99f7d8998d9023861c",
+    "aws:asset:path": "asset.68ecb128a171c9c7977c60719455eecf8c3d9a76af64f37ca9c1ec8888f00dbb",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -1333,14 +1418,7 @@
        ]
       },
       {
-       "Action": [
-        "es:ESHttpGet",
-        "es:ESHttpHead",
-        "es:ESHttpDelete",
-        "es:ESHttpPost",
-        "es:ESHttpPut",
-        "es:ESHttpPatch"
-       ],
+       "Action": "es:ESHttpPut",
        "Effect": "Allow",
        "Resource": [
         {
@@ -1408,10 +1486,8 @@
      "arm64"
     ],
     "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
-     },
-     "S3Key": "fd7b5166a47c254296819d18af7b09634ea5b5daa8a886151788311577d1c518.zip"
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
+     "S3Key": "e3ecca91c5a495857c9a76041e60fb0aebcd976b6d25a65850dfdaf30273c3fd.zip"
     },
     "Description": "Processes inventory events from SQS",
     "Environment": {
@@ -1492,7 +1568,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "StockPulseStack/inventory-event-processor/Resource",
-    "aws:asset:path": "asset.fd7b5166a47c254296819d18af7b09634ea5b5daa8a886151788311577d1c518",
+    "aws:asset:path": "asset.e3ecca91c5a495857c9a76041e60fb0aebcd976b6d25a65850dfdaf30273c3fd",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -1638,7 +1714,8 @@
       {
        "Action": [
         "es:ESHttpGet",
-        "es:ESHttpHead"
+        "es:ESHttpHead",
+        "es:ESHttpPost"
        ],
        "Effect": "Allow",
        "Resource": [
@@ -1691,10 +1768,8 @@
      "arm64"
     ],
     "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
-     },
-     "S3Key": "62c1bba55be9aef824066643088b816e3458a66399276cf3fb8828cf40512fb7.zip"
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
+     "S3Key": "225280f2bfdbbcce60a5c6e798b97ff51f7d0e90ac47e1678cac291078d3d42b.zip"
     },
     "Description": "Searches historical inventory events",
     "Environment": {
@@ -1775,7 +1850,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "StockPulseStack/search-api/Resource",
-    "aws:asset:path": "asset.62c1bba55be9aef824066643088b816e3458a66399276cf3fb8828cf40512fb7",
+    "aws:asset:path": "asset.225280f2bfdbbcce60a5c6e798b97ff51f7d0e90ac47e1678cac291078d3d42b",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -1918,10 +1993,8 @@
      "arm64"
     ],
     "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
-     },
-     "S3Key": "a2d6de037a9030fa7b5d227ed8ceaafa238170469aac8ea8282646507c873cff.zip"
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
+     "S3Key": "21b55894001a6193822f1675746b8eb5102a02a63f719a6eaaa34cc86b19e441.zip"
     },
     "Description": "Generates smart reorder recommendations",
     "Environment": {
@@ -2002,9 +2075,216 @@
    ],
    "Metadata": {
     "aws:cdk:path": "StockPulseStack/reorder-api/Resource",
-    "aws:asset:path": "asset.a2d6de037a9030fa7b5d227ed8ceaafa238170469aac8ea8282646507c873cff",
+    "aws:asset:path": "asset.21b55894001a6193822f1675746b8eb5102a02a63f719a6eaaa34cc86b19e441",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
+   }
+  },
+  "OpenSearchIndexInitializerServiceRole58CEAEDA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializer/ServiceRole/Resource"
+   }
+  },
+  "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpPut"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C",
+    "Roles": [
+     {
+      "Ref": "OpenSearchIndexInitializerServiceRole58CEAEDA"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializer/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "OpenSearchIndexInitializer1B2BAA1C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-119618549031-ap-south-1",
+     "S3Key": "94a7d040f1dba6e13dc10eec58f6de48daa5a21a0e641be9418bfaa1e24ef326.zip"
+    },
+    "Description": "Creates the inventory-events OpenSearch index with its required mapping",
+    "Environment": {
+     "Variables": {
+      "OPENSEARCH_ENDPOINT": {
+       "Fn::Join": [
+        "",
+        [
+         "https://",
+         {
+          "Fn::GetAtt": [
+           "StockPulseOpenSearchE1A70830",
+           "DomainEndpoint"
+          ]
+         }
+        ]
+       ]
+      }
+     }
+    },
+    "FunctionName": "stockpulse-opensearch-index-initializer",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "OpenSearchIndexInitializerServiceRole58CEAEDA",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseLambdaSecurityGroupE68D24E9",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "OpenSearchIndexInitializerServiceRoleDefaultPolicyD5060F5C",
+    "OpenSearchIndexInitializerServiceRole58CEAEDA",
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitializer/Resource",
+    "aws:asset:path": "asset.94a7d040f1dba6e13dc10eec58f6de48daa5a21a0e641be9418bfaa1e24ef326",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "OpenSearchIndexInitialization": {
+   "Type": "AWS::CloudFormation::CustomResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "OpenSearchIndexInitializer1B2BAA1C",
+      "Arn"
+     ]
+    },
+    "IndexName": "inventory-events",
+    "MappingVersion": "1"
+   },
+   "DependsOn": [
+    "StockPulseOpenSearchAppLogs2D452B95",
+    "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6",
+    "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c137223086AEC",
+    "StockPulseOpenSearchE1A70830",
+    "StockPulseOpenSearchSlowIndexLogs2452DFB3",
+    "StockPulseOpenSearchSlowSearchLogs425D7A62"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/OpenSearchIndexInitialization/Default"
    }
   },
   "StockPulseApi0B6B8534": {
@@ -2269,11 +2549,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2309,11 +2585,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2442,11 +2714,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2482,11 +2750,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2615,11 +2879,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2655,11 +2915,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2788,11 +3044,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2828,11 +3080,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -2961,11 +3209,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -3001,11 +3245,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -3192,11 +3432,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -3232,11 +3468,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -3368,11 +3600,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },
@@ -3408,11 +3636,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":execute-api:ap-south-1:",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":",
+       ":execute-api:ap-south-1:119618549031:",
        {
         "Ref": "StockPulseApi0B6B8534"
        },

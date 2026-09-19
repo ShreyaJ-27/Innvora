@@ -1,5 +1,42 @@
 {
   "version": "54.0.0",
   "title": "Validation Report",
-  "pluginReports": []
+  "pluginReports": [
+    {
+      "pluginName": "CloudFormation Validate",
+      "pluginVersion": "1.9.0",
+      "conclusion": "success",
+      "violations": [
+        {
+          "ruleName": "F3004",
+          "description": "Resources/StockPulseOpenSearchE1A70830: Circular Dependencies for resource StockPulseOpenSearchE1A70830. Circular dependency with [StockPulseOpenSearchE1A70830 -> StockPulseOpenSearchE1A70830]",
+          "severity": "warning",
+          "ruleMetadata": {
+            "category": "Reference"
+          },
+          "violatingConstructs": [
+            {
+              "constructPath": "StockPulseStack/StockPulseOpenSearch/Resource",
+              "constructFqn": "aws-cdk-lib.aws_opensearchservice.CfnDomain",
+              "libraryVersion": "2.270.0",
+              "cloudFormationResource": {
+                "templatePath": "StockPulseStack.template.json",
+                "logicalId": "StockPulseOpenSearchE1A70830",
+                "propertyPaths": [
+                  "Resources/StockPulseOpenSearchE1A70830"
+                ]
+              },
+              "stackTraces": [
+                "...new Domain2 in aws-cdk-lib...",
+                "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+                "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+                "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+                "...node internals, tsx..."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
