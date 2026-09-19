@@ -14,6 +14,14 @@ export const LocationOverviewCards: React.FC<LocationOverviewCardsProps> = ({
   selectedLocation,
   onSelectLocation,
 }) => {
+  if (locations.length === 0) {
+    return (
+      <div className="py-8 text-center text-slate-400 text-sm bg-white rounded-xl border border-slate-200">
+        No location data available — per-location breakdowns will appear once inventory is seeded.
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {locations.map((loc) => {

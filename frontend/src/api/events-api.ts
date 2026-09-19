@@ -1,20 +1,34 @@
 import { apiClient } from './client';
-import { EventSimulationRequest } from '../types/events';
-import { mockDb } from './mock-adapter';
+import { EventSubmitRequest } from '../types/events';
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK_API === 'true';
-
-export async function postInventoryEvent(event: EventSimulationRequest): Promise<{
-  accepted: boolean;
+export interface EventPostResponse {
+  accepted?: boolean;
   eventId: string;
   message: string;
-}> {
-  if (USE_MOCK) {
-    return mockDb.processInventoryEvent(event);
-  }
+}
 
-  return apiClient<{ accepted: boolean; eventId: string; message: string }>('/inventory/events', {
+/**
+ * POST /inventory/events
+ *
+ * Submits an inventory event to the API Gateway → SQS → Lambda pipeline.
+ * The backend validates the payload with Zod and queues it asynchronously.
+ *
+ * Required fields (per backend inventoryEventApiSchema):
+ *   productId, sku, locationId, eventType, quantityChange, timestamp, source
+ * Optional:
+ *   eventId (backend generates a UUID if omitted)
+ *
+ * Processing is async — DynamoDB/OpenSearch changes are NOT immediate.
+ */
+export async function postInventoryEvent(event: EventSubmitRequest): Promise<EventPostResponse> {
+  const response = await apiClient<EventPostResponse>('/inventory/events', {
     method: 'POST',
     body: JSON.stringify(event),
   });
+
+  return {
+    accepted: true,
+    eventId: response.eventId,
+    message: response.message || 'Inventory event accepted for async processing.',
+  };
 }

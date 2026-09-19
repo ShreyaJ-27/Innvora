@@ -18,23 +18,14 @@ export function useReorders(initialParams?: ReorderQueryParams) {
     setLoading(true);
     setError(null);
     try {
-      const items = await getReorders(params);
-      setData(items);
-
-      // Compute summary
-      const critical = items.filter((i) => i.urgency === 'CRITICAL').length;
-      const reorderSoon = items.filter((i) => i.urgency === 'REORDER_SOON').length;
-      const totalUnits = items.reduce((acc, i) => acc + i.recommendedQuantity, 0);
-      const totalCost = items.reduce((acc, i) => acc + i.estimatedCost, 0);
-
-      setSummary({
-        criticalCount: critical,
-        reorderSoonCount: reorderSoon,
-        recommendedUnits: totalUnits,
-        estimatedTotalValue: totalCost,
-      });
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch replenishment recommendations');
+      // getReorders now returns { items, summary } from the backend
+      const result = await getReorders(params);
+      setData(result.items);
+      setSummary(result.summary);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch replenishment recommendations';
+      setError(message);
+      setData([]);
     } finally {
       setLoading(false);
     }

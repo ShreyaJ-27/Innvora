@@ -4,20 +4,24 @@ import { searchInventoryEvents, SearchQueryParams } from '../api/search-api';
 
 export function useSearch(initialParams?: SearchQueryParams) {
   const [data, setData] = useState<InventoryEvent[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [params, setParams] = useState<SearchQueryParams>(initialParams || {});
 
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const fetchEvents = useCallback(async (currentParams: SearchQueryParams) => {
+    // searchInventoryEvents guards against empty params internally and returns []
+    // without calling the API — but we still want to show loading briefly.
     setLoading(true);
     setError(null);
     try {
       const items = await searchInventoryEvents(currentParams);
       setData(items);
-    } catch (err: any) {
-      setError(err.message || 'Failed to search inventory events');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to search inventory events';
+      setError(message);
+      setData([]);
     } finally {
       setLoading(false);
     }
@@ -28,7 +32,6 @@ export function useSearch(initialParams?: SearchQueryParams) {
       clearTimeout(debounceTimeoutRef.current);
     }
 
-    // Debounce search text input by 300ms
     debounceTimeoutRef.current = setTimeout(() => {
       fetchEvents(params);
     }, 250);

@@ -15,8 +15,9 @@ export function useInventoryHealth(locationId?: string) {
       const res = await getInventoryHealth(locationId);
       setSummary(res.summary);
       setLocations(res.locations);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch inventory health');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch inventory health';
+      setError(message);
     } finally {
       setLoading(false);
     }

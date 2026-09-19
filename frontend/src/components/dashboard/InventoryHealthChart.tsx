@@ -25,6 +25,26 @@ export const InventoryHealthChart: React.FC<InventoryHealthChartProps> = ({
     );
   }
 
+  if (summary.totalSkus === 0) {
+    return (
+      <Card
+        header={<div className="font-semibold text-sm text-slate-800">Inventory Health Breakdown</div>}
+      >
+        <div className="h-64 flex flex-col items-center justify-center gap-3 text-center">
+          <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+            <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-600">No inventory data yet</p>
+            <p className="text-xs text-slate-400 mt-1">Health distribution will appear once inventory events are processed.</p>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
   const chartData = [
     { name: 'Healthy', value: summary.healthyCount, color: STATUS_CONFIG.HEALTHY.chartColor },
     { name: 'Reorder Soon', value: summary.reorderSoonCount, color: STATUS_CONFIG.REORDER_SOON.chartColor },

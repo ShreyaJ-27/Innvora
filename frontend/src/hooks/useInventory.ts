@@ -14,8 +14,10 @@ export function useInventory(initialParams?: InventoryQueryParams) {
     try {
       const items = await getInventory(params);
       setData(items);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch inventory data');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch inventory data';
+      setError(message);
+      setData([]);
     } finally {
       setLoading(false);
     }

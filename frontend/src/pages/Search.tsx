@@ -14,6 +14,23 @@ export interface SearchProps {
   onLocationChange: (loc: string) => void;
 }
 
+/** Returns true when the params object has at least one meaningful filter. */
+function hasActiveParams(params: {
+  q?: string;
+  locationId?: string;
+  eventType?: string;
+  startDate?: string;
+  endDate?: string;
+}): boolean {
+  return Boolean(
+    params.q ||
+    (params.locationId && params.locationId !== 'ALL') ||
+    (params.eventType && params.eventType !== 'ALL') ||
+    params.startDate ||
+    params.endDate
+  );
+}
+
 export const Search: React.FC<SearchProps> = ({
   selectedLocation,
   onLocationChange,
@@ -40,11 +57,13 @@ export const Search: React.FC<SearchProps> = ({
     if (urlQ !== params.q) {
       setParams((prev) => ({ ...prev, q: urlQ }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // Keep location synced with global selector if not manually changed
+  // Keep location synced with global selector
   useEffect(() => {
     setParams((prev) => ({ ...prev, locationId: selectedLocation }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLocation]);
 
   const handleQueryChange = (val: string) => {
@@ -55,6 +74,8 @@ export const Search: React.FC<SearchProps> = ({
       setSearchParams({}, { replace: true });
     }
   };
+
+  const isSearchActive = hasActiveParams(params);
 
   return (
     <PageContainer>
@@ -80,19 +101,36 @@ export const Search: React.FC<SearchProps> = ({
         </Card>
 
         {/* Results Metadata Strip */}
-        <div className="flex items-center justify-between text-xs text-slate-500 px-1">
-          <div className="flex items-center gap-2">
-            <Database className="w-3.5 h-3.5 text-blue-600" />
-            <span>OpenSearch Index: <code className="text-slate-700 font-mono">stockpulse-events-2026</code></span>
+        {isSearchActive && (
+          <div className="flex items-center justify-between text-xs text-slate-500 px-1">
+            <div className="flex items-center gap-2">
+              <Database className="w-3.5 h-3.5 text-blue-600" />
+              <span>OpenSearch Index: <code className="text-slate-700 font-mono">stockpulse-events-2026</code></span>
+            </div>
+            <span>
+              Found <strong className="text-slate-900">{events.length}</strong> matching indexed events
+            </span>
           </div>
-          <span>
-            Found <strong className="text-slate-900">{events.length}</strong> matching indexed events
-          </span>
-        </div>
+        )}
 
-        {/* Results Table */}
+        {/* Results Table or Prompt */}
         {error ? (
           <ErrorState message={error} onRetry={refetch} />
+        ) : !isSearchActive ? (
+          <Card className="py-16">
+            <div className="flex flex-col items-center text-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                <SearchIcon className="w-5 h-5 text-blue-500" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-slate-700">Enter a search term or apply a filter</p>
+                <p className="text-xs text-slate-400 mt-1 max-w-xs">
+                  Search by SKU, product ID, event type, location, or date range to query
+                  the OpenSearch inventory event index.
+                </p>
+              </div>
+            </div>
+          </Card>
         ) : (
           <EventSearchResults events={events} isLoading={loading} />
         )}

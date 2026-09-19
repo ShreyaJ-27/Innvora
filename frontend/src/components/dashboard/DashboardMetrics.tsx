@@ -1,8 +1,8 @@
 import React from 'react';
-import { Package, Layers, DollarSign, AlertTriangle } from 'lucide-react';
+import { Package, AlertTriangle, CheckCircle2, Clock } from 'lucide-react';
 import { MetricCard } from '../common/MetricCard';
 import { InventoryHealthSummary } from '../../types/inventory';
-import { formatCurrency, formatNumber } from '../../utils/formatters';
+import { formatNumber } from '../../utils/formatters';
 
 export interface DashboardMetricsProps {
   summary: InventoryHealthSummary | null;
@@ -29,6 +29,8 @@ export const DashboardMetrics: React.FC<DashboardMetricsProps> = ({
     );
   }
 
+  const itemsNeedingReorder = summary.itemsNeedingReorder ?? (summary.criticalCount + summary.reorderSoonCount);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* 1. Total SKUs */}
@@ -36,42 +38,52 @@ export const DashboardMetrics: React.FC<DashboardMetricsProps> = ({
         title="Total SKUs"
         value={formatNumber(summary.totalSkus)}
         icon={<Package className="w-5 h-5" />}
-        supportingText="Active catalog items"
-        trend={{ value: '+4 this month', isPositive: true }}
+        supportingText="Active catalog items tracked"
         accentColor="blue"
       />
 
-      {/* 2. Total Inventory Units */}
+      {/* 2. Healthy Items */}
       <MetricCard
-        title="Total Units"
-        value={formatNumber(summary.totalUnits)}
-        icon={<Layers className="w-5 h-5" />}
-        supportingText="In-stock physical units"
-        trend={{ value: '-2.4% vs last week', isNeutral: true }}
-        accentColor="indigo"
-      />
-
-      {/* 3. Inventory Value */}
-      <MetricCard
-        title="Inventory Value"
-        value={formatCurrency(summary.totalValue)}
-        icon={<DollarSign className="w-5 h-5" />}
-        supportingText="Valuation at cost"
-        trend={{ value: '+5.1% YoY', isPositive: true }}
+        title="Healthy"
+        value={formatNumber(summary.healthyCount)}
+        icon={<CheckCircle2 className="w-5 h-5" />}
+        supportingText="SKUs at safe stock levels"
+        trend={
+          summary.totalSkus > 0
+            ? {
+                value: `${Math.round((summary.healthyCount / summary.totalSkus) * 100)}% of catalog`,
+                isPositive: true,
+              }
+            : undefined
+        }
         accentColor="emerald"
       />
 
-      {/* 4. Items Needing Reorder */}
+      {/* 3. Reorder Soon */}
+      <MetricCard
+        title="Reorder Soon"
+        value={formatNumber(summary.reorderSoonCount)}
+        icon={<Clock className="w-5 h-5" />}
+        supportingText="Approaching reorder point"
+        trend={
+          summary.reorderSoonCount > 0
+            ? { value: 'Monitor closely', isNeutral: true }
+            : { value: 'None pending', isPositive: true }
+        }
+        accentColor="amber"
+      />
+
+      {/* 4. Items Needing Reorder (Critical + Reorder Soon) */}
       <MetricCard
         title="Needing Reorder"
-        value={formatNumber(summary.itemsNeedingReorder)}
+        value={formatNumber(itemsNeedingReorder)}
         icon={<AlertTriangle className="w-5 h-5" />}
-        supportingText={`${summary.criticalCount} Critical, ${summary.reorderSoonCount} Reorder Soon`}
+        supportingText={`${summary.criticalCount} Critical · ${summary.reorderSoonCount} Reorder Soon`}
         trend={{
-          value: summary.itemsNeedingReorder > 0 ? 'Action Required' : 'All Stock Healthy',
-          isPositive: summary.itemsNeedingReorder === 0,
+          value: itemsNeedingReorder > 0 ? 'Action Required' : 'All Stock Healthy',
+          isPositive: itemsNeedingReorder === 0,
         }}
-        accentColor={summary.itemsNeedingReorder > 0 ? 'rose' : 'emerald'}
+        accentColor={itemsNeedingReorder > 0 ? 'rose' : 'emerald'}
         onClick={onNavigateToReorders}
       />
     </div>

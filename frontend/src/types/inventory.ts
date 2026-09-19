@@ -1,4 +1,48 @@
+// ─── Status Types ────────────────────────────────────────────────────────────
+
 export type InventoryStatus = 'HEALTHY' | 'REORDER_SOON' | 'CRITICAL' | 'OVERSTOCKED';
+
+// ─── Backend Response Shapes (as returned by the deployed API) ────────────────
+
+/**
+ * What GET /inventory returns per item (inside the `items` array).
+ * The backend InventoryState is lean — no product name, category, or supplier.
+ */
+export interface BackendInventoryState {
+  productId: string;
+  sku: string;
+  locationId: string;
+  quantity: number;
+  reservedQuantity: number;
+  availableQuantity: number;
+  reorderPoint: number;
+  safetyStock: number;
+  lastUpdated: string;
+}
+
+/**
+ * Paginated envelope returned by GET /inventory.
+ */
+export interface BackendInventoryListResponse {
+  items: BackendInventoryState[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+/**
+ * What GET /inventory/health returns inside data.
+ * Note: field names differ from the legacy frontend shape.
+ */
+export interface BackendInventoryHealthSummary {
+  totalSkus: number;
+  healthy: number;       // backend uses camelCase, not "healthyCount"
+  reorderSoon: number;   // backend uses camelCase, not "reorderSoonCount"
+  critical: number;      // backend uses camelCase, not "criticalCount"
+  overstocked: number;   // backend uses camelCase, not "overstockedCount"
+}
+
+// ─── Frontend / UI Types ──────────────────────────────────────────────────────
 
 export interface SupplierInfo {
   id: string;
@@ -15,6 +59,11 @@ export interface StockHistoryPoint {
   reorderPoint: number;
 }
 
+/**
+ * Rich product inventory object used throughout the UI.
+ * When data comes from the live backend most optional fields will be absent —
+ * the adapter in inventory-api.ts fills in safe defaults.
+ */
 export interface ProductInventory {
   id: string;
   productId: string;
@@ -49,6 +98,12 @@ export interface LocationInventorySummary {
   reorderSoonCount: number;
 }
 
+/**
+ * Frontend health summary used in the Dashboard.
+ * Derived from BackendInventoryHealthSummary by the adapter in inventory-api.ts.
+ * totalUnits / totalValue / stockTrend are not provided by the backend health endpoint
+ * and will be 0 / [] unless a separate call provides them.
+ */
 export interface InventoryHealthSummary {
   totalSkus: number;
   totalUnits: number;

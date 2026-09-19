@@ -1,4 +1,41 @@
+// ─── Reorder Urgency ─────────────────────────────────────────────────────────
+
 export type ReorderUrgency = 'CRITICAL' | 'REORDER_SOON' | 'HEALTHY' | 'OVERSTOCKED';
+
+// ─── Backend Response Shapes ──────────────────────────────────────────────────
+
+/**
+ * One recommendation as returned by GET /reorders (inside `recommendations` array).
+ * Field names match the backend handler response exactly.
+ */
+export interface BackendReorderRecommendation {
+  productId: string;
+  sku: string;
+  locationId: string;
+  currentStock: number;
+  availableStock: number;
+  averageDailyDemand: number;
+  leadTimeDays: number;
+  reorderPoint: number;
+  daysOfStockRemaining: number;
+  recommendedQuantity: number;
+  urgency: ReorderUrgency;
+  reason: string;
+}
+
+/**
+ * Summary block returned by GET /reorders alongside the recommendations array.
+ */
+export interface BackendReorderSummary {
+  critical: number;
+  reorderSoon: number;
+  healthy: number;
+  overstocked: number;
+  recommendedUnits: number;
+  estimatedValue: number;
+}
+
+// ─── Frontend / UI Types ──────────────────────────────────────────────────────
 
 export interface ReorderExplanation {
   currentStock: number;
@@ -12,6 +49,12 @@ export interface ReorderExplanation {
   reason: string;
 }
 
+/**
+ * Rich reorder recommendation used throughout the UI.
+ * Adapted from BackendReorderRecommendation by the adapter in reorder-api.ts.
+ * Fields not provided by the backend (productName, locationName, supplierName, estimatedCost)
+ * are filled with safe fallbacks.
+ */
 export interface ReorderRecommendation {
   id: string;
   productId: string;
