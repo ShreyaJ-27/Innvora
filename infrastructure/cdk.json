@@ -1,0 +1,7 @@
+{
+  "app": "npx tsx bin/stock-pulse.ts",
+  "context": {
+    "awsRegion": "ap-south-1",
+    "@aws-cdk/custom-resources:installLatestAwsSdkDefault": false
+  }
+}

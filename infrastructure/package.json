@@ -1,0 +1,29 @@
+{
+  "name": "stockpulse-infrastructure",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.170.0",
+    "constructs": "^10.4.2",
+    "@aws-sdk/client-dynamodb": "^3.699.0",
+    "@aws-sdk/client-sqs": "^3.699.0",
+    "@aws-sdk/credential-provider-node": "^3.699.0",
+    "@aws-sdk/lib-dynamodb": "^3.699.0",
+    "@opensearch-project/opensearch": "^3.6.0"
+  },
+  "devDependencies": {
+    "aws-cdk": "^2.170.0",
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^22.10.1",
+    "esbuild": "^0.24.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

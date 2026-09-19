@@ -1,0 +1,1 @@
+export { inventoryEventProcessor as handler } from './runtime.js';

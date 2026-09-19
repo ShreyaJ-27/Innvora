@@ -1,0 +1,1 @@
+export { inventoryApi as handler } from './runtime.js';

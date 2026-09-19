@@ -1,0 +1,1768 @@
+{
+  "/StockPulseStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    },
+    {
+      "type": "aws:cdk:acknowledged-rules",
+      "data": {
+        "CloudFormation-Validate::W3010": "Literal AZs in template are the result of accessing stack.availabilityZones, this is expected and safe"
+      },
+      "trace": [
+        "    ...new Vpc2 in aws-cdk-lib...",
+        "    at new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "    at <anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "    at <anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "    ...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseInventory": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "StockPulseInventory3E2CFBD5"
+      }
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": "stockpulse-events"
+    }
+  ],
+  "/StockPulseStack/AWS679f53fac002430cb0da5b7982bd2287": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 0
+    }
+  ],
+  "/StockPulseStack/ApiGatewayUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiGatewayUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:164:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/DynamoDbTableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDbTableName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:165:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/InventoryEventsQueueUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InventoryEventsQueueUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:166:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/OpenSearchEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OpenSearchEndpoint"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:167:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/InventoryApiLambdaName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InventoryApiLambdaName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:168:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/InventoryEventProcessorLambdaName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InventoryEventProcessorLambdaName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:169:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/SearchApiLambdaName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SearchApiLambdaName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:170:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/ReorderApiLambdaName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ReorderApiLambdaName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:171:5)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpc1A3A7103"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcIGW8DB0539E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcVPCGW0FCB71AC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseInventory/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseInventory3E2CFBD5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:30:28)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseInventoryEventsDLQ/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseInventoryEventsDLQF58C0120"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Queue2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:39:29)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseInventoryEvents/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseInventoryEventsEF006865"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Queue2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:45:34)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseLambdaSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseLambdaSecurityGroupE68D24E9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:54:33)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearchSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchSecurityGroupE8DEDF08"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:59:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearchSecurityGroup/from StockPulseStackStockPulseLambdaSecurityGroup22452266:443": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchSecurityGroupfromStockPulseStackStockPulseLambdaSecurityGroup22452266443A5F432FA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:64:29)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "installLatestAwsSdk was not specified, and defaults to true. You probably do not want this. Set the global context flag '@aws-cdk/customresources:installLatestAwsSdkDefault' to false to switch this behavior off project-wide, or set the property explicitly to true if you know you need to call APIs that are not in Lambda's built-in SDK version. [ack: @aws-cdk/custom-resources:installLatestAwsSdkNotSpecified]",
+      "trace": [
+        "Annotations.addMessage (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new AwsCustomResource2 (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\custom-resources\\lib\\aws-custom-resource\\aws-custom-resource.js:1:9863)",
+        "new AwsCustomResource2 (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "new LogGroupResourcePolicy (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-opensearchservice\\lib\\log-group-resource-policy.js:1:1464)",
+        "new Domain2 (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-opensearchservice\\lib\\domain.js:1:30022)",
+        "new Domain2 (D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "Object.<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+        "Object.transformer (D:\\stock-pulse\\infrastructure\\node_modules\\tsx\\dist\\register-OY9cqBEN.cjs:9:3619)",
+        "Module.load (node:internal/modules/cjs/loader:1533:32)",
+        "Module._load (node:internal/modules/cjs/loader:1335:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+        "loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:328:3)",
+        "ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)",
+        "ModuleJob.run (node:internal/modules/esm/module_job:430:25)",
+        "async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)",
+        "async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchE1A70830"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-apiLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryapiLogGroup7EAC42A9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:114:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:124:26)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-api/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryapiD582259F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:124:26)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-event-processorLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryeventprocessorLogGroupCFF23523"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:114:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:125:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-event-processor/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryeventprocessor9B924DAD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:125:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/search-apiLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "searchapiLogGroup08A722C7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:114:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:126:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/search-api/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "searchapi1877647C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:126:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/reorder-apiLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "reorderapiLogGroupA8E2F07B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:114:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:24)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/reorder-api/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "reorderapiCC4F3524"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:24)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApi0B6B8534"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiAccountA8549A05"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiEndpointDE5690CB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1Subnet96866511"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1RouteTable6CCEAB84"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1RouteTableAssociation6ACB2F68"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1DefaultRoute62F2D856"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:210 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1EIP1824F249"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet1NATGatewayAB833D74"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet2Subnet42F6EAAC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet2RouteTable65D7A674"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet2RouteTableAssociation478A9368"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PublicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPublicSubnet2DefaultRoute49090AC4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:210 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet1RouteTableAD84E4E2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet2RouteTable639AB677"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...D:\\stock-pulse\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/PrivateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:19:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/DynamoDbEndpoint/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcDynamoDbEndpoint238EBEA5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addGatewayEndpoint in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:27:9)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/SqsEndpoint/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcSqsEndpoint6D0CE1D7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:28:9)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/SlowSearchLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchSlowSearchLogs425D7A62"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/SlowIndexLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchSlowIndexLogs2452DFB3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/AppLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchAppLogs2D452B95"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-api/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryapiServiceRole53F8A74F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:124:26)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-event-processor/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryeventprocessorServiceRole1F5D5057"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:125:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-event-processor/SqsEventSource:StockPulseStackStockPulseInventoryEvents6B62E50A/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryeventprocessorSqsEventSourceStockPulseStackStockPulseInventoryEvents6B62E50A91DE3B60"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...NodejsFunction.addEventSource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:137:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/search-api/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "searchapiServiceRoleEC986FD2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:126:23)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/reorder-api/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "reorderapiServiceRole82525FF6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NodejsFunction in aws-cdk-lib...",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:100:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:24)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiCloudWatchRole255A294C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiDeployment03A6090Bd1efb7b132a078a5433382f815275c83"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/DeploymentStage.prod/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiDeploymentStageprod992C4C20"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseVpc/SqsEndpoint/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseVpcSqsEndpointSecurityGroup827FD35C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:28:9)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372/Resource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c137223086AEC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseOpenSearch/ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372/CustomResourcePolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Domain2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:66:20)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-api/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryapiServiceRoleDefaultPolicy6570C216"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/inventory-event-processor/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/search-api/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "searchapiServiceRoleDefaultPolicyE611E30C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/reorder-api/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "reorderapiServiceRoleDefaultPolicy87EE1243"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiOPTIONS6D2CBABF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:143:17)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryAC7BC8AC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:155:32)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/reorders/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApireordersC678773A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:162:14)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryOPTIONS3536098B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:155:32)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventory6CAA4098"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:156:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventory5F41C05B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:156:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryGET6EC3C979"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:156:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/events/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryeventsC29E0000"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:157:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/health/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryhealth67A616FC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:158:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/search/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorysearchB970849D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:159:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/{productId}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryproductIdFE7B106E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:160:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocation7BE05256"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/reorders/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApireordersOPTIONSB0F3F0A6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:162:14)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/reorders/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..reorders": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApireordersGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETreordersA0E30F72"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:162:38)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/reorders/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..reorders": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApireordersGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETreorders75F804B7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:162:38)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/reorders/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApireordersGET02E1A757"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:162:38)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/events/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryeventsOPTIONS805D143B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:157:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/events/POST/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.POST..inventory.events": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryeventsPOSTApiPermissionStockPulseStackStockPulseApiD16ACF7CPOSTinventoryevents32BC1A64"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:157:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/events/POST/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.POST..inventory.events": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryeventsPOSTApiPermissionTestStockPulseStackStockPulseApiD16ACF7CPOSTinventoryevents0CF676AC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:157:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/events/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryeventsPOST5EC3AA84"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:157:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/health/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryhealthOPTIONS8AC0E4BF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:158:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/health/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.health": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryhealthGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventoryhealthC601B9C0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:158:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/health/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.health": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryhealthGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventoryhealthB0656D9E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:158:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/health/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryhealthGETEB84550D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:158:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/search/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorysearchOPTIONS330C56E7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:159:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/search/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.search": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorysearchGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventorysearch90988F93"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:159:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/search/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.search": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorysearchGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventorysearch4498A617"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:159:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/search/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorysearchGETF63512F1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:159:37)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/{productId}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryproductIdOPTIONS8690A993"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:160:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.{productId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryproductIdGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventoryproductId24051733"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:160:42)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.{productId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryproductIdGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventoryproductId18047651"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:160:42)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventoryproductIdGETD58BA44C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:160:42)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationOPTIONS3B96A400"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:15)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationlocationId82A0C386"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:39)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationlocationIdOPTIONS1BD00A9F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:39)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.location.{locationId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationlocationIdGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventorylocationlocationId0F66A9A2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:67)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.location.{locationId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationlocationIdGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventorylocationlocationId855E05CE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:67)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StockPulseApiinventorylocationlocationIdGETEB8341F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:161:67)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
+        "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
+        "...node internals, tsx..."
+      ]
+    }
+  ]
+}

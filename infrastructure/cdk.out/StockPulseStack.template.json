@@ -1,0 +1,3603 @@
+{
+ "Resources": {
+  "StockPulseVpc1A3A7103": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/Resource"
+   }
+  },
+  "StockPulseVpcPublicSubnet1Subnet96866511": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "StockPulseVpcPublicSubnet1RouteTable6CCEAB84": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "StockPulseVpcPublicSubnet1RouteTableAssociation6ACB2F68": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPublicSubnet1RouteTable6CCEAB84"
+    },
+    "SubnetId": {
+     "Ref": "StockPulseVpcPublicSubnet1Subnet96866511"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "StockPulseVpcPublicSubnet1DefaultRoute62F2D856": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "StockPulseVpcIGW8DB0539E"
+    },
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPublicSubnet1RouteTable6CCEAB84"
+    }
+   },
+   "DependsOn": [
+    "StockPulseVpcVPCGW0FCB71AC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "StockPulseVpcPublicSubnet1EIP1824F249": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/EIP"
+   }
+  },
+  "StockPulseVpcPublicSubnet1NATGatewayAB833D74": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "StockPulseVpcPublicSubnet1EIP1824F249",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "StockPulseVpcPublicSubnet1Subnet96866511"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPublicSubnet1DefaultRoute62F2D856",
+    "StockPulseVpcPublicSubnet1RouteTableAssociation6ACB2F68"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "StockPulseVpcPublicSubnet2Subnet42F6EAAC": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "StockPulseVpcPublicSubnet2RouteTable65D7A674": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "StockPulseVpcPublicSubnet2RouteTableAssociation478A9368": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPublicSubnet2RouteTable65D7A674"
+    },
+    "SubnetId": {
+     "Ref": "StockPulseVpcPublicSubnet2Subnet42F6EAAC"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "StockPulseVpcPublicSubnet2DefaultRoute49090AC4": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "StockPulseVpcIGW8DB0539E"
+    },
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPublicSubnet2RouteTable65D7A674"
+    }
+   },
+   "DependsOn": [
+    "StockPulseVpcVPCGW0FCB71AC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "StockPulseVpcPrivateSubnet1SubnetC140FC60": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "StockPulseVpcPrivateSubnet1RouteTableAD84E4E2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPrivateSubnet1RouteTableAD84E4E2"
+    },
+    "SubnetId": {
+     "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "StockPulseVpcPublicSubnet1NATGatewayAB833D74"
+    },
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPrivateSubnet1RouteTableAD84E4E2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "StockPulseVpcPrivateSubnet2RouteTable639AB677": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPrivateSubnet2RouteTable639AB677"
+    },
+    "SubnetId": {
+     "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "StockPulseVpcPublicSubnet1NATGatewayAB833D74"
+    },
+    "RouteTableId": {
+     "Ref": "StockPulseVpcPrivateSubnet2RouteTable639AB677"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "StockPulseVpcIGW8DB0539E": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/IGW"
+   }
+  },
+  "StockPulseVpcVPCGW0FCB71AC": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "StockPulseVpcIGW8DB0539E"
+    },
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/VPCGW"
+   }
+  },
+  "StockPulseVpcDynamoDbEndpoint238EBEA5": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "StockPulseVpcPrivateSubnet1RouteTableAD84E4E2"
+     },
+     {
+      "Ref": "StockPulseVpcPrivateSubnet2RouteTable639AB677"
+     },
+     {
+      "Ref": "StockPulseVpcPublicSubnet1RouteTable6CCEAB84"
+     },
+     {
+      "Ref": "StockPulseVpcPublicSubnet2RouteTable65D7A674"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".dynamodb"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc"
+     }
+    ],
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/DynamoDbEndpoint/Resource"
+   }
+  },
+  "StockPulseVpcSqsEndpointSecurityGroup827FD35C": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "StockPulseStack/StockPulseVpc/SqsEndpoint/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "StockPulseVpc1A3A7103",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "StockPulseVpc1A3A7103",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/SqsEndpoint/SecurityGroup/Resource"
+   }
+  },
+  "StockPulseVpcSqsEndpoint6D0CE1D7": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "StockPulseVpcSqsEndpointSecurityGroup827FD35C",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.ap-south-1.sqs",
+    "SubnetIds": [
+     {
+      "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+     },
+     {
+      "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "StockPulseStack/StockPulseVpc"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseVpc/SqsEndpoint/Resource"
+   }
+  },
+  "StockPulseInventory3E2CFBD5": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "PK",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "SK",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "PK",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "SK",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "StockPulseInventory"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseInventory/Resource"
+   }
+  },
+  "StockPulseInventoryEventsDLQF58C0120": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "MessageRetentionPeriod": 1209600,
+    "QueueName": "StockPulseInventoryEventsDLQ",
+    "SqsManagedSseEnabled": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseInventoryEventsDLQ/Resource"
+   }
+  },
+  "StockPulseInventoryEventsEF006865": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "MessageRetentionPeriod": 345600,
+    "QueueName": "StockPulseInventoryEvents",
+    "RedrivePolicy": {
+     "deadLetterTargetArn": {
+      "Fn::GetAtt": [
+       "StockPulseInventoryEventsDLQF58C0120",
+       "Arn"
+      ]
+     },
+     "maxReceiveCount": 5
+    },
+    "SqsManagedSseEnabled": true,
+    "VisibilityTimeout": 180
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseInventoryEvents/Resource"
+   }
+  },
+  "StockPulseLambdaSecurityGroupE68D24E9": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Egress-only security group for StockPulse Lambdas",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseLambdaSecurityGroup/Resource"
+   }
+  },
+  "StockPulseOpenSearchSecurityGroupE8DEDF08": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allows HTTPS only from StockPulse Lambdas",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StockPulseVpc1A3A7103"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearchSecurityGroup/Resource"
+   }
+  },
+  "StockPulseOpenSearchSecurityGroupfromStockPulseStackStockPulseLambdaSecurityGroup22452266443A5F432FA": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Lambda access to OpenSearch",
+    "FromPort": 443,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "StockPulseOpenSearchSecurityGroupE8DEDF08",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "StockPulseLambdaSecurityGroupE68D24E9",
+      "GroupId"
+     ]
+    },
+    "ToPort": 443
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearchSecurityGroup/from StockPulseStackStockPulseLambdaSecurityGroup22452266:443"
+   }
+  },
+  "StockPulseOpenSearchSlowSearchLogs425D7A62": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/SlowSearchLogs/Resource"
+   }
+  },
+  "StockPulseOpenSearchSlowIndexLogs2452DFB3": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/SlowIndexLogs/Resource"
+   }
+  },
+  "StockPulseOpenSearchAppLogs2D452B95": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 30
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/AppLogs/Resource"
+   }
+  },
+  "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c137223086AEC": {
+   "Type": "Custom::CloudwatchLogResourcePolicy",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CloudWatchLogs\",\"action\":\"putResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372\",\"policyDocument\":\"{\\\"Statement\\\":[{\\\"Action\\\":[\\\"logs:PutLogEvents\\\",\\\"logs:CreateLogStream\\\"],\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":{\\\"Service\\\":\\\"es.amazonaws.com\\\"},\\\"Resource\\\":[\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchSlowSearchLogs425D7A62",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchSlowIndexLogs2452DFB3",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchAppLogs2D452B95",
+         "Arn"
+        ]
+       },
+       "\\\"]}],\\\"Version\\\":\\\"2012-10-17\\\"}\"},\"physicalResourceId\":{\"id\":\"ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CloudWatchLogs\",\"action\":\"putResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372\",\"policyDocument\":\"{\\\"Statement\\\":[{\\\"Action\\\":[\\\"logs:PutLogEvents\\\",\\\"logs:CreateLogStream\\\"],\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":{\\\"Service\\\":\\\"es.amazonaws.com\\\"},\\\"Resource\\\":[\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchSlowSearchLogs425D7A62",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchSlowIndexLogs2452DFB3",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"",
+       {
+        "Fn::GetAtt": [
+         "StockPulseOpenSearchAppLogs2D452B95",
+         "Arn"
+        ]
+       },
+       "\\\"]}],\\\"Version\\\":\\\"2012-10-17\\\"}\"},\"physicalResourceId\":{\"id\":\"ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372\"}}"
+      ]
+     ]
+    },
+    "Delete": "{\"service\":\"CloudWatchLogs\",\"action\":\"deleteResourcePolicy\",\"parameters\":{\"policyName\":\"ESLogPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372\"},\"ignoreErrorCodesMatching\":\"ResourceNotFoundException\"}",
+    "InstallLatestAwsSdk": true
+   },
+   "DependsOn": [
+    "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372/Resource/Default"
+   }
+  },
+  "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "logs:PutResourcePolicy",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "logs:DeleteResourcePolicy",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/ESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372/CustomResourcePolicy/Resource"
+   }
+  },
+  "StockPulseOpenSearchE1A70830": {
+   "Type": "AWS::OpenSearchService::Domain",
+   "Properties": {
+    "ClusterConfig": {
+     "DedicatedMasterEnabled": false,
+     "InstanceCount": 1,
+     "InstanceType": "t3.small.search",
+     "ZoneAwarenessEnabled": false
+    },
+    "DomainEndpointOptions": {
+     "EnforceHTTPS": true,
+     "TLSSecurityPolicy": "Policy-Min-TLS-1-2-2019-07"
+    },
+    "DomainName": "stockpulse-events",
+    "EBSOptions": {
+     "EBSEnabled": true,
+     "VolumeSize": 10,
+     "VolumeType": "gp3"
+    },
+    "EncryptionAtRestOptions": {
+     "Enabled": true
+    },
+    "EngineVersion": "OpenSearch_2.11",
+    "LogPublishingOptions": {
+     "SEARCH_SLOW_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "StockPulseOpenSearchSlowSearchLogs425D7A62",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     },
+     "INDEX_SLOW_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "StockPulseOpenSearchSlowIndexLogs2452DFB3",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     },
+     "ES_APPLICATION_LOGS": {
+      "CloudWatchLogsLogGroupArn": {
+       "Fn::GetAtt": [
+        "StockPulseOpenSearchAppLogs2D452B95",
+        "Arn"
+       ]
+      },
+      "Enabled": true
+     }
+    },
+    "NodeToNodeEncryptionOptions": {
+     "Enabled": true
+    },
+    "VPCOptions": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseOpenSearchSecurityGroupE8DEDF08",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c1372CustomResourcePolicy3356DBC6",
+    "StockPulseOpenSearchESLogGroupPolicyc8927b64528497f9cacaef0750e89b05f4de0c137223086AEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseOpenSearch/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
+     },
+     "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs24.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "inventoryapiLogGroup7EAC42A9": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/inventory-api",
+    "RetentionInDays": 7
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-apiLogGroup/Resource"
+   }
+  },
+  "inventoryapiServiceRole53F8A74F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-api/ServiceRole/Resource"
+   }
+  },
+  "inventoryapiServiceRoleDefaultPolicy6570C216": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "sqs:SendMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StockPulseInventoryEventsEF006865",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "inventoryapiServiceRoleDefaultPolicy6570C216",
+    "Roles": [
+     {
+      "Ref": "inventoryapiServiceRole53F8A74F"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-api/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "inventoryapiD582259F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
+     },
+     "S3Key": "3cefec28163b48162d0dca3184107ffee72e74a407433c99f7d8998d9023861c.zip"
+    },
+    "Description": "StockPulse inventory and event ingestion API",
+    "Environment": {
+     "Variables": {
+      "INVENTORY_TABLE_NAME": {
+       "Ref": "StockPulseInventory3E2CFBD5"
+      },
+      "INVENTORY_EVENTS_QUEUE_URL": {
+       "Ref": "StockPulseInventoryEventsEF006865"
+      },
+      "OPENSEARCH_ENDPOINT": {
+       "Fn::Join": [
+        "",
+        [
+         "https://",
+         {
+          "Fn::GetAtt": [
+           "StockPulseOpenSearchE1A70830",
+           "DomainEndpoint"
+          ]
+         }
+        ]
+       ]
+      },
+      "OPENSEARCH_INDEX": "inventory-events",
+      "DEFAULT_AVERAGE_DAILY_DEMAND": "1",
+      "DEFAULT_FORECAST_BUFFER": "0",
+      "DEFAULT_LEAD_TIME_DAYS": "7",
+      "DEFAULT_MINIMUM_ORDER_QUANTITY": "1",
+      "DEFAULT_PACK_SIZE": "1"
+     }
+    },
+    "FunctionName": "inventory-api",
+    "Handler": "index.handler",
+    "LoggingConfig": {
+     "LogGroup": {
+      "Ref": "inventoryapiLogGroup7EAC42A9"
+     }
+    },
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "inventoryapiServiceRole53F8A74F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30,
+    "TracingConfig": {
+     "Mode": "PassThrough"
+    },
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseLambdaSecurityGroupE68D24E9",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "inventoryapiServiceRoleDefaultPolicy6570C216",
+    "inventoryapiServiceRole53F8A74F",
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-api/Resource",
+    "aws:asset:path": "asset.3cefec28163b48162d0dca3184107ffee72e74a407433c99f7d8998d9023861c",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "inventoryeventprocessorLogGroupCFF23523": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/inventory-event-processor",
+    "RetentionInDays": 7
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-event-processorLogGroup/Resource"
+   }
+  },
+  "inventoryeventprocessorServiceRole1F5D5057": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-event-processor/ServiceRole/Resource"
+   }
+  },
+  "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead",
+        "es:ESHttpDelete",
+        "es:ESHttpPost",
+        "es:ESHttpPut",
+        "es:ESHttpPatch"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:ChangeMessageVisibility",
+        "sqs:GetQueueUrl",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StockPulseInventoryEventsEF006865",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9",
+    "Roles": [
+     {
+      "Ref": "inventoryeventprocessorServiceRole1F5D5057"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-event-processor/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "inventoryeventprocessor9B924DAD": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
+     },
+     "S3Key": "fd7b5166a47c254296819d18af7b09634ea5b5daa8a886151788311577d1c518.zip"
+    },
+    "Description": "Processes inventory events from SQS",
+    "Environment": {
+     "Variables": {
+      "INVENTORY_TABLE_NAME": {
+       "Ref": "StockPulseInventory3E2CFBD5"
+      },
+      "INVENTORY_EVENTS_QUEUE_URL": {
+       "Ref": "StockPulseInventoryEventsEF006865"
+      },
+      "OPENSEARCH_ENDPOINT": {
+       "Fn::Join": [
+        "",
+        [
+         "https://",
+         {
+          "Fn::GetAtt": [
+           "StockPulseOpenSearchE1A70830",
+           "DomainEndpoint"
+          ]
+         }
+        ]
+       ]
+      },
+      "OPENSEARCH_INDEX": "inventory-events",
+      "DEFAULT_AVERAGE_DAILY_DEMAND": "1",
+      "DEFAULT_FORECAST_BUFFER": "0",
+      "DEFAULT_LEAD_TIME_DAYS": "7",
+      "DEFAULT_MINIMUM_ORDER_QUANTITY": "1",
+      "DEFAULT_PACK_SIZE": "1"
+     }
+    },
+    "FunctionName": "inventory-event-processor",
+    "Handler": "index.handler",
+    "LoggingConfig": {
+     "LogGroup": {
+      "Ref": "inventoryeventprocessorLogGroupCFF23523"
+     }
+    },
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "inventoryeventprocessorServiceRole1F5D5057",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30,
+    "TracingConfig": {
+     "Mode": "PassThrough"
+    },
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseLambdaSecurityGroupE68D24E9",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "inventoryeventprocessorServiceRoleDefaultPolicy73D31FA9",
+    "inventoryeventprocessorServiceRole1F5D5057",
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-event-processor/Resource",
+    "aws:asset:path": "asset.fd7b5166a47c254296819d18af7b09634ea5b5daa8a886151788311577d1c518",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "inventoryeventprocessorSqsEventSourceStockPulseStackStockPulseInventoryEvents6B62E50A91DE3B60": {
+   "Type": "AWS::Lambda::EventSourceMapping",
+   "Properties": {
+    "BatchSize": 10,
+    "EventSourceArn": {
+     "Fn::GetAtt": [
+      "StockPulseInventoryEventsEF006865",
+      "Arn"
+     ]
+    },
+    "FunctionName": {
+     "Ref": "inventoryeventprocessor9B924DAD"
+    },
+    "ScalingConfig": {
+     "MaximumConcurrency": 2
+    }
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/inventory-event-processor/SqsEventSource:StockPulseStackStockPulseInventoryEvents6B62E50A/Resource"
+   }
+  },
+  "searchapiLogGroup08A722C7": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/search-api",
+    "RetentionInDays": 7
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/search-apiLogGroup/Resource"
+   }
+  },
+  "searchapiServiceRoleEC986FD2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/search-api/ServiceRole/Resource"
+   }
+  },
+  "searchapiServiceRoleDefaultPolicyE611E30C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpHead"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseOpenSearchE1A70830",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "StockPulseOpenSearchE1A70830",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "searchapiServiceRoleDefaultPolicyE611E30C",
+    "Roles": [
+     {
+      "Ref": "searchapiServiceRoleEC986FD2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/search-api/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "searchapi1877647C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
+     },
+     "S3Key": "62c1bba55be9aef824066643088b816e3458a66399276cf3fb8828cf40512fb7.zip"
+    },
+    "Description": "Searches historical inventory events",
+    "Environment": {
+     "Variables": {
+      "INVENTORY_TABLE_NAME": {
+       "Ref": "StockPulseInventory3E2CFBD5"
+      },
+      "INVENTORY_EVENTS_QUEUE_URL": {
+       "Ref": "StockPulseInventoryEventsEF006865"
+      },
+      "OPENSEARCH_ENDPOINT": {
+       "Fn::Join": [
+        "",
+        [
+         "https://",
+         {
+          "Fn::GetAtt": [
+           "StockPulseOpenSearchE1A70830",
+           "DomainEndpoint"
+          ]
+         }
+        ]
+       ]
+      },
+      "OPENSEARCH_INDEX": "inventory-events",
+      "DEFAULT_AVERAGE_DAILY_DEMAND": "1",
+      "DEFAULT_FORECAST_BUFFER": "0",
+      "DEFAULT_LEAD_TIME_DAYS": "7",
+      "DEFAULT_MINIMUM_ORDER_QUANTITY": "1",
+      "DEFAULT_PACK_SIZE": "1"
+     }
+    },
+    "FunctionName": "search-api",
+    "Handler": "index.handler",
+    "LoggingConfig": {
+     "LogGroup": {
+      "Ref": "searchapiLogGroup08A722C7"
+     }
+    },
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "searchapiServiceRoleEC986FD2",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30,
+    "TracingConfig": {
+     "Mode": "PassThrough"
+    },
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseLambdaSecurityGroupE68D24E9",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "searchapiServiceRoleDefaultPolicyE611E30C",
+    "searchapiServiceRoleEC986FD2",
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/search-api/Resource",
+    "aws:asset:path": "asset.62c1bba55be9aef824066643088b816e3458a66399276cf3fb8828cf40512fb7",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "reorderapiLogGroupA8E2F07B": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/reorder-api",
+    "RetentionInDays": 7
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/reorder-apiLogGroup/Resource"
+   }
+  },
+  "reorderapiServiceRole82525FF6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/reorder-api/ServiceRole/Resource"
+   }
+  },
+  "reorderapiServiceRoleDefaultPolicy87EE1243": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "StockPulseInventory3E2CFBD5",
+          "Arn"
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "reorderapiServiceRoleDefaultPolicy87EE1243",
+    "Roles": [
+     {
+      "Ref": "reorderapiServiceRole82525FF6"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/reorder-api/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "reorderapiCC4F3524": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-south-1"
+     },
+     "S3Key": "a2d6de037a9030fa7b5d227ed8ceaafa238170469aac8ea8282646507c873cff.zip"
+    },
+    "Description": "Generates smart reorder recommendations",
+    "Environment": {
+     "Variables": {
+      "INVENTORY_TABLE_NAME": {
+       "Ref": "StockPulseInventory3E2CFBD5"
+      },
+      "INVENTORY_EVENTS_QUEUE_URL": {
+       "Ref": "StockPulseInventoryEventsEF006865"
+      },
+      "OPENSEARCH_ENDPOINT": {
+       "Fn::Join": [
+        "",
+        [
+         "https://",
+         {
+          "Fn::GetAtt": [
+           "StockPulseOpenSearchE1A70830",
+           "DomainEndpoint"
+          ]
+         }
+        ]
+       ]
+      },
+      "OPENSEARCH_INDEX": "inventory-events",
+      "DEFAULT_AVERAGE_DAILY_DEMAND": "1",
+      "DEFAULT_FORECAST_BUFFER": "0",
+      "DEFAULT_LEAD_TIME_DAYS": "7",
+      "DEFAULT_MINIMUM_ORDER_QUANTITY": "1",
+      "DEFAULT_PACK_SIZE": "1"
+     }
+    },
+    "FunctionName": "reorder-api",
+    "Handler": "index.handler",
+    "LoggingConfig": {
+     "LogGroup": {
+      "Ref": "reorderapiLogGroupA8E2F07B"
+     }
+    },
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "reorderapiServiceRole82525FF6",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30,
+    "TracingConfig": {
+     "Mode": "PassThrough"
+    },
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "StockPulseLambdaSecurityGroupE68D24E9",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
+      },
+      {
+       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "reorderapiServiceRoleDefaultPolicy87EE1243",
+    "reorderapiServiceRole82525FF6",
+    "StockPulseVpcPrivateSubnet1DefaultRouteB2F863BA",
+    "StockPulseVpcPrivateSubnet1RouteTableAssociation3D958736",
+    "StockPulseVpcPrivateSubnet2DefaultRouteB31CABA0",
+    "StockPulseVpcPrivateSubnet2RouteTableAssociationF46D7232"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/reorder-api/Resource",
+    "aws:asset:path": "asset.a2d6de037a9030fa7b5d227ed8ceaafa238170469aac8ea8282646507c873cff",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "StockPulseApi0B6B8534": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "StockPulse inventory, search, and reorder API",
+    "EndpointConfiguration": {
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "StockPulse API"
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Resource"
+   }
+  },
+  "StockPulseApiCloudWatchRole255A294C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/CloudWatchRole/Resource"
+   }
+  },
+  "StockPulseApiAccountA8549A05": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "StockPulseApiCloudWatchRole255A294C",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "StockPulseApi0B6B8534"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Account"
+   }
+  },
+  "StockPulseApiDeployment03A6090Bd1efb7b132a078a5433382f815275c83": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "StockPulse inventory, search, and reorder API",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "DependsOn": [
+    "StockPulseApiinventoryproductIdGETD58BA44C",
+    "StockPulseApiinventoryproductIdOPTIONS8690A993",
+    "StockPulseApiinventoryproductIdFE7B106E",
+    "StockPulseApiinventoryeventsOPTIONS805D143B",
+    "StockPulseApiinventoryeventsPOST5EC3AA84",
+    "StockPulseApiinventoryeventsC29E0000",
+    "StockPulseApiinventoryGET6EC3C979",
+    "StockPulseApiinventoryhealthGETEB84550D",
+    "StockPulseApiinventoryhealthOPTIONS8AC0E4BF",
+    "StockPulseApiinventoryhealth67A616FC",
+    "StockPulseApiinventorylocationlocationIdGETEB8341F2",
+    "StockPulseApiinventorylocationlocationIdOPTIONS1BD00A9F",
+    "StockPulseApiinventorylocationlocationId82A0C386",
+    "StockPulseApiinventorylocationOPTIONS3B96A400",
+    "StockPulseApiinventorylocation7BE05256",
+    "StockPulseApiinventoryOPTIONS3536098B",
+    "StockPulseApiinventoryAC7BC8AC",
+    "StockPulseApiinventorysearchGETF63512F1",
+    "StockPulseApiinventorysearchOPTIONS330C56E7",
+    "StockPulseApiinventorysearchB970849D",
+    "StockPulseApiOPTIONS6D2CBABF",
+    "StockPulseApireordersGET02E1A757",
+    "StockPulseApireordersOPTIONSB0F3F0A6",
+    "StockPulseApireordersC678773A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "StockPulseApiDeploymentStageprod992C4C20": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "StockPulseApiDeployment03A6090Bd1efb7b132a078a5433382f815275c83"
+    },
+    "MethodSettings": [
+     {
+      "DataTraceEnabled": false,
+      "HttpMethod": "*",
+      "LoggingLevel": "ERROR",
+      "ResourcePath": "/*"
+     }
+    ],
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    },
+    "StageName": "prod",
+    "TracingEnabled": true
+   },
+   "DependsOn": [
+    "StockPulseApiAccountA8549A05"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "StockPulseApiOPTIONS6D2CBABF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "StockPulseApi0B6B8534",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventoryAC7BC8AC": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "StockPulseApi0B6B8534",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "inventory",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/Resource"
+   }
+  },
+  "StockPulseApiinventoryOPTIONS3536098B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventoryGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventory6CAA4098": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/inventory"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory"
+   }
+  },
+  "StockPulseApiinventoryGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventory5F41C05B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/inventory"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory"
+   }
+  },
+  "StockPulseApiinventoryGET6EC3C979": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "inventoryapiD582259F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/GET/Resource"
+   }
+  },
+  "StockPulseApiinventoryeventsC29E0000": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "PathPart": "events",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/events/Resource"
+   }
+  },
+  "StockPulseApiinventoryeventsOPTIONS805D143B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryeventsC29E0000"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/events/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventoryeventsPOSTApiPermissionStockPulseStackStockPulseApiD16ACF7CPOSTinventoryevents32BC1A64": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/POST/inventory/events"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/events/POST/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.POST..inventory.events"
+   }
+  },
+  "StockPulseApiinventoryeventsPOSTApiPermissionTestStockPulseStackStockPulseApiD16ACF7CPOSTinventoryevents0CF676AC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/POST/inventory/events"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/events/POST/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.POST..inventory.events"
+   }
+  },
+  "StockPulseApiinventoryeventsPOST5EC3AA84": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "inventoryapiD582259F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryeventsC29E0000"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/events/POST/Resource"
+   }
+  },
+  "StockPulseApiinventoryhealth67A616FC": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "PathPart": "health",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/health/Resource"
+   }
+  },
+  "StockPulseApiinventoryhealthOPTIONS8AC0E4BF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryhealth67A616FC"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/health/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventoryhealthGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventoryhealthC601B9C0": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/inventory/health"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/health/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.health"
+   }
+  },
+  "StockPulseApiinventoryhealthGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventoryhealthB0656D9E": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/inventory/health"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/health/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.health"
+   }
+  },
+  "StockPulseApiinventoryhealthGETEB84550D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "inventoryapiD582259F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryhealth67A616FC"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/health/GET/Resource"
+   }
+  },
+  "StockPulseApiinventorysearchB970849D": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "PathPart": "search",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/search/Resource"
+   }
+  },
+  "StockPulseApiinventorysearchOPTIONS330C56E7": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventorysearchB970849D"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/search/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventorysearchGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventorysearch90988F93": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "searchapi1877647C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/inventory/search"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/search/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.search"
+   }
+  },
+  "StockPulseApiinventorysearchGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventorysearch4498A617": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "searchapi1877647C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/inventory/search"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/search/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.search"
+   }
+  },
+  "StockPulseApiinventorysearchGETF63512F1": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "searchapi1877647C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventorysearchB970849D"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/search/GET/Resource"
+   }
+  },
+  "StockPulseApiinventoryproductIdFE7B106E": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "PathPart": "{productId}",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/{productId}/Resource"
+   }
+  },
+  "StockPulseApiinventoryproductIdOPTIONS8690A993": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryproductIdFE7B106E"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/{productId}/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventoryproductIdGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventoryproductId24051733": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/inventory/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.{productId}"
+   }
+  },
+  "StockPulseApiinventoryproductIdGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventoryproductId18047651": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/inventory/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.{productId}"
+   }
+  },
+  "StockPulseApiinventoryproductIdGETD58BA44C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "inventoryapiD582259F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventoryproductIdFE7B106E"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/{productId}/GET/Resource"
+   }
+  },
+  "StockPulseApiinventorylocation7BE05256": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventoryAC7BC8AC"
+    },
+    "PathPart": "location",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/Resource"
+   }
+  },
+  "StockPulseApiinventorylocationOPTIONS3B96A400": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventorylocation7BE05256"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventorylocationlocationId82A0C386": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "StockPulseApiinventorylocation7BE05256"
+    },
+    "PathPart": "{locationId}",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/Resource"
+   }
+  },
+  "StockPulseApiinventorylocationlocationIdOPTIONS1BD00A9F": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApiinventorylocationlocationId82A0C386"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApiinventorylocationlocationIdGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETinventorylocationlocationId0F66A9A2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/inventory/location/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.location.{locationId}"
+   }
+  },
+  "StockPulseApiinventorylocationlocationIdGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETinventorylocationlocationId855E05CE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "inventoryapiD582259F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/inventory/location/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..inventory.location.{locationId}"
+   }
+  },
+  "StockPulseApiinventorylocationlocationIdGETEB8341F2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "inventoryapiD582259F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApiinventorylocationlocationId82A0C386"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/inventory/location/{locationId}/GET/Resource"
+   }
+  },
+  "StockPulseApireordersC678773A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "StockPulseApi0B6B8534",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "reorders",
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/reorders/Resource"
+   }
+  },
+  "StockPulseApireordersOPTIONSB0F3F0A6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "StockPulseApireordersC678773A"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/reorders/OPTIONS/Resource"
+   }
+  },
+  "StockPulseApireordersGETApiPermissionStockPulseStackStockPulseApiD16ACF7CGETreordersA0E30F72": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "reorderapiCC4F3524",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/",
+       {
+        "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+       },
+       "/GET/reorders"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/reorders/GET/ApiPermission.StockPulseStackStockPulseApiD16ACF7C.GET..reorders"
+   }
+  },
+  "StockPulseApireordersGETApiPermissionTestStockPulseStackStockPulseApiD16ACF7CGETreorders75F804B7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "reorderapiCC4F3524",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:ap-south-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "StockPulseApi0B6B8534"
+       },
+       "/test-invoke-stage/GET/reorders"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/reorders/GET/ApiPermission.Test.StockPulseStackStockPulseApiD16ACF7C.GET..reorders"
+   }
+  },
+  "StockPulseApireordersGET02E1A757": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:ap-south-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "reorderapiCC4F3524",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "StockPulseApireordersC678773A"
+    },
+    "RestApiId": {
+     "Ref": "StockPulseApi0B6B8534"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/StockPulseApi/Default/reorders/GET/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32SwW7bMAyGn6V3RcvSAju7aVYEWDsvHnINaJlxlNiSJlIJAsPvPlh2rWEYduLHXzRF/vJKrr4s5fIBbrRQ1WXR6FJ2BYO6CLjRoUO1kt3eKbE+mn2+FnkoG62KUBrkQUu0s4HxJ5QNJj1pGZFVGlhbMxcPsNnmQ3gHfgXGG9xF7vUVGFPjrWH0BueCcZIpy5hBnVo0LCZl79TGVM5qw1PpnMZOR1D4Z02BKnjN91dvg4uj/1fYmtojUS+qu4HWVqXs5qUj9IJ+kex+BAxRjNAL69AQglcnQn/VCmX3YlvQ0Y6RetHYmmT3zdbz3R/ciwbasgLZFdrUDbI1X4NR0c8Z1sckbq5ouLDBK3wD57Spo93/VHP0rSbS1vRCQyu73DZaRacn2tlxwyH2gh4PQIRMMhuCoEf5HNQF+RkIp0EPxlZ4JvkewzwWOF2P7yS7HRJnTse+CTOlbDAsXtA19h5fdnAoZQVDPf5jEXZIcZ949xvyyVbD4UQfp9Mlkfs+ySoQ2/bgp5xkdqN11NKXf6WpkYjrD2NMRn4P7AL3YthdnunTdfUkPz/J5cOZtF74YFi3KHdj/A1zqqu6ewMAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "StockPulseStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "StockPulseApiEndpointDE5690CB": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "StockPulseApi0B6B8534"
+      },
+      ".execute-api.ap-south-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiGatewayUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "StockPulseApi0B6B8534"
+      },
+      ".execute-api.ap-south-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "StockPulseApiDeploymentStageprod992C4C20"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "DynamoDbTableName": {
+   "Value": {
+    "Ref": "StockPulseInventory3E2CFBD5"
+   }
+  },
+  "InventoryEventsQueueUrl": {
+   "Value": {
+    "Ref": "StockPulseInventoryEventsEF006865"
+   }
+  },
+  "OpenSearchEndpoint": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Fn::GetAtt": [
+        "StockPulseOpenSearchE1A70830",
+        "DomainEndpoint"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "InventoryApiLambdaName": {
+   "Value": {
+    "Ref": "inventoryapiD582259F"
+   }
+  },
+  "InventoryEventProcessorLambdaName": {
+   "Value": {
+    "Ref": "inventoryeventprocessor9B924DAD"
+   }
+  },
+  "SearchApiLambdaName": {
+   "Value": {
+    "Ref": "searchapi1877647C"
+   }
+  },
+  "ReorderApiLambdaName": {
+   "Value": {
+    "Ref": "reorderapiCC4F3524"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
