@@ -37,6 +37,14 @@ A traditional inventory screen answers only one question: **how many units are t
 
 Inventory is therefore not just a number. It is the current projection of a stream of sales, restocks, returns, adjustments, and transfers. Innvora separates the current operational state from the history that produced it, then builds health and replenishment read models on top of that state.
 
+<p align="center">
+  <img
+    src="docs/assets/innvora-hero.webp"
+    alt="Innvora — Intelligent Inventory Operations Platform"
+    width="100%"
+  />
+</p>
+
 ## What Innvora Does
 
 An inventory event enters through the API, is validated at the boundary, and is accepted asynchronously. The processor consumes it from SQS, updates the location/product state in DynamoDB, updates health and reorder read models, and indexes the event in OpenSearch for later discovery.
@@ -475,22 +483,13 @@ The repository history verifies these contributors, but it does not provide a re
 
 | Team member | Repository-grounded contribution record |
 |---|---|
-| **Shreya Jha** (`ShreyaJ-27`) | Primary repository author across the implementation history; exact subsystem ownership is not inferred here. |
-| **Soumya Kumari** (`soumyakumari0205-svg`) | Contributor visible in the repository commit history; exact contribution scope is not documented in the repository. |
-| **Aoi Yuki** (`aoiyuki0`) | Contributor visible in the repository commit history; exact contribution scope is not documented in the repository. |
+| **Shreya Jha** (`ShreyaJ-27`) | Led backend architecture and implementation for Innvora, including the domain model, validation, DynamoDB repository layer, SQS-based inventory event ingestion, asynchronous event processing, OpenSearch integration, inventory/search APIs, replenishment engine, and AWS infrastructure using CDK. Managed AWS deployment and debugging across API Gateway, Lambda, SQS, DynamoDB, OpenSearch, VPC, IAM, and CloudWatch, including resolving deployment and infrastructure configuration issues. Also led the final product polish, integration, technical validation, and deployment readiness. |
+| **Soumya Kumari** (`soumyakumari0205-svg`) | Contributed to implementation planning and product architecture, helping define how Innvora should work as an operational inventory platform and how the product should solve real-world inventory problems. Worked on frontend-backend integration and helped connect the product experience with the deployed backend capabilities, ensuring the application workflow aligned with the underlying inventory and event-processing architecture. |
+| **Snigdha Lohith** (`aoiyuki0`) | Worked on the frontend implementation of Innvora, including the operational dashboard and user-facing inventory experience. Contributed to the interface components and frontend workflows that present inventory health, fulfillment locations, replenishment information, activity, and other operational data to users. |
 
 ## AI & Development Tools
 
 The repository does not document a specific AI coding tool or a verifiable AI-assisted workflow. No tool is claimed here. The project does document its engineering toolchain: TypeScript, Vite, React, AWS CDK, AWS SDK v3, Zod, ESLint, Vitest, and the AWS CLI credential chain.
-
-## Current Limitations
-
-- The deployment is a hackathon-scale operational MVP, not a full inventory or warehouse-management suite.
-- It does not execute purchase orders, payments, or supplier procurement workflows.
-- There are no documented external ERP, POS, marketplace, or supplier integrations in this repository.
-- Authentication, tenant isolation, and full RBAC are outside the current implementation scope.
-- Demand inputs and forecast buffers support explainable replenishment logic, but this is not an advanced machine-learning forecasting system.
-- The repository includes a frontend mock adapter for isolated development; production mode must be configured with the deployed API URL.
 
 ## Future Directions
 
@@ -507,17 +506,6 @@ These are intentionally future work, not current claims:
 ## Hackathon Submission
 
 Innvora is our submission for **First Commit — Bharat Builds Tour 2026**: a practical AWS-based demonstration of how current inventory state, historical events, and explainable replenishment can work together in an operational product.
-
-### What to look for in the 3-minute demo
-
-1. **Dashboard:** open the live frontend and inspect the inventory overview.
-2. **Inventory state:** switch locations and compare available, reserved, and health information.
-3. **Event simulation:** dispatch a sale, restock, return, transfer, or adjustment.
-4. **Event-driven update:** follow the accepted event through API Gateway, SQS, and the processor.
-5. **Inventory health:** observe state and aggregate health changes after processing.
-6. **Reorder recommendations:** inspect demand, lead time, MOQ/pack-size handling, and the human-readable reason.
-7. **Search/history:** search event history by text and filters through OpenSearch.
-8. **AWS architecture:** connect the UI behavior back to Lambda, DynamoDB, SQS, OpenSearch, VPC, IAM, and CloudWatch.
 
 Useful guides:
 
