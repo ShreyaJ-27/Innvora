@@ -7,120 +7,159 @@
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
   body {
-    @apply font-sans text-charcoal-900 bg-sand-200;
-    background:
-      radial-gradient(circle at 12% 10%, rgba(248, 244, 236, 0.95), transparent 24rem),
-      linear-gradient(135deg, #E9E0D2 0%, #D9CCB9 100%);
+    @apply font-sans text-charcoal-900;
+    background-color: #E5DDD0;
     color: #272522;
   }
-  
-  /* Selection color — warm */
   ::selection {
     background-color: #D9CCB9;
     color: #272522;
   }
+  /* Force native select options to always be visible */
+  select option {
+    background-color: #F8F4EC !important;
+    color: #272522 !important;
+  }
 }
 
-/* Custom warm scrollbars */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #C4B49F;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #A89580;
-}
+/* ─── Scrollbars ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C4B49F; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #A89580; }
 
-/* Innvora component layer */
+/* ─── Component Layer ──────────────────────────────────────────────────────── */
 @layer components {
-  /* Warm card surface */
+
+  /* ── Surfaces ── */
   .inn-card {
-    @apply bg-sand-100 border border-sand-500 rounded-lg;
-    box-shadow: 0 1px 3px 0 rgba(39,37,34,0.06), 0 10px 24px -20px rgba(39,37,34,0.42);
+    @apply bg-sand-100 border border-sand-500;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px 0 rgba(39,37,34,0.06), 0 8px 20px -16px rgba(39,37,34,0.32);
   }
 
+  /* Primary operational panel — dark grid texture */
   .ops-panel {
     @apply relative overflow-hidden border border-sand-500 bg-sand-100/90;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 16px 48px -34px rgba(39,37,34,0.65);
   }
-
   .ops-panel::before {
     content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(255,255,255,0.16), transparent 34%, rgba(90,83,73,0.035)),
-      repeating-linear-gradient(90deg, rgba(90,83,73,0.035) 0 1px, transparent 1px 24px);
-    opacity: .75;
+      linear-gradient(90deg, rgba(255,255,255,0.14), transparent 36%, rgba(90,83,73,0.03)),
+      repeating-linear-gradient(90deg, rgba(90,83,73,0.03) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(0deg, rgba(90,83,73,0.03) 0 1px, transparent 1px 24px);
+    opacity: 0.7;
   }
 
+  /* Dark charcoal surface — used for premium sections */
+  .ops-dark-surface {
+    @apply relative overflow-hidden;
+    background-color: #1E1C19;
+    border-radius: 8px;
+  }
+
+  /* Inset operational surface */
   .ops-surface {
     @apply relative border border-sand-400 bg-sand-50/80;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: inset 0 1px rgba(255,255,255,.55);
   }
 
+  /* ── KPI / Metric blocks ── */
   .ops-kpi {
     @apply relative overflow-hidden border border-sand-400 bg-sand-100;
     border-radius: 6px;
-    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
   }
-
   .ops-kpi:hover {
     transform: translateY(-2px);
     border-color: #A89580;
-    box-shadow: 0 14px 32px -26px rgba(39,37,34,.65);
+    box-shadow: 0 12px 28px -20px rgba(39,37,34,.6);
   }
 
+  /* Dominant metric — used for the main KPI */
+  .ops-kpi-dominant {
+    @apply relative overflow-hidden border-2 border-charcoal-800 bg-charcoal-900;
+    border-radius: 8px;
+  }
+
+  /* ── Table rows ── */
   .ops-row {
-    @apply border-b border-sand-300 transition-all duration-200;
+    @apply border-b border-sand-300 transition-all duration-150;
   }
-
   .ops-row:hover {
-    background: rgba(237, 229, 216, 0.8);
+    background: rgba(237,229,216,0.85);
     transform: translateX(2px);
   }
 
+  /* ── Navigation ── */
+  /* Left-border active marker approach — NOT background fill */
+  .ops-nav-item {
+    @apply flex items-center gap-2.5 px-3 py-2 text-sm transition-all duration-150 relative;
+    border-radius: 4px;
+    color: #7D776F;
+    border-left: 2px solid transparent;
+  }
+  .ops-nav-item:hover {
+    color: #272522;
+    background: rgba(237,229,216,0.6);
+    border-left-color: #C4B49F;
+  }
+  .ops-nav-item.active {
+    color: #272522;
+    font-weight: 700;
+    background: rgba(237,229,216,0.5);
+    border-left-color: #5A5349;
+  }
+  .ops-nav-item.active .ops-nav-icon {
+    color: #272522;
+  }
+  .ops-nav-icon {
+    color: #A8A39B;
+    transition: color .15s;
+    flex-shrink: 0;
+  }
+
+  /* ── Live indicator ── */
   .ops-live-dot {
     @apply relative inline-block w-2 h-2 rounded-full bg-olive-500;
   }
-
   .ops-live-dot::after {
     content: '';
     position: absolute;
     inset: -5px;
     border-radius: 999px;
-    border: 1px solid rgba(93, 123, 80, .36);
+    border: 1px solid rgba(93,123,80,.36);
     animation: pulse-ring 1.8s ease-out infinite;
   }
 
+  /* ── Grid background texture ── */
   .ops-grid-bg {
     background-image:
-      linear-gradient(rgba(90,83,73,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(90,83,73,0.055) 1px, transparent 1px);
-    background-size: 24px 24px;
+      linear-gradient(rgba(90,83,73,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,83,73,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
+  /* ── Numbers ── */
   .ops-number {
     font-variant-numeric: tabular-nums;
-    animation: count-pop .45s cubic-bezier(.2,.9,.2,1);
+    animation: count-pop .4s cubic-bezier(.2,.9,.2,1);
   }
 
+  /* ── Progress bar (sheen animation) ── */
   .ops-progress {
     position: relative;
     overflow: hidden;
   }
-
   .ops-progress::after {
     content: '';
     position: absolute;
@@ -128,116 +167,182 @@
     width: 36%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent);
     transform: translateX(-100%);
-    animation: scan-flow 2.4s ease-in-out infinite;
+    animation: scan-flow 2.6s ease-in-out infinite;
   }
 
+  /* ── Inputs ── */
   .ops-command-input {
     @apply bg-sand-50 border border-sand-400 text-charcoal-800 placeholder-charcoal-400 focus:outline-none focus:ring-1 focus:ring-charcoal-800;
-    border-radius: 8px;
-    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    border-radius: 6px;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
   }
-
   .ops-command-input:focus {
     background: #F8F4EC;
     box-shadow: 0 0 0 4px rgba(90,83,73,.08);
   }
 
-  /* Thin separator line */
-  .inn-separator {
-    @apply border-t border-sand-400;
-  }
-
-  /* Status indicator dot */
-  .inn-dot {
-    @apply w-2 h-2 rounded-full shrink-0;
-  }
-
-  /* Label uppercase track */
-  .inn-label {
-    @apply text-[10px] font-bold uppercase tracking-widest text-charcoal-400;
-  }
-
-  /* Operational band — full width horizontal data strip */
-  .inn-band {
-    @apply border-y border-sand-400 bg-sand-100 px-6 py-4;
-  }
-
-  /* Metric number style */
-  .inn-metric {
-    @apply text-3xl font-extrabold text-charcoal-900 leading-none;
-  }
-
-  /* Warm input base */
   .inn-input {
-    @apply w-full px-3 py-2 bg-sand-50 border border-sand-500 rounded-lg text-sm text-charcoal-800
+    @apply w-full px-3 py-2 bg-sand-50 border border-sand-500 text-sm text-charcoal-800
            placeholder-charcoal-400 focus:outline-none focus:ring-1 focus:ring-charcoal-700
            focus:border-charcoal-700 transition-colors;
+    border-radius: 6px;
   }
-
-  /* Warm select base */
   .inn-select {
     @apply inn-input appearance-none cursor-pointer pr-8;
   }
 
-  /* Primary CTA button */
+  /* ── Buttons ── */
   .inn-btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2
            bg-charcoal-900 text-sand-100 text-sm font-semibold
            hover:bg-charcoal-800 active:bg-charcoal-900
-           transition-colors focus:outline-none focus:ring-2 focus:ring-charcoal-900 focus:ring-offset-2;
+           transition-colors focus:outline-none;
+    border-radius: 6px;
   }
-
-  /* Outline button */
   .inn-btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2
            bg-transparent text-charcoal-700 text-sm font-medium
            border border-sand-500 hover:bg-sand-100 active:bg-sand-200
            transition-colors focus:outline-none;
+    border-radius: 6px;
   }
 
-  /* Warm tooltip */
+  /* ── Labels ── */
+  .inn-label {
+    @apply text-[10px] font-bold uppercase tracking-widest text-charcoal-400;
+  }
+  .inn-separator {
+    @apply border-t border-sand-400;
+  }
+  .inn-metric {
+    @apply text-3xl font-extrabold text-charcoal-900 leading-none;
+  }
+
+  /* ── Tooltip ── */
   .inn-tooltip {
-    @apply bg-sand-100 text-charcoal-900 border border-sand-400 rounded-lg shadow-panel
-           text-xs px-3 py-2;
+    @apply bg-sand-100 text-charcoal-900 border border-sand-400 shadow-panel text-xs px-3 py-2;
+    border-radius: 6px;
   }
-}
 
-/* Landing page specific styles */
+  /* ── Status badges ── */
+  .status-critical {
+    @apply bg-terracotta-50 text-terracotta-800 border border-terracotta-200;
+    border-radius: 4px;
+  }
+  .status-reorder {
+    @apply bg-terracotta-50 text-terracotta-700 border border-terracotta-200;
+    border-radius: 4px;
+  }
+  .status-healthy {
+    @apply bg-olive-50 text-olive-800 border border-olive-200;
+    border-radius: 4px;
+  }
+  .status-overstocked {
+    @apply bg-sand-200 text-charcoal-700 border border-sand-400;
+    border-radius: 4px;
+  }
+
+  /* ── Event timeline ── */
+  .inn-timeline {
+    position: relative;
+  }
+  .inn-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #C4B49F 10%, #C4B49F 90%, transparent);
+  }
+  .inn-event-marker {
+    @apply relative flex items-start gap-4 py-3;
+  }
+  .inn-event-dot {
+    @apply relative z-10 w-10 h-10 rounded-sm flex items-center justify-center shrink-0 text-[10px] font-black uppercase tracking-wider;
+    border-radius: 4px;
+  }
+  .inn-event-dot-sale { @apply bg-terracotta-100 text-terracotta-800 border border-terracotta-200; }
+  .inn-event-dot-restock { @apply bg-olive-100 text-olive-800 border border-olive-200; }
+  .inn-event-dot-transfer { @apply bg-sand-300 text-charcoal-700 border border-sand-400; }
+  .inn-event-dot-return { @apply bg-sand-200 text-charcoal-600 border border-sand-400; }
+  .inn-event-dot-adjustment { @apply bg-terracotta-50 text-terracotta-700 border border-terracotta-100; }
+
+  /* ── Band / strip ── */
+  .inn-band {
+    @apply border-y border-sand-400 bg-sand-100 px-6 py-4;
+  }
+
+  /* ── Scroll reveal — base state ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s cubic-bezier(.2,.8,.2,1), transform 0.55s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-32px);
+    transition: opacity 0.6s cubic-bezier(.2,.8,.2,1), transform 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.6s cubic-bezier(.2,.8,.2,1), transform 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+} /* end @layer components */
+
+/* ─── Landing-specific ──────────────────────────────────────────────────────── */
 .landing-hero-overlay {
   background: linear-gradient(
     to right,
-    rgba(233, 224, 210, 0.97) 0%,
-    rgba(233, 224, 210, 0.90) 40%,
-    rgba(233, 224, 210, 0.4) 70%,
-    rgba(233, 224, 210, 0) 100%
+    rgba(233,224,210,0.98) 0%,
+    rgba(233,224,210,0.93) 38%,
+    rgba(233,224,210,0.5) 65%,
+    rgba(233,224,210,0.0) 100%
   );
 }
-
 .landing-section-divider {
   height: 1px;
   background: linear-gradient(to right, transparent, #C4B49F, transparent);
 }
 
-/* Chart warm tooltip override */
+/* ─── Chart tooltip override ────────────────────────────────────────────────── */
 .recharts-default-tooltip {
   background: #F8F4EC !important;
   border: 1px solid #D7CABB !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(39,37,34,0.08) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px rgba(39,37,34,0.1) !important;
 }
 .recharts-tooltip-label {
   color: #272522 !important;
-  font-weight: 600 !important;
-  font-size: 12px !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
 }
 .recharts-tooltip-item {
   color: #45413B !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
-/* Animate-in utilities */
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fade-in {
@@ -245,39 +350,54 @@
   to   { opacity: 1; }
 }
 @keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(20px); }
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 @keyframes pulse-ring {
-  0% { opacity: .72; transform: scale(.5); }
-  100% { opacity: 0; transform: scale(1.8); }
+  0%   { opacity: .72; transform: scale(.5); }
+  100% { opacity: 0;   transform: scale(1.9); }
 }
 @keyframes scan-flow {
-  0% { transform: translateX(-120%); }
-  60%, 100% { transform: translateX(320%); }
+  0%         { transform: translateX(-120%); }
+  60%, 100%  { transform: translateX(320%); }
 }
 @keyframes count-pop {
-  0% { opacity: .45; transform: translateY(8px) scale(.98); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0%   { opacity: .4;  transform: translateY(8px) scale(.97); }
+  100% { opacity: 1;   transform: translateY(0) scale(1); }
 }
 @keyframes draw-line {
-  from { stroke-dashoffset: 760; }
-  to { stroke-dashoffset: 0; }
+  from { stroke-dashoffset: 800; }
+  to   { stroke-dashoffset: 0; }
 }
 @keyframes rise-in {
-  from { opacity: 0; transform: translateY(16px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes hub-transition {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-in-up { animation: fade-in-up 0.35s ease-out forwards; }
-.animate-fade-in    { animation: fade-in 0.2s ease-out forwards; }
-.animate-slide-right { animation: slide-in-right 0.3s ease-out forwards; }
-.animate-rise-in { animation: rise-in .42s cubic-bezier(.2,.8,.2,1) both; }
-.animate-draw-line {
-  stroke-dasharray: 760;
-  stroke-dashoffset: 760;
-  animation: draw-line 1.35s ease-out forwards;
+.animate-fade-in-up   { animation: fade-in-up .38s ease-out forwards; }
+.animate-fade-in      { animation: fade-in .22s ease-out forwards; }
+.animate-slide-right  { animation: slide-in-right .32s ease-out forwards; }
+.animate-slide-left   { animation: slide-in-left .32s ease-out forwards; }
+.animate-rise-in      { animation: rise-in .42s cubic-bezier(.2,.8,.2,1) both; }
+.animate-draw-line    {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: draw-line 1.4s ease-out forwards;
 }
+.animate-ticker       { animation: ticker-scroll 18s linear infinite; }
+.animate-hub          { animation: hub-transition 0.35s ease-out both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

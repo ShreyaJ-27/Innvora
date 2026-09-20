@@ -40,7 +40,7 @@ export const Select: React.FC<SelectProps> = ({
           disabled:cursor-not-allowed ${sizeClasses[sizeVariant]}`}
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option key={opt.value} value={opt.value} style={{ backgroundColor: '#F8F4EC', color: '#272522' }}>
             {opt.label}
           </option>
         ))}

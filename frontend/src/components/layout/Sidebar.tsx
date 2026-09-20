@@ -9,11 +9,8 @@ import {
   Settings,
   HelpCircle,
   X,
-  ChevronLeft,
-  ChevronRight,
   Warehouse,
 } from 'lucide-react';
-import { IconButton } from '../common/IconButton';
 
 export interface SidebarProps {
   isOpen: boolean;
@@ -22,87 +19,92 @@ export interface SidebarProps {
   onToggleCollapse: () => void;
 }
 
+const navItems = [
+  { to: '/dashboard',  label: 'Dashboard',        icon: LayoutDashboard, shortcut: 'D' },
+  { to: '/inventory',  label: 'Inventory',         icon: Boxes,           shortcut: 'I' },
+  { to: '/reorders',   label: 'Replenishment',     icon: Sparkles,        shortcut: 'R' },
+  { to: '/activity',   label: 'Activity',          icon: Activity,        shortcut: 'A' },
+  { to: '/search',     label: 'Search',            icon: Search,          shortcut: 'S' },
+];
+
+const bottomItems = [
+  { to: '/settings', label: 'Settings',   icon: Settings },
+  { to: '/help',     label: 'Help & Docs', icon: HelpCircle },
+];
+
 export const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   onClose,
   isCollapsed,
-  onToggleCollapse,
 }) => {
   const navigate = useNavigate();
-  
-  const navItems = [
-    { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/inventory', label: 'Inventory', icon: Boxes },
-    { to: '/reorders', label: 'Replenishment', icon: Sparkles },
-    { to: '/activity', label: 'Activity', icon: Activity },
-    { to: '/search', label: 'Search', icon: Search },
-  ];
-
-  const bottomItems = [
-    { to: '/settings', label: 'Settings', icon: Settings },
-    { to: '/help', label: 'Help & Docs', icon: HelpCircle },
-  ];
-
-  const activeClass = 'bg-sand-200 text-charcoal-900 font-semibold shadow-[inset_3px_0_0_#5A5349]';
-  const inactiveClass = 'text-charcoal-500 hover:text-charcoal-900 hover:bg-sand-100 hover:translate-x-0.5';
 
   return (
     <>
       {/* Mobile Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-charcoal-900/30 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-40 bg-charcoal-900/40 backdrop-blur-[2px] lg:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col
-          border-r border-sand-400 transition-all duration-300 ease-in-out
+        className={`
+          fixed lg:static inset-y-0 left-0 z-50 flex flex-col
+          border-r border-sand-400/70
+          transition-all duration-280 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          ${isCollapsed ? 'lg:w-16' : 'lg:w-56'} w-60`}
+          ${isCollapsed ? 'lg:w-14' : 'lg:w-52'} w-56
+        `}
         style={{
-          backgroundColor: 'rgba(248,244,236,0.92)',
-          backdropFilter: 'blur(16px)',
-          boxShadow: isOpen ? '4px 0 16px rgba(39,37,34,0.08)' : 'none',
+          backgroundColor: '#F0EAE0',
+          backdropFilter: 'blur(20px)',
+          boxShadow: isOpen ? '4px 0 24px rgba(39,37,34,0.1)' : 'none',
         }}
       >
-        {/* Brand Header */}
-        <div className="h-14 flex items-center justify-between px-4 border-b border-sand-400 shrink-0">
+        {/* Brand */}
+        <div
+          className="h-14 flex items-center justify-between px-4 border-b border-sand-400/60 shrink-0"
+        >
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2.5 overflow-hidden group"
+            className="flex items-center gap-2.5 group overflow-hidden"
+            aria-label="Go to home"
           >
-            {/* Logo mark */}
-            <div className="w-8 h-8 rounded-md bg-charcoal-900 flex items-center justify-center shrink-0">
+            <div
+              className="w-8 h-8 flex items-center justify-center shrink-0 transition-transform group-hover:scale-95"
+              style={{ background: '#272522', borderRadius: '6px' }}
+            >
               <Warehouse className="w-4 h-4 text-sand-200" />
             </div>
             {!isCollapsed && (
-              <div className="flex flex-col overflow-hidden">
-                <span className="font-bold text-sm tracking-tight text-charcoal-900 leading-tight">
-                  Innvora
+              <div className="flex flex-col leading-none overflow-hidden">
+                <span className="text-[13px] font-black tracking-tight text-charcoal-900">
+                  INNVORA
                 </span>
-                <span className="text-[9px] font-semibold tracking-widest text-charcoal-400 uppercase">
-                  Inventory Ops
+                <span className="text-[9px] font-bold tracking-[0.18em] text-charcoal-400 uppercase mt-0.5">
+                  Ops Platform
                 </span>
               </div>
             )}
           </button>
 
-          {/* Close on mobile */}
-          <div className="lg:hidden">
-            <IconButton aria-label="Close sidebar" onClick={onClose} size="sm">
-              <X className="w-4 h-4" />
-            </IconButton>
-          </div>
+          <button
+            className="lg:hidden p-1 text-charcoal-400 hover:text-charcoal-800 transition-colors"
+            onClick={onClose}
+            aria-label="Close navigation"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
-        {/* Primary Navigation */}
-        <div className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+        {/* Primary Nav */}
+        <nav className="flex-1 py-3 px-2 overflow-y-auto space-y-0.5">
           {!isCollapsed && (
-            <p className="px-2 pb-2 text-[9px] font-bold text-charcoal-400 uppercase tracking-widest">
+            <p className="px-3 pb-2 pt-1 text-[9px] font-black text-charcoal-400 uppercase tracking-[0.18em]">
               Operations
             </p>
           )}
@@ -113,22 +115,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={item.to}
                 to={item.to}
                 onClick={() => { if (window.innerWidth < 1024) onClose(); }}
-                className={({ isActive }) =>
-                  `flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-all duration-200
-                  ${isActive ? activeClass : inactiveClass}
-                  ${isCollapsed ? 'justify-center' : ''}`
-                }
                 title={isCollapsed ? item.label : undefined}
+                className={({ isActive }) =>
+                  `ops-nav-item ${isActive ? 'active' : ''} ${isCollapsed ? 'justify-center px-0' : ''}`
+                }
               >
-                <Icon className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="flex-1 truncate">{item.label}</span>}
+                <Icon className="ops-nav-icon w-[15px] h-[15px] shrink-0" />
+                {!isCollapsed && (
+                  <span className="flex-1 text-[13px] truncate">{item.label}</span>
+                )}
               </NavLink>
             );
           })}
-        </div>
+        </nav>
 
-        {/* Bottom Utility Items */}
-        <div className="p-2 border-t border-sand-400 space-y-0.5">
+        {/* Bottom Nav */}
+        <div
+          className="p-2 border-t border-sand-400/60 space-y-0.5"
+          style={{ paddingBottom: '12px' }}
+        >
+          {!isCollapsed && (
+            <p className="px-3 pb-1 pt-1 text-[9px] font-black text-charcoal-400 uppercase tracking-[0.18em]">
+              System
+            </p>
+          )}
           {bottomItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -136,36 +146,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={item.to}
                 to={item.to}
                 onClick={() => { if (window.innerWidth < 1024) onClose(); }}
-                className={({ isActive }) =>
-                  `w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-all duration-200
-                  ${isActive ? activeClass : inactiveClass}
-                  ${isCollapsed ? 'justify-center' : ''}`
-                }
                 title={isCollapsed ? item.label : undefined}
+                className={({ isActive }) =>
+                  `ops-nav-item ${isActive ? 'active' : ''} ${isCollapsed ? 'justify-center px-0' : ''}`
+                }
               >
-                <Icon className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span>{item.label}</span>}
+                <Icon className="ops-nav-icon w-[15px] h-[15px] shrink-0" />
+                {!isCollapsed && (
+                  <span className="text-[13px]">{item.label}</span>
+                )}
               </NavLink>
             );
           })}
-
-          {/* Collapse toggle for desktop */}
-          <div className="hidden lg:flex pt-1 justify-end">
-            <button
-              onClick={onToggleCollapse}
-              className="p-1.5 rounded-lg text-charcoal-400 hover:text-charcoal-700 hover:bg-sand-300 text-xs flex items-center gap-1 w-full justify-center transition-colors"
-              aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            >
-              {isCollapsed ? (
-                <ChevronRight className="w-4 h-4" />
-              ) : (
-                <>
-                  <ChevronLeft className="w-4 h-4" />
-                  <span className="text-[10px]">Collapse</span>
-                </>
-              )}
-            </button>
-          </div>
         </div>
       </aside>
     </>

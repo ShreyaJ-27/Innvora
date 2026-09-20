@@ -34,11 +34,11 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
     fetchLocations().then((remoteLocations) => {
       if (!mounted || !remoteLocations?.length) return;
       const options: LocationOption[] = [
-        { id: 'ALL', name: 'All Fulfillment Hubs', city: 'Network Wide' },
+        { id: 'ALL', name: 'All Fulfillment Hubs', city: 'All Hubs' },
         ...remoteLocations.map((loc) => ({
           id: loc.locationId,
           name: loc.locationName,
-          city: loc.city,
+          city: loc.city || loc.locationName || loc.locationId,
         })),
       ];
       setLocations(options);
@@ -61,8 +61,8 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
           className="bg-transparent text-xs font-medium text-charcoal-700 focus:outline-none cursor-pointer"
         >
           {locations.map((loc) => (
-            <option key={loc.id} value={loc.id}>
-              {loc.id === 'ALL' ? 'All Hubs' : loc.city}
+            <option key={loc.id} value={loc.id} style={{ backgroundColor: '#F8F4EC', color: '#272522' }}>
+              {loc.id === 'ALL' ? 'All Hubs' : (loc.city || loc.name || loc.id)}
             </option>
           ))}
         </select>
