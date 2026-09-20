@@ -21,7 +21,7 @@ export const AppShell: React.FC<AppShellProps> = ({
 
   return (
     <div
-      className="min-h-screen flex text-charcoal-900 font-sans"
+      className="min-h-screen flex text-charcoal-900 font-sans ops-grid-bg"
       style={{ backgroundColor: '#E9E0D2' }}
     >
       {/* Sidebar Navigation */}

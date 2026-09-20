@@ -67,6 +67,7 @@ function normalizeApiEvent(event: APIGatewayProxyEvent): ApiGatewayEvent {
   return {
     httpMethod: event.httpMethod,
     path: event.resource || event.path,
+    body: event.body,
     queryStringParameters,
     pathParameters: event.pathParameters
   };
@@ -93,6 +94,7 @@ export async function searchApi(event: APIGatewayProxyEvent): Promise<APIGateway
 
 export async function reorderApi(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   const reorderService = new ReorderService({
+    listPrecomputedRecommendations: async (locationId) => inventoryRepository.listPrecomputedReorders ? inventoryRepository.listPrecomputedReorders(locationId) : [],
     listInventory: async (locationId) => (await inventoryRepository.listAllInventory())
       .filter((item) => !locationId || item.locationId === locationId)
       .map((item) => ({

@@ -3,6 +3,7 @@ import { DataTable, Column } from '../common/DataTable';
 import { StatusBadge } from '../common/StatusBadge';
 import { ProductInventory } from '../../types/inventory';
 import { formatDate } from '../../utils/formatters';
+import { ArrowRight, Eye, MoreHorizontal } from 'lucide-react';
 
 export interface InventoryTableProps {
   items: ProductInventory[];
@@ -21,17 +22,38 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       header: 'Product',
       sortable: true,
       render: (item) => (
-        <div>
-          <div className="font-medium text-charcoal-900 leading-tight">{item.name}</div>
-          <div className="text-[10px] text-charcoal-400 mt-0.5 uppercase tracking-wider">{item.category}</div>
+        <div className="min-w-[210px]">
+          <div className="font-bold text-charcoal-900 leading-tight">{item.name}</div>
+          <div className="mt-1 flex items-center gap-2">
+            <span className="font-mono text-[10px] text-charcoal-500">{item.sku}</span>
+            <span className="h-1 w-1 rounded-full bg-sand-500" />
+            <span className="text-[10px] text-charcoal-400 uppercase tracking-wider">{item.category}</span>
+          </div>
         </div>
       ),
     },
     {
       key: 'sku',
-      header: 'SKU',
-      sortable: true,
-      render: (item) => <span className="font-mono text-[10px] text-charcoal-500">{item.sku}</span>,
+      header: 'Stock Coverage',
+      sortable: false,
+      render: (item) => {
+        const threshold = item.reorderPoint + item.safetyStock;
+        const coverage = Math.min(100, Math.max(4, (item.availableStock / Math.max(threshold, 1)) * 100));
+        return (
+          <div className="min-w-[150px]">
+            <div className="mb-1 flex items-center justify-between text-[10px] text-charcoal-500">
+              <span>{item.availableStock} available</span>
+              <span>ROP {item.reorderPoint}</span>
+            </div>
+            <div className="h-2 overflow-hidden rounded-sm bg-sand-300">
+              <div
+                className={`ops-progress h-full ${item.status === 'CRITICAL' ? 'bg-terracotta-700' : item.status === 'REORDER_SOON' ? 'bg-terracotta-500' : item.status === 'OVERSTOCKED' ? 'bg-charcoal-500' : 'bg-olive-500'}`}
+                style={{ width: `${coverage}%` }}
+              />
+            </div>
+          </div>
+        );
+      },
     },
     {
       key: 'locationName',
@@ -45,20 +67,14 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
     },
     {
       key: 'availableStock',
-      header: 'Available',
+      header: 'On Hand',
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span className={`font-bold font-mono text-sm ${
-          item.status === 'CRITICAL'
-            ? 'text-terracotta-700'
-            : item.status === 'REORDER_SOON'
-            ? 'text-terracotta-500'
-            : 'text-charcoal-800'
-        }`}>
-          {item.availableStock}{' '}
-          <span className="text-[10px] font-normal text-charcoal-400">/ {item.currentStock}</span>
-        </span>
+        <div className="font-mono">
+          <span className={`font-black text-sm ${item.status === 'CRITICAL' ? 'text-terracotta-700' : item.status === 'REORDER_SOON' ? 'text-terracotta-500' : 'text-charcoal-800'}`}>{item.currentStock}</span>
+          <div className="text-[10px] text-charcoal-400">{item.reservedStock} reserved</div>
+        </div>
       ),
     },
     {
@@ -101,6 +117,18 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
         <span className="text-[10px] text-charcoal-400">{formatDate(item.lastUpdated)}</span>
       ),
     },
+    {
+      key: 'actions',
+      header: '',
+      align: 'right',
+      render: () => (
+        <div className="flex items-center justify-end gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-sand-400 bg-sand-50 text-charcoal-600"><Eye className="h-3.5 w-3.5" /></span>
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-sand-400 bg-sand-50 text-charcoal-600"><MoreHorizontal className="h-3.5 w-3.5" /></span>
+          <ArrowRight className="h-3.5 w-3.5 text-charcoal-400" />
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -113,6 +141,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       pageSize={10}
       emptyTitle="No inventory items yet"
       emptyDescription="Stock data will appear here once inventory events are processed."
+      className="inventory-control-table"
     />
   );
 };

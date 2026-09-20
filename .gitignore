@@ -11,6 +11,8 @@ node_modules
 dist
 dist-lambda
 cdk.out
+**/cdk.out/**
+infrastructure/cdk.out/
 dist-ssr
 *.local
 

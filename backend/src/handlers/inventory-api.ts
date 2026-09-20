@@ -1,6 +1,6 @@
 import { createApiResponse, createErrorResponse } from '../utils/http.js';
 import { InventoryService } from '../services/inventory-service.js';
-import { AppError } from '../errors/AppError.js';
+import { AppError, NotFoundError } from '../errors/AppError.js';
 import { InventoryEventRepository } from '../repositories/event-repository.js';
 import { ReorderService } from '../services/reorder-service.js';
 
@@ -13,6 +13,7 @@ export const corsHeaders = {
 export interface ApiGatewayEvent {
   httpMethod: string;
   path: string;
+  body?: string | null;
   queryStringParameters?: Record<string, string | null> | null;
   pathParameters?: Record<string, string | undefined> | null;
 }
@@ -34,8 +35,11 @@ export class InventoryApiHandler {
     }
 
     try {
+      // 1. Health Dashboard Summary
       if (event.path === '/inventory/health' && event.httpMethod === 'GET') {
-        const data = await this.inventoryService.getInventoryHealthSummary();
+        const params = event.queryStringParameters ?? {};
+        const locationId = this.parseOptionalString(params.locationId);
+        const data = await this.inventoryService.getInventoryHealthSummary(locationId);
         return createApiResponse({
           statusCode: 200,
           body: { success: true, data },
@@ -43,6 +47,7 @@ export class InventoryApiHandler {
         });
       }
 
+      // 2. Inventory Listing
       if (event.path === '/inventory' && event.httpMethod === 'GET') {
         const params = event.queryStringParameters ?? {};
         const result = await this.inventoryService.listInventory({
@@ -59,6 +64,7 @@ export class InventoryApiHandler {
         });
       }
 
+      // 3. OpenSearch Event Search
       if (event.path === '/inventory/search' && event.httpMethod === 'GET') {
         if (!this.inventoryEventRepository) {
           throw new AppError('Inventory event repository is not configured', {
@@ -120,6 +126,7 @@ export class InventoryApiHandler {
         });
       }
 
+      // 4. Reorder Recommendations
       if (event.path === '/reorders' && event.httpMethod === 'GET') {
         if (!this.reorderService) {
           throw new AppError('Reorder service is not configured', {
@@ -174,6 +181,73 @@ export class InventoryApiHandler {
         });
       }
 
+      // 5. Locations Catalog (Source of Truth)
+      if (event.path === '/locations' && event.httpMethod === 'GET') {
+        const locations = await this.inventoryService.listLocations();
+        return createApiResponse({
+          statusCode: 200,
+          body: { success: true, data: locations },
+          headers: corsHeaders
+        });
+      }
+
+      // 6. Suppliers Catalog
+      if (event.path === '/suppliers' && event.httpMethod === 'GET') {
+        const suppliers = await this.inventoryService.listSuppliers();
+        return createApiResponse({
+          statusCode: 200,
+          body: { success: true, data: suppliers },
+          headers: corsHeaders
+        });
+      }
+
+      // 7. Products Catalog & Creation
+      if (event.path === '/products' && event.httpMethod === 'GET') {
+        const products = await this.inventoryService.listProducts();
+        return createApiResponse({
+          statusCode: 200,
+          body: { success: true, data: products },
+          headers: corsHeaders
+        });
+      }
+
+      if (event.path === '/products' && event.httpMethod === 'POST') {
+        const payload = typeof event.body === 'string' ? JSON.parse(event.body) : (event.body ?? {});
+        const result = await this.inventoryService.createProduct(payload);
+        return createApiResponse({
+          statusCode: 201,
+          body: { success: true, data: result },
+          headers: corsHeaders
+        });
+      }
+
+      const isProductDetailPath = event.path === '/products/{productId}' || event.path.startsWith('/products/');
+      if (isProductDetailPath && event.httpMethod === 'GET') {
+        const prodId = event.pathParameters?.productId || event.path.split('/')[2];
+        if (prodId) {
+          const product = await this.inventoryService.getProductById(prodId);
+          if (!product) {
+            throw new NotFoundError(`Product '${prodId}'`);
+          }
+          return createApiResponse({
+            statusCode: 200,
+            body: { success: true, data: product },
+            headers: corsHeaders
+          });
+        }
+      }
+
+      // 8. Real-time Notifications & Alerts
+      if (event.path === '/notifications' && event.httpMethod === 'GET') {
+        const alerts = await this.inventoryService.getNotifications();
+        return createApiResponse({
+          statusCode: 200,
+          body: { success: true, data: alerts },
+          headers: corsHeaders
+        });
+      }
+
+      // 9. Single Product Inventory
       const productId = event.pathParameters?.productId;
       if (event.path === '/inventory/{productId}' && event.httpMethod === 'GET') {
         if (!productId) {
@@ -193,6 +267,7 @@ export class InventoryApiHandler {
         });
       }
 
+      // 10. Location Inventory
       const locationId = event.pathParameters?.locationId;
       if (event.path === '/inventory/location/{locationId}' && event.httpMethod === 'GET') {
         if (!locationId) {
@@ -223,7 +298,8 @@ export class InventoryApiHandler {
             success: false,
             error: {
               code: error.code,
-              message: error.message
+              message: error.message,
+              ...(error.details ? { details: error.details } : {})
             }
           },
           headers: corsHeaders

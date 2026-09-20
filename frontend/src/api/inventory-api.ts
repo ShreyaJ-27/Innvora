@@ -7,6 +7,11 @@ import {
   BackendInventoryListResponse,
   BackendInventoryHealthSummary,
   InventoryStatus,
+  LocationRecord,
+  SupplierRecord,
+  ProductRecord,
+  CreateProductPayload,
+  NotificationAlert,
 } from '../types/inventory';
 
 // ─── Query Params ─────────────────────────────────────────────────────────────
@@ -258,4 +263,63 @@ export async function getInventoryHealth(locationId?: string): Promise<{
     summary,
     locations,
   };
+}
+
+// ─── Catalog & Notification Functions ─────────────────────────────────────────
+
+export const FALLBACK_LOCATIONS: LocationRecord[] = [
+  { locationId: 'LOC-BOM-01', locationName: 'Mumbai Central Fulfillment', city: 'Mumbai', region: 'West', status: 'ACTIVE', capacityUnits: 50000 },
+  { locationId: 'LOC-DEL-02', locationName: 'Delhi NCR Logistics Hub', city: 'Delhi NCR', region: 'North', status: 'ACTIVE', capacityUnits: 60000 },
+  { locationId: 'LOC-BLR-01', locationName: 'Bengaluru Tech Park Warehouse', city: 'Bengaluru', region: 'South', status: 'ACTIVE', capacityUnits: 45000 },
+  { locationId: 'LOC-HYD-01', locationName: 'Hyderabad Regional Depot', city: 'Hyderabad', region: 'South', status: 'ACTIVE', capacityUnits: 40000 },
+];
+
+export async function fetchLocations(): Promise<LocationRecord[]> {
+  try {
+    const data = await apiClient<LocationRecord[]>('/locations');
+    if (Array.isArray(data) && data.length > 0) {
+      return data;
+    }
+  } catch (err) {
+    console.warn('Failed to fetch locations from backend, using fallback:', err);
+  }
+  return FALLBACK_LOCATIONS;
+}
+
+export async function fetchSuppliers(): Promise<SupplierRecord[]> {
+  try {
+    const data = await apiClient<SupplierRecord[]>('/suppliers');
+    if (Array.isArray(data) && data.length > 0) return data;
+  } catch (err) {
+    console.warn('Failed to fetch suppliers from backend:', err);
+  }
+  return [];
+}
+
+export async function fetchProducts(): Promise<ProductRecord[]> {
+  try {
+    const data = await apiClient<ProductRecord[]>('/products');
+    if (Array.isArray(data) && data.length > 0) return data;
+  } catch (err) {
+    console.warn('Failed to fetch products from backend:', err);
+  }
+  return [];
+}
+
+export async function createProduct(payload: CreateProductPayload): Promise<ProductRecord> {
+  return apiClient<ProductRecord>('/products', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function fetchNotifications(locationId?: string): Promise<NotificationAlert[]> {
+  const query = locationId && locationId !== 'ALL' ? `?locationId=${encodeURIComponent(locationId)}` : '';
+  try {
+    const data = await apiClient<NotificationAlert[]>(`/notifications${query}`);
+    if (Array.isArray(data)) return data;
+  } catch (err) {
+    console.warn('Failed to fetch notifications from backend:', err);
+  }
+  return [];
 }

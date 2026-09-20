@@ -43,8 +43,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { to: '/help', label: 'Help & Docs', icon: HelpCircle },
   ];
 
-  const activeClass = 'bg-sand-300 text-charcoal-900 font-semibold';
-  const inactiveClass = 'text-charcoal-500 hover:text-charcoal-900 hover:bg-sand-200';
+  const activeClass = 'bg-sand-200 text-charcoal-900 font-semibold shadow-[inset_3px_0_0_#5A5349]';
+  const inactiveClass = 'text-charcoal-500 hover:text-charcoal-900 hover:bg-sand-100 hover:translate-x-0.5';
 
   return (
     <>
@@ -62,9 +62,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
         className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col
           border-r border-sand-400 transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          ${isCollapsed ? 'lg:w-16' : 'lg:w-60'} w-60`}
+          ${isCollapsed ? 'lg:w-16' : 'lg:w-56'} w-60`}
         style={{
-          backgroundColor: '#F8F4EC',
+          backgroundColor: 'rgba(248,244,236,0.92)',
+          backdropFilter: 'blur(16px)',
           boxShadow: isOpen ? '4px 0 16px rgba(39,37,34,0.08)' : 'none',
         }}
       >
@@ -75,7 +76,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="flex items-center gap-2.5 overflow-hidden group"
           >
             {/* Logo mark */}
-            <div className="w-8 h-8 rounded-lg bg-charcoal-900 flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-md bg-charcoal-900 flex items-center justify-center shrink-0">
               <Warehouse className="w-4 h-4 text-sand-200" />
             </div>
             {!isCollapsed && (
@@ -113,7 +114,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 to={item.to}
                 onClick={() => { if (window.innerWidth < 1024) onClose(); }}
                 className={({ isActive }) =>
-                  `flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-colors
+                  `flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-all duration-200
                   ${isActive ? activeClass : inactiveClass}
                   ${isCollapsed ? 'justify-center' : ''}`
                 }
@@ -136,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 to={item.to}
                 onClick={() => { if (window.innerWidth < 1024) onClose(); }}
                 className={({ isActive }) =>
-                  `w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-colors
+                  `w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-all duration-200
                   ${isActive ? activeClass : inactiveClass}
                   ${isCollapsed ? 'justify-center' : ''}`
                 }

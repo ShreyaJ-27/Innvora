@@ -46,6 +46,7 @@ export interface ReorderServiceDependencies {
   getInventory(productId: string, locationId: string): Promise<ReorderInventorySnapshot | null>;
   getDemandInformation(productId: string, locationId: string): Promise<ReorderDemandSnapshot | null>;
   getSupplierInformation(productId: string, locationId: string): Promise<ReorderSupplierSnapshot | null>;
+  listPrecomputedRecommendations?: (locationId?: string, urgency?: string) => Promise<ReorderRecommendation[]>;
 }
 
 const urgencyOrder: Record<ReorderUrgency, number> = {
@@ -106,6 +107,11 @@ export class ReorderService {
     });
   }
 
+  /**
+   * Scalable Reorder Recommendations:
+   * 1. Reads from precomputed read-model when available (no table scan, no on-the-fly math).
+   * 2. Falls back to on-demand calculation if precomputed items not yet seeded.
+   */
   public async listRecommendations(options: ReorderRecommendationListOptions = {}): Promise<{
     recommendations: ReorderRecommendation[];
     summary: ReorderRecommendationSummary;
@@ -115,6 +121,36 @@ export class ReorderService {
     const locationId = options.locationId?.trim() || undefined;
     const urgency = options.urgency && options.urgency !== 'all' ? options.urgency.toUpperCase() as ReorderUrgency : undefined;
 
+    // Fast-path: read precomputed read model
+    if (this.dependencies.listPrecomputedRecommendations) {
+      const precomputed = await this.dependencies.listPrecomputedRecommendations(locationId, urgency);
+      if (precomputed && precomputed.length > 0) {
+        const sorted = precomputed.sort((a, b) => urgencyOrder[a.urgency] - urgencyOrder[b.urgency]);
+        const summary = sorted.reduce(
+          (acc, rec) => {
+            acc[rec.urgency === 'CRITICAL' ? 'critical' : rec.urgency === 'REORDER_SOON' ? 'reorderSoon' : rec.urgency === 'HEALTHY' ? 'healthy' : 'overstocked'] += 1;
+            acc.recommendedUnits += rec.recommendedQuantity;
+            return acc;
+          },
+          {
+            critical: 0,
+            reorderSoon: 0,
+            healthy: 0,
+            overstocked: 0,
+            recommendedUnits: 0,
+            estimatedValue: 0
+          } as ReorderRecommendationSummary
+        );
+
+        const startIndex = (page - 1) * limit;
+        return {
+          recommendations: sorted.slice(startIndex, startIndex + limit),
+          summary
+        };
+      }
+    }
+
+    // Fallback: calculate on-demand
     const inventoryItems = await this.dependencies.listInventory(locationId);
     const recommendations = await Promise.all(
       inventoryItems.map(async (inventory) => {

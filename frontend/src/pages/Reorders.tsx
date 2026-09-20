@@ -10,7 +10,7 @@ import { Button } from '../components/common/Button';
 import { ErrorState } from '../components/common/ErrorState';
 import { useReorders } from '../hooks/useReorders';
 import { ReorderRecommendation } from '../types/reorder';
-import { RefreshCw, Download, CheckCircle2 } from 'lucide-react';
+import { RefreshCw, Download, CheckCircle2, AlertTriangle, TrendingUp, Clock3 } from 'lucide-react';
 import { LOCATIONS } from '../components/layout/LocationSelector';
 
 export interface ReordersProps {
@@ -121,13 +121,38 @@ export const Reorders: React.FC<ReordersProps> = ({
         </div>
       )}
 
-      {/* Summary Cards */}
-      <div className="mb-6">
-        <ReorderSummaryCards summary={summary} isLoading={loading} />
+      <div className="ops-panel mb-6 p-5">
+        <div className="relative z-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-charcoal-400">Reorder Pressure</p>
+            <h2 className="mt-1 text-2xl font-black text-charcoal-900">Recommendations ranked for action</h2>
+            <p className="mt-1 text-xs text-charcoal-500">Live backend recommendations with server-side reasoning.</p>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-md border border-terracotta-300 bg-terracotta-50 p-3">
+              <AlertTriangle className="mb-2 h-4 w-4 text-terracotta-700" />
+              <p className="text-2xl font-black text-terracotta-800">{summary.criticalCount}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-terracotta-700">Critical</p>
+            </div>
+            <div className="rounded-md border border-sand-400 bg-sand-100 p-3">
+              <Clock3 className="mb-2 h-4 w-4 text-terracotta-600" />
+              <p className="text-2xl font-black text-charcoal-900">{summary.reorderSoonCount}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-charcoal-500">Soon</p>
+            </div>
+            <div className="rounded-md border border-sand-400 bg-sand-100 p-3">
+              <TrendingUp className="mb-2 h-4 w-4 text-charcoal-600" />
+              <p className="text-2xl font-black text-charcoal-900">{summary.recommendedUnits.toLocaleString()}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-charcoal-500">Units</p>
+            </div>
+          </div>
+        </div>
+        <div className="relative z-10 mt-5">
+          <ReorderSummaryCards summary={summary} isLoading={loading} />
+        </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-sand-100 border border-sand-400 rounded-xl px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 mb-6" style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
+      <div className="bg-sand-100 border border-sand-400 rounded-lg px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 mb-6" style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
         <div className="w-full md:w-72">
           <SearchInput
             value={search}

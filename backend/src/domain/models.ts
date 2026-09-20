@@ -78,3 +78,42 @@ export interface ReorderRecommendation {
   urgency: ReorderUrgency;
   reason: string;
 }
+
+export interface HealthAggregate {
+  locationId: string; // 'GLOBAL' or specific location ID
+  totalSkus: number;
+  healthy: number;
+  reorderSoon: number;
+  critical: number;
+  overstocked: number;
+  lastUpdated: string;
+}
+
+export interface NotificationAlert {
+  id: string;
+  sku: string;
+  productName: string;
+  locationId: string;
+  locationName?: string;
+  urgency: ReorderUrgency;
+  message: string;
+  timestamp: string;
+}
+
+export interface CreateProductInput {
+  productId?: string;
+  sku: string;
+  name: string;
+  category: string;
+  supplierId: string;
+  supplierName?: string;
+  unitCost: number;
+  sellingPrice: number;
+  reorderPoint: number;
+  safetyStock: number;
+  minimumOrderQuantity: number;
+  packSize: number;
+  locationId?: string;
+  initialStock?: number;
+}
+

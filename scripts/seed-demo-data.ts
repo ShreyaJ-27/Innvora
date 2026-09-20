@@ -449,6 +449,66 @@ async function main() {
       quantityChange: 10,
       timestamp: new Date().toISOString(),
       source: 'Supplier Shipment Receipt'
+    },
+    {
+      eventId: 'seed-mov-hyd-sale-01',
+      productId: 'PROD-CHG-02',
+      sku: 'SKU-CHG-002',
+      locationId: 'LOC-HYD-01',
+      eventType: 'SALE',
+      quantityChange: -3,
+      timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+      source: 'Hyderabad Quick Commerce Webhook'
+    },
+    {
+      eventId: 'seed-mov-hyd-restock-01',
+      productId: 'PROD-STN-05',
+      sku: 'SKU-STN-005',
+      locationId: 'LOC-HYD-01',
+      eventType: 'RESTOCK',
+      quantityChange: 15,
+      timestamp: new Date(Date.now() - 1000 * 60 * 40).toISOString(),
+      source: 'Supplier Freight Inbound'
+    },
+    {
+      eventId: 'seed-mov-hyd-adj-01',
+      productId: 'PROD-SPK-04',
+      sku: 'SKU-SPK-004',
+      locationId: 'LOC-HYD-01',
+      eventType: 'ADJUSTMENT',
+      quantityChange: -2,
+      timestamp: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
+      source: 'Hyderabad Depot Cycle Count'
+    },
+    {
+      eventId: 'seed-mov-hyd-tr-in-01',
+      productId: 'PROD-PWR-03',
+      sku: 'SKU-PWR-003',
+      locationId: 'LOC-HYD-01',
+      eventType: 'TRANSFER_IN',
+      quantityChange: 10,
+      timestamp: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
+      source: 'Inter-Hub Receipt from Mumbai'
+    },
+    {
+      eventId: 'seed-mov-hyd-tr-out-01',
+      productId: 'PROD-KBD-06',
+      sku: 'SKU-KBD-006',
+      locationId: 'LOC-HYD-01',
+      eventType: 'TRANSFER_OUT',
+      quantityChange: -5,
+      timestamp: new Date(Date.now() - 1000 * 60 * 18).toISOString(),
+      source: 'Inter-Hub Dispatch to Bengaluru'
+    },
+    {
+      eventId: 'seed-mov-hyd-ret-01',
+      productId: 'PROD-EAR-01',
+      sku: 'SKU-EAR-001',
+      locationId: 'LOC-HYD-01',
+      eventType: 'RETURN',
+      quantityChange: 1,
+      timestamp: new Date(Date.now() - 1000 * 60 * 8).toISOString(),
+      source: 'Customer RMA Return Desk'
     }
   ];
 

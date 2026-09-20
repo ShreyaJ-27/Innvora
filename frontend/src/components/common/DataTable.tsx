@@ -157,8 +157,8 @@ export function DataTable<T extends Record<string, any>>({
                 <tr
                   key={key}
                   onClick={() => onRowClick && onRowClick(item)}
-                  className={`transition-colors ${
-                    onRowClick ? 'cursor-pointer hover:bg-sand-200' : 'hover:bg-sand-200/60'
+                  className={`group transition-all duration-200 ${
+                    onRowClick ? 'cursor-pointer hover:bg-sand-200 hover:shadow-[inset_3px_0_0_#A89580]' : 'hover:bg-sand-200/60'
                   }`}
                 >
                   {columns.map((col) => (

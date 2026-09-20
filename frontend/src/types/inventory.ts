@@ -120,3 +120,68 @@ export interface InventoryHealthSummary {
     outboundUnits: number;
   }[];
 }
+
+// ─── Catalog & Notification Types ──────────────────────────────────────────────
+
+export interface LocationRecord {
+  locationId: string;
+  locationName: string;
+  city: string;
+  region: string;
+  status: 'ACTIVE' | 'INACTIVE';
+  capacityUnits: number;
+}
+
+export interface SupplierRecord {
+  supplierId: string;
+  supplierName: string;
+  contactEmail: string;
+  leadTimeDays: number;
+  reliabilityRate: number;
+}
+
+export interface ProductRecord {
+  productId: string;
+  sku: string;
+  name: string;
+  category: string;
+  description?: string;
+  unitCost: number;
+  sellingPrice: number;
+  reorderPoint: number;
+  safetyStock: number;
+  minimumOrderQuantity: number;
+  packSize: number;
+  defaultLocationId: string;
+  supplierId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateProductPayload {
+  sku: string;
+  name: string;
+  category: string;
+  description?: string;
+  unitCost: number;
+  sellingPrice: number;
+  reorderPoint: number;
+  safetyStock: number;
+  minimumOrderQuantity?: number;
+  packSize?: number;
+  defaultLocationId?: string;
+  supplierId?: string;
+  initialStock?: number;
+}
+
+export interface NotificationAlert {
+  id: string;
+  title: string;
+  message: string;
+  severity: 'CRITICAL' | 'WARNING' | 'INFO';
+  type: string;
+  timestamp: string;
+  locationId?: string;
+  productId?: string;
+  sku?: string;
+}

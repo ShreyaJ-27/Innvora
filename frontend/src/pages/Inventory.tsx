@@ -126,6 +126,30 @@ export const Inventory: React.FC<InventoryProps> = ({
         }
       />
 
+      <div className="ops-panel mb-6 p-4">
+        <div className="relative z-10 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-charcoal-400">Control Surface</p>
+            <h2 className="mt-1 text-xl font-black text-charcoal-900">Stock state by SKU, hub, and threshold</h2>
+          </div>
+          <div className="flex items-center gap-2 text-[11px] font-semibold text-charcoal-500">
+            <span className="ops-live-dot" /> Live API
+          </div>
+        </div>
+        <div className="relative z-10 mt-4">
+          <InventoryFilters
+            search={search}
+            onSearchChange={setSearch}
+            locationId={selectedLocation}
+            onLocationChange={onLocationChange}
+            status={status}
+            onStatusChange={setStatus}
+            onRefresh={refetch}
+            isRefreshing={loading}
+          />
+        </div>
+      </div>
+
       {/* Status Filter Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
         {statusCards.map((card) => {
@@ -134,7 +158,7 @@ export const Inventory: React.FC<InventoryProps> = ({
             <div
               key={card.filter}
               onClick={() => setStatus(card.filter)}
-              className={`p-3.5 rounded-xl border cursor-pointer transition-all ${card.extra ?? ''} ${
+              className={`ops-kpi p-3.5 cursor-pointer ${card.extra ?? ''} ${
                 isActive ? card.active : card.inactive
               }`}
               style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}
@@ -151,20 +175,6 @@ export const Inventory: React.FC<InventoryProps> = ({
             </div>
           );
         })}
-      </div>
-
-      {/* Filter Toolbar */}
-      <div className="mb-6">
-        <InventoryFilters
-          search={search}
-          onSearchChange={setSearch}
-          locationId={selectedLocation}
-          onLocationChange={onLocationChange}
-          status={status}
-          onStatusChange={setStatus}
-          onRefresh={refetch}
-          isRefreshing={loading}
-        />
       </div>
 
       {/* Table or Error */}
@@ -198,6 +208,7 @@ export const Inventory: React.FC<InventoryProps> = ({
       <AddProductModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
+        onProductAdded={refetch}
       />
 
       {/* Import Inventory Manifest Modal */}

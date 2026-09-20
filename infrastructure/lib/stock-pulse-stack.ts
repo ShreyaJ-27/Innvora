@@ -36,6 +36,13 @@ export class StockPulseStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
+    inventoryTable.addGlobalSecondaryIndex({
+      indexName: 'GSI1',
+      partitionKey: { name: 'GSI1PK', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'GSI1SK', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.ALL
+    });
+
     const deadLetterQueue = new sqs.Queue(this, 'StockPulseInventoryEventsDLQ', {
       queueName: 'StockPulseInventoryEventsDLQ',
       retentionPeriod: cdk.Duration.days(14),
@@ -259,6 +266,14 @@ export class StockPulseStack extends cdk.Stack {
     inventory.addResource('{productId}').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
     inventory.addResource('location').addResource('{locationId}').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
     api.root.addResource('reorders').addMethod('GET', new apigateway.LambdaIntegration(reorderApi));
+
+    api.root.addResource('locations').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
+    api.root.addResource('suppliers').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
+    const products = api.root.addResource('products');
+    products.addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
+    products.addMethod('POST', new apigateway.LambdaIntegration(inventoryApi));
+    products.addResource('{productId}').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
+    api.root.addResource('notifications').addMethod('GET', new apigateway.LambdaIntegration(inventoryApi));
 
     new cdk.CfnOutput(this, 'ApiGatewayUrl', { value: api.url });
     new cdk.CfnOutput(this, 'DynamoDbTableName', { value: inventoryTable.tableName });

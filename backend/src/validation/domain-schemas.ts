@@ -87,9 +87,39 @@ export const reorderRecommendationSchema = z.object({
   reason: nonEmptyString
 });
 
+export const createProductSchema = z.object({
+  productId: z.string().trim().optional(),
+  sku: nonEmptyString,
+  name: nonEmptyString,
+  category: nonEmptyString,
+  supplierId: nonEmptyString,
+  supplierName: z.string().trim().optional(),
+  unitCost: positiveNumber,
+  sellingPrice: positiveNumber,
+  reorderPoint: nonNegativeNumber,
+  safetyStock: nonNegativeNumber,
+  minimumOrderQuantity: z.number().int().finite().positive().default(1),
+  packSize: z.number().int().finite().positive().default(1),
+  locationId: z.string().trim().optional(),
+  initialStock: z.number().int().finite().nonnegative().optional().default(0)
+});
+
+export const healthAggregateSchema = z.object({
+  locationId: nonEmptyString,
+  totalSkus: nonNegativeNumber,
+  healthy: nonNegativeNumber,
+  reorderSoon: nonNegativeNumber,
+  critical: nonNegativeNumber,
+  overstocked: nonNegativeNumber,
+  lastUpdated: isoTimestamp
+});
+
 export type ProductInput = z.infer<typeof productSchema>;
 export type SupplierInput = z.infer<typeof supplierSchema>;
 export type InventoryLocationInput = z.infer<typeof inventoryLocationSchema>;
 export type InventoryStateInput = z.infer<typeof inventoryStateSchema>;
 export type InventoryEventInput = z.infer<typeof inventoryEventSchema>;
 export type ReorderRecommendationInput = z.infer<typeof reorderRecommendationSchema>;
+export type CreateProductSchemaInput = z.infer<typeof createProductSchema>;
+export type HealthAggregateInput = z.infer<typeof healthAggregateSchema>;
+

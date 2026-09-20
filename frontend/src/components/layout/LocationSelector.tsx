@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin } from 'lucide-react';
+import { fetchLocations } from '../../api/inventory-api';
 
 export interface LocationOption {
   id: string;
@@ -26,6 +27,29 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
   onLocationChange,
   className = '',
 }) => {
+  const [locations, setLocations] = useState<LocationOption[]>(LOCATIONS);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchLocations().then((remoteLocations) => {
+      if (!mounted || !remoteLocations?.length) return;
+      const options: LocationOption[] = [
+        { id: 'ALL', name: 'All Fulfillment Hubs', city: 'Network Wide' },
+        ...remoteLocations.map((loc) => ({
+          id: loc.locationId,
+          name: loc.locationName,
+          city: loc.city,
+        })),
+      ];
+      setLocations(options);
+    }).catch(() => {
+      // Keep static fallback
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className={`relative inline-flex items-center ${className}`}>
       <div className="flex items-center gap-1.5 px-3 py-1.5 bg-sand-200 border border-sand-400 rounded-lg hover:border-sand-500 transition-colors">
@@ -36,7 +60,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
           aria-label="Select inventory location"
           className="bg-transparent text-xs font-medium text-charcoal-700 focus:outline-none cursor-pointer"
         >
-          {LOCATIONS.map((loc) => (
+          {locations.map((loc) => (
             <option key={loc.id} value={loc.id}>
               {loc.id === 'ALL' ? 'All Hubs' : loc.city}
             </option>

@@ -394,5 +394,115 @@
     "reorderPoint": 60,
     "safetyStock": 30,
     "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-EAR-01",
+    "sku": "SKU-EAR-001",
+    "locationId": "LOC-HYD-01",
+    "quantity": 26,
+    "reservedQuantity": 4,
+    "availableQuantity": 22,
+    "reorderPoint": 35,
+    "safetyStock": 15,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-CHG-02",
+    "sku": "SKU-CHG-002",
+    "locationId": "LOC-HYD-01",
+    "quantity": 75,
+    "reservedQuantity": 5,
+    "availableQuantity": 70,
+    "reorderPoint": 40,
+    "safetyStock": 20,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-PWR-03",
+    "sku": "SKU-PWR-003",
+    "locationId": "LOC-HYD-01",
+    "quantity": 110,
+    "reservedQuantity": 5,
+    "availableQuantity": 105,
+    "reorderPoint": 30,
+    "safetyStock": 15,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-SPK-04",
+    "sku": "SKU-SPK-004",
+    "locationId": "LOC-HYD-01",
+    "quantity": 12,
+    "reservedQuantity": 4,
+    "availableQuantity": 8,
+    "reorderPoint": 25,
+    "safetyStock": 10,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-STN-05",
+    "sku": "SKU-STN-005",
+    "locationId": "LOC-HYD-01",
+    "quantity": 45,
+    "reservedQuantity": 3,
+    "availableQuantity": 42,
+    "reorderPoint": 20,
+    "safetyStock": 8,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-KBD-06",
+    "sku": "SKU-KBD-006",
+    "locationId": "LOC-HYD-01",
+    "quantity": 90,
+    "reservedQuantity": 4,
+    "availableQuantity": 86,
+    "reorderPoint": 25,
+    "safetyStock": 10,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-MOU-07",
+    "sku": "SKU-MOU-007",
+    "locationId": "LOC-HYD-01",
+    "quantity": 11,
+    "reservedQuantity": 2,
+    "availableQuantity": 9,
+    "reorderPoint": 30,
+    "safetyStock": 12,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-WTC-08",
+    "sku": "SKU-WTC-008",
+    "locationId": "LOC-HYD-01",
+    "quantity": 16,
+    "reservedQuantity": 2,
+    "availableQuantity": 14,
+    "reorderPoint": 20,
+    "safetyStock": 8,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-CAM-09",
+    "sku": "SKU-CAM-009",
+    "locationId": "LOC-HYD-01",
+    "quantity": 35,
+    "reservedQuantity": 3,
+    "availableQuantity": 32,
+    "reorderPoint": 20,
+    "safetyStock": 8,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "productId": "PROD-CAB-12",
+    "sku": "SKU-CAB-012",
+    "locationId": "LOC-HYD-01",
+    "quantity": 40,
+    "reservedQuantity": 5,
+    "availableQuantity": 35,
+    "reorderPoint": 50,
+    "safetyStock": 20,
+    "lastUpdated": "2026-09-20T10:00:00.000Z"
   }
 ]
