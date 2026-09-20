@@ -37,13 +37,12 @@ export const ActivityFilters: React.FC<ActivityFiltersProps> = ({
   ];
 
   return (
-    <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-card flex flex-col md:flex-row items-center justify-between gap-3">
+    <div className="bg-sand-100 border border-sand-400 rounded-xl px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3" style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
       <div className="w-full md:w-72">
         <SearchInput
           value={skuSearch}
           onChange={onSkuSearchChange}
-          placeholder="Filter by SKU or Product..."
-          sizeVariant="md"
+          placeholder="Filter by SKU or product…"
         />
       </div>
 
@@ -51,26 +50,24 @@ export const ActivityFilters: React.FC<ActivityFiltersProps> = ({
         <Select
           options={LOCATIONS.map((l) => ({
             value: l.id,
-            label: l.id === 'ALL' ? 'All Locations' : l.city,
+            label: l.id === 'ALL' ? 'All Hubs' : l.city,
           }))}
           value={locationId}
           onChange={(e) => onLocationChange(e.target.value)}
-          sizeVariant="md"
         />
 
         <Select
           options={eventTypeOptions}
           value={eventType}
           onChange={(e) => onEventTypeChange(e.target.value)}
-          sizeVariant="md"
         />
 
         <Button
           variant="outline"
-          size="md"
+          size="sm"
           onClick={onRefresh}
           isLoading={isRefreshing}
-          leftIcon={<RefreshCw className="w-4 h-4 text-slate-500" />}
+          leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
         >
           <span className="hidden sm:inline">Refresh</span>
         </Button>

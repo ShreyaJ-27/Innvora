@@ -1,5 +1,5 @@
 import React from 'react';
-import { HelpCircle, Sparkles } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 import { DataTable, Column } from '../common/DataTable';
 import { StatusBadge } from '../common/StatusBadge';
 import { Button } from '../common/Button';
@@ -24,8 +24,8 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
       sortable: true,
       render: (item) => (
         <div>
-          <div className="font-semibold text-slate-900 leading-tight">{item.productName}</div>
-          <div className="text-xs text-slate-400 mt-0.5">{item.category}</div>
+          <div className="font-medium text-charcoal-900 leading-tight">{item.productName}</div>
+          <div className="text-[10px] text-charcoal-400 mt-0.5 uppercase tracking-wider">{item.category}</div>
         </div>
       ),
     },
@@ -33,14 +33,14 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
       key: 'sku',
       header: 'SKU',
       sortable: true,
-      render: (item) => <span className="font-mono text-xs text-slate-600">{item.sku}</span>,
+      render: (item) => <span className="font-mono text-[10px] text-charcoal-500">{item.sku}</span>,
     },
     {
       key: 'locationName',
-      header: 'Location',
+      header: 'Hub',
       sortable: true,
       render: (item) => (
-        <span className="text-xs text-slate-600 truncate max-w-[140px] inline-block">
+        <span className="text-xs text-charcoal-600 truncate max-w-[120px] inline-block">
           {item.locationName}
         </span>
       ),
@@ -51,35 +51,26 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span
-          className={`font-bold font-mono ${
-            item.urgency === 'CRITICAL' ? 'text-rose-600' : 'text-slate-800'
-          }`}
-        >
+        <span className={`font-bold font-mono text-sm ${
+          item.urgency === 'CRITICAL' ? 'text-terracotta-700' : 'text-charcoal-800'
+        }`}>
           {item.availableStock}
         </span>
       ),
     },
     {
       key: 'dailyDemand',
-      header: 'Daily Demand',
+      header: 'Demand/d',
       sortable: true,
       align: 'right',
-      render: (item) => <span className="text-xs text-slate-600">{item.dailyDemand}/d</span>,
+      render: (item) => <span className="text-xs text-charcoal-500">{item.dailyDemand}</span>,
     },
     {
       key: 'leadTimeDays',
       header: 'Lead Time',
       sortable: true,
       align: 'right',
-      render: (item) => <span className="text-xs text-slate-600">{item.leadTimeDays}d</span>,
-    },
-    {
-      key: 'reorderPoint',
-      header: 'Reorder Point',
-      sortable: true,
-      align: 'right',
-      render: (item) => <span className="text-xs text-slate-600">{item.reorderPoint}</span>,
+      render: (item) => <span className="text-xs text-charcoal-500">{item.leadTimeDays}d</span>,
     },
     {
       key: 'daysRemaining',
@@ -87,28 +78,26 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span
-          className={`px-2 py-0.5 rounded text-xs font-semibold ${
-            item.daysRemaining < 2
-              ? 'bg-rose-100 text-rose-800'
-              : item.daysRemaining < 5
-              ? 'bg-amber-100 text-amber-800'
-              : 'bg-slate-100 text-slate-700'
-          }`}
-        >
+        <span className={`text-[11px] px-1.5 py-0.5 rounded border font-semibold ${
+          item.daysRemaining < 2
+            ? 'bg-terracotta-100 text-terracotta-800 border-terracotta-300'
+            : item.daysRemaining < 5
+            ? 'bg-terracotta-50 text-terracotta-700 border-terracotta-200'
+            : 'bg-sand-200 text-charcoal-600 border-sand-400'
+        }`}>
           {item.daysRemaining}d
         </span>
       ),
     },
     {
       key: 'recommendedQuantity',
-      header: 'Recommended Qty',
+      header: 'Reorder Qty',
       sortable: true,
       align: 'right',
       render: (item) => (
         <div className="text-right">
-          <div className="font-bold text-blue-600">{item.recommendedQuantity} units</div>
-          <div className="text-[10px] text-slate-400">{formatCurrency(item.estimatedCost)}</div>
+          <div className="font-bold text-charcoal-900">{item.recommendedQuantity} units</div>
+          <div className="text-[10px] text-charcoal-400">{formatCurrency(item.estimatedCost)}</div>
         </div>
       ),
     },
@@ -121,7 +110,7 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
     },
     {
       key: 'action',
-      header: 'Action',
+      header: '',
       align: 'center',
       render: (item) => (
         <Button
@@ -131,8 +120,7 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
             e.stopPropagation();
             onWhyClick(item);
           }}
-          className="border-blue-200 text-blue-700 hover:bg-blue-50 text-xs px-2.5 py-1"
-          leftIcon={<HelpCircle className="w-3.5 h-3.5 text-blue-600" />}
+          leftIcon={<HelpCircle className="w-3.5 h-3.5" />}
         >
           Why?
         </Button>
@@ -147,7 +135,7 @@ export const ReorderTable: React.FC<ReorderTableProps> = ({
       keyExtractor={(item) => item.id}
       isLoading={isLoading}
       onRowClick={onWhyClick}
-      pageSize={8}
+      pageSize={10}
       emptyTitle="No replenishment recommendations"
       emptyDescription="All inventory is operating above calculated safety buffers."
     />

@@ -32,39 +32,34 @@ export const EventSearchFilters: React.FC<EventSearchFiltersProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Prominent Large Search Bar */}
+      {/* Search Bar */}
       <div className="w-full">
         <SearchInput
           value={query}
           onChange={onQueryChange}
-          placeholder="Search SKUs, products, locations, or inventory events..."
+          placeholder="Search by SKU, product name, event type, location…"
           sizeVariant="lg"
-          className="shadow-sm"
         />
       </div>
 
-      {/* Secondary Filter Row */}
+      {/* Filter Row */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="w-full sm:w-56">
           <Select
-            label="Location Filter"
             options={LOCATIONS.map((l) => ({
               value: l.id,
-              label: l.id === 'ALL' ? 'Network Wide' : `${l.name} (${l.city})`,
+              label: l.id === 'ALL' ? 'All Hubs' : l.city,
             }))}
             value={locationId}
             onChange={(e) => onLocationChange(e.target.value)}
-            sizeVariant="sm"
           />
         </div>
 
         <div className="w-full sm:w-52">
           <Select
-            label="Event Type"
             options={eventTypeOptions}
             value={eventType}
             onChange={(e) => onEventTypeChange(e.target.value)}
-            sizeVariant="sm"
           />
         </div>
       </div>

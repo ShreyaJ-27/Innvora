@@ -41,7 +41,7 @@ export const DemoEventSimulatorModal: React.FC<DemoEventSimulatorModalProps> = (
   const [locationId, setLocationId] = useState('LOC-BOM-01');
   const [eventType, setEventType] = useState<InventoryEventType>('SALE');
   const [quantityChange, setQuantityChange] = useState<number>(4);
-  const [source, setSource] = useState('StockPulse Demo Simulator');
+  const [source, setSource] = useState('Innvora Demo Simulator');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [processingStage, setProcessingStage] = useState<'idle' | 'accepted' | 'processing' | 'completed'>('idle');

@@ -7,11 +7,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from 'recharts';
 import { Card } from '../common/Card';
 import { InventoryHealthSummary } from '../../types/inventory';
-import { formatNumber } from '../../utils/formatters';
 
 export interface StockTrendChartProps {
   summary: InventoryHealthSummary | null;
@@ -24,48 +22,34 @@ export const StockTrendChart: React.FC<StockTrendChartProps> = ({
 }) => {
   if (isLoading || !summary || !summary.stockTrend || summary.stockTrend.length === 0) {
     return (
-      <Card
-        header={<div className="font-semibold text-sm text-slate-800">Inventory Velocity & Movement</div>}
-      >
-        {isLoading ? (
-          <div className="h-64 flex items-center justify-center animate-pulse bg-slate-50 rounded-lg">
-            <div className="w-full h-40 bg-slate-100 rounded" />
-          </div>
-        ) : (
-          <div className="h-64 flex flex-col items-center justify-center gap-3 text-center">
-            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-              <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-slate-600">No trend data available</p>
-              <p className="text-xs text-slate-400 mt-1">Stock movement history will appear here once events are processed.</p>
-            </div>
-          </div>
-        )}
+      <Card header={<div className="text-sm font-semibold text-charcoal-800">Stock Velocity</div>}>
+        <div className="h-56 flex items-center justify-center">
+          <div className="w-full h-32 bg-sand-200 rounded-lg animate-pulse" />
+        </div>
       </Card>
     );
   }
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs shadow-xl border border-slate-700 space-y-1">
-          <p className="font-semibold text-slate-300 border-b border-slate-700 pb-1">{label}</p>
-          {payload.map((entry: any, index: number) => (
-            <div key={`item-${index}`} className="flex items-center justify-between gap-4">
-              <span className="flex items-center gap-1.5" style={{ color: entry.color }}>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }} />
-                {entry.name}:
-              </span>
-              <span className="font-bold text-white">{formatNumber(entry.value)} units</span>
+  // Warm tooltip replacing the dark one
+  const WarmTooltip = ({ active, payload, label }: any) => {
+    if (!active || !payload?.length) return null;
+    return (
+      <div
+        className="bg-sand-100 border border-sand-400 rounded-lg px-3 py-2.5 text-xs"
+        style={{ boxShadow: '0 4px 12px rgba(39,37,34,0.10)' }}
+      >
+        <p className="font-semibold text-charcoal-900 mb-1.5 pb-1 border-b border-sand-300">{label}</p>
+        {payload.map((entry: any, i: number) => (
+          <div key={i} className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }} />
+              <span className="text-charcoal-600">{entry.name}</span>
             </div>
-          ))}
-        </div>
-      );
-    }
-    return null;
+            <span className="font-semibold text-charcoal-900">{entry.value.toLocaleString()} units</span>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -73,69 +57,81 @@ export const StockTrendChart: React.FC<StockTrendChartProps> = ({
       header={
         <div className="flex items-center justify-between w-full">
           <div>
-            <h3 className="font-semibold text-sm text-slate-900">Inventory Velocity & Inbound/Outbound</h3>
-            <p className="text-xs text-slate-500">7-day stock trajectory across fulfillment points</p>
+            <h3 className="text-sm font-semibold text-charcoal-900">Stock Velocity</h3>
+            <p className="text-[11px] text-charcoal-400">7-day inbound/outbound movement</p>
           </div>
-          <span className="text-xs text-slate-400 font-medium">Daily Aggregates</span>
+          <span className="text-[10px] text-charcoal-400 font-medium">Daily aggregates</span>
         </div>
       }
     >
-      <div className="h-64 w-full py-1">
+      <div className="h-56 w-full pt-2">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={summary.stockTrend}
-            margin={{ top: 10, right: 20, left: -10, bottom: 0 }}
+            margin={{ top: 5, right: 10, left: -20, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+            <CartesianGrid strokeDasharray="2 4" stroke="#E2D9C8" vertical={false} />
             <XAxis
               dataKey="date"
-              stroke="#94a3b8"
-              fontSize={11}
+              stroke="#A89580"
+              fontSize={10}
               tickLine={false}
-              axisLine={{ stroke: '#e2e8f0' }}
+              axisLine={{ stroke: '#D7CABB' }}
             />
             <YAxis
-              stroke="#94a3b8"
-              fontSize={11}
+              stroke="#A89580"
+              fontSize={10}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`}
+              tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
             />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend
-              verticalAlign="top"
-              align="right"
-              wrapperStyle={{ paddingBottom: '10px', fontSize: '11px' }}
-            />
+            <Tooltip content={<WarmTooltip />} />
             <Line
               type="monotone"
               dataKey="totalStock"
-              name="Net Stock Units"
-              stroke="#2563eb"
-              strokeWidth={2.5}
-              dot={{ r: 3, fill: '#2563eb' }}
-              activeDot={{ r: 5 }}
+              name="Net Stock"
+              stroke="#5A5349"
+              strokeWidth={2}
+              dot={{ r: 2.5, fill: '#5A5349', strokeWidth: 0 }}
+              activeDot={{ r: 4, fill: '#272522' }}
             />
             <Line
               type="monotone"
               dataKey="inboundUnits"
-              name="Inbound Restock"
-              stroke="#10b981"
-              strokeWidth={1.8}
-              strokeDasharray="4 4"
+              name="Inbound"
+              stroke="#7A9E5D"
+              strokeWidth={1.5}
+              strokeDasharray="4 3"
               dot={false}
             />
             <Line
               type="monotone"
               dataKey="outboundUnits"
-              name="Outbound Fulfillments"
-              stroke="#f43f5e"
-              strokeWidth={1.8}
-              strokeDasharray="4 4"
+              name="Outbound"
+              stroke="#C6745A"
+              strokeWidth={1.5}
+              strokeDasharray="4 3"
               dot={false}
             />
           </LineChart>
         </ResponsiveContainer>
+      </div>
+
+      {/* Simple legend */}
+      <div className="flex items-center gap-5 pt-3 border-t border-sand-300 mt-2">
+        {[
+          { color: '#5A5349', label: 'Net Stock' },
+          { color: '#7A9E5D', label: 'Inbound', dashed: true },
+          { color: '#C6745A', label: 'Outbound', dashed: true },
+        ].map((item) => (
+          <div key={item.label} className="flex items-center gap-1.5">
+            <span className="w-3 h-0.5 rounded-full" style={{
+              backgroundColor: item.color,
+              borderBottom: item.dashed ? `1.5px dashed ${item.color}` : 'none',
+            }} />
+            <span className="text-[10px] text-charcoal-500">{item.label}</span>
+          </div>
+        ))}
       </div>
     </Card>
   );

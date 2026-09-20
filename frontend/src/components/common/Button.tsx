@@ -20,36 +20,36 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles =
-    'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none';
+  const base =
+    'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed select-none';
 
-  const variantStyles = {
+  const variants = {
     primary:
-      'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-500 shadow-sm',
+      'bg-charcoal-900 text-sand-100 hover:bg-charcoal-800 active:bg-charcoal-900 focus:ring-charcoal-800 rounded-lg shadow-subtle',
     secondary:
-      'bg-slate-100 text-slate-800 hover:bg-slate-200 active:bg-slate-300 focus:ring-slate-400 border border-slate-200',
+      'bg-sand-300 text-charcoal-800 hover:bg-sand-400 active:bg-sand-500 focus:ring-sand-500 border border-sand-400 rounded-lg',
     outline:
-      'bg-white text-slate-700 hover:bg-slate-50 active:bg-slate-100 border border-slate-300 focus:ring-blue-500 shadow-sm',
+      'bg-sand-100 text-charcoal-700 hover:bg-sand-200 active:bg-sand-300 border border-sand-500 focus:ring-charcoal-700 rounded-lg shadow-subtle',
     ghost:
-      'text-slate-600 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200 focus:ring-slate-400',
+      'text-charcoal-600 hover:text-charcoal-900 hover:bg-sand-200 active:bg-sand-300 focus:ring-charcoal-400 rounded-lg',
     danger:
-      'bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800 focus:ring-rose-500 shadow-sm',
+      'bg-terracotta-600 text-white hover:bg-terracotta-700 active:bg-terracotta-800 focus:ring-terracotta-500 rounded-lg shadow-subtle',
   };
 
-  const sizeStyles = {
-    sm: 'text-xs px-2.5 py-1.5 gap-1.5',
-    md: 'text-sm px-3.5 py-2 gap-2',
-    lg: 'text-base px-4 py-2.5 gap-2.5',
+  const sizes = {
+    sm: 'text-xs px-3 py-1.5 gap-1.5',
+    md: 'text-sm px-4 py-2 gap-2',
+    lg: 'text-sm px-5 py-2.5 gap-2',
   };
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
       disabled={disabled || isLoading}
       {...props}
     >
       {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin text-current" />
+        <Loader2 className="w-3.5 h-3.5 animate-spin text-current" />
       ) : (
         leftIcon && <span className="shrink-0">{leftIcon}</span>
       )}

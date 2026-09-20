@@ -28,17 +28,17 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
 }) => {
   return (
     <div className={`relative inline-flex items-center ${className}`}>
-      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-subtle hover:border-slate-300 transition-colors">
-        <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
+      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-sand-200 border border-sand-400 rounded-lg hover:border-sand-500 transition-colors">
+        <MapPin className="w-3.5 h-3.5 text-charcoal-500 shrink-0" />
         <select
           value={selectedLocation}
           onChange={(e) => onLocationChange(e.target.value)}
           aria-label="Select inventory location"
-          className="bg-transparent text-xs font-medium text-slate-800 focus:outline-none cursor-pointer pr-1"
+          className="bg-transparent text-xs font-medium text-charcoal-700 focus:outline-none cursor-pointer"
         >
           {LOCATIONS.map((loc) => (
             <option key={loc.id} value={loc.id}>
-              {loc.name} {loc.id !== 'ALL' ? `(${loc.city})` : ''}
+              {loc.id === 'ALL' ? 'All Hubs' : loc.city}
             </option>
           ))}
         </select>

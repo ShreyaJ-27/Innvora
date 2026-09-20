@@ -57,16 +57,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await Promise.all([
-      refetchHealth(),
-      refetchInv(),
-      refetchReorders(),
-      refetchEvents(),
-    ]);
+    await Promise.all([refetchHealth(), refetchInv(), refetchReorders(), refetchEvents()]);
     setIsRefreshing(false);
   };
 
-  const currentDate = new Intl.DateTimeFormat('en-US', {
+  const currentDate = new Intl.DateTimeFormat('en-IN', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -77,7 +72,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     return (
       <PageContainer>
         <ErrorState
-          title="Dashboard Telemetry Offline"
+          title="Unable to Load Dashboard"
           message={healthError}
           onRetry={handleRefresh}
         />
@@ -87,14 +82,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   return (
     <PageContainer>
-      {/* Header with Title & Context Controls */}
       <PageHeader
-        title="Inventory Overview"
-        subtitle="Real-time visibility into your inventory health and replenishment needs."
+        eyebrow="Innvora Control Center"
+        title="Inventory Operations"
+        subtitle="Real-time operational state across your fulfillment network."
         actions={
           <div className="flex items-center gap-2">
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-600 shadow-subtle">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-sand-100 border border-sand-400 rounded-lg text-[11px] font-medium text-charcoal-600">
+              <Calendar className="w-3.5 h-3.5 text-charcoal-400" />
               <span>{currentDate}</span>
             </div>
             <Button
@@ -111,38 +106,38 @@ export const Dashboard: React.FC<DashboardProps> = ({
       />
 
       <div className="space-y-6">
-        {/* KPI Summary Cards */}
+        {/* KPI Metrics */}
         <DashboardMetrics
           summary={summary}
           isLoading={healthLoading}
           onNavigateToReorders={() => navigate('/reorders')}
         />
 
-        {/* Smart Replenishment Insight Callout Banner */}
+        {/* Replenishment Alert Banner */}
         <SmartInsightCard
           criticalCount={summary?.criticalCount || 0}
           reorderSoonCount={summary?.reorderSoonCount || 0}
         />
 
-        {/* Health Donut & Stock Trend Velocity Charts */}
+        {/* Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <InventoryHealthChart summary={summary} isLoading={healthLoading} />
           <StockTrendChart summary={summary} isLoading={healthLoading} />
         </div>
 
-        {/* Needs Immediate Attention Table */}
+        {/* Needs Attention Table */}
         <NeedsAttentionTable
           items={inventory}
           reorders={reorders}
           isLoading={invLoading || reordersLoading}
         />
 
-        {/* Fulfillment Hub / Location Overview */}
+        {/* Fulfillment Hub Network */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Fulfillment Hub Network</h3>
-              <p className="text-xs text-slate-500">Live operational capacity and stock safety by facility</p>
+              <h3 className="text-sm font-semibold text-charcoal-900">Fulfillment Network</h3>
+              <p className="text-[11px] text-charcoal-400">Live operational capacity by hub</p>
             </div>
           </div>
           <LocationOverviewCards
@@ -152,7 +147,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           />
         </div>
 
-        {/* Live Activity Telemetry Feed */}
+        {/* Activity Feed */}
         <RecentActivityFeed events={events} isLoading={eventsLoading} />
       </div>
     </PageContainer>

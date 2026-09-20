@@ -80,13 +80,14 @@ export const Search: React.FC<SearchProps> = ({
   return (
     <PageContainer>
       <PageHeader
-        title="Historical Event Search"
-        subtitle="Full-text OpenSearch querying across telemetry logs, sales transactions, receipts, and audits."
+        eyebrow="Event Search"
+        title="Inventory Search"
+        subtitle="Full-text search across all inventory events indexed in Amazon OpenSearch."
       />
 
       <div className="space-y-6">
         {/* Search Input and Filter Card */}
-        <Card noPadding className="p-5 bg-white border-slate-200">
+        <Card noPadding className="p-5">
           <EventSearchFilters
             query={params.q || ''}
             onQueryChange={handleQueryChange}
@@ -102,13 +103,13 @@ export const Search: React.FC<SearchProps> = ({
 
         {/* Results Metadata Strip */}
         {isSearchActive && (
-          <div className="flex items-center justify-between text-xs text-slate-500 px-1">
+          <div className="flex items-center justify-between text-xs text-charcoal-500 px-1">
             <div className="flex items-center gap-2">
-              <Database className="w-3.5 h-3.5 text-blue-600" />
-              <span>OpenSearch Index: <code className="text-slate-700 font-mono">stockpulse-events-2026</code></span>
+              <Database className="w-3.5 h-3.5 text-charcoal-400" />
+              <span>OpenSearch Index: <code className="text-charcoal-700 font-mono">stockpulse-events-2026</code></span>
             </div>
             <span>
-              Found <strong className="text-slate-900">{events.length}</strong> matching indexed events
+              Found <strong className="text-charcoal-900">{events.length}</strong> matching events
             </span>
           </div>
         )}
@@ -119,14 +120,13 @@ export const Search: React.FC<SearchProps> = ({
         ) : !isSearchActive ? (
           <Card className="py-16">
             <div className="flex flex-col items-center text-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                <SearchIcon className="w-5 h-5 text-blue-500" />
+              <div className="w-12 h-12 rounded-xl bg-sand-300 border border-sand-400 flex items-center justify-center">
+                <SearchIcon className="w-5 h-5 text-charcoal-600" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-slate-700">Enter a search term or apply a filter</p>
-                <p className="text-xs text-slate-400 mt-1 max-w-xs">
-                  Search by SKU, product ID, event type, location, or date range to query
-                  the OpenSearch inventory event index.
+                <p className="text-sm font-medium text-charcoal-700">Enter a search term or apply a filter</p>
+                <p className="text-xs text-charcoal-400 mt-1 max-w-xs">
+                  Search by SKU, product name, event type, or location to query the OpenSearch inventory event index.
                 </p>
               </div>
             </div>

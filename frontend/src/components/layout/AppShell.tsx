@@ -20,7 +20,10 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-900 font-sans">
+    <div
+      className="min-h-screen flex text-charcoal-900 font-sans"
+      style={{ backgroundColor: '#E9E0D2' }}
+    >
       {/* Sidebar Navigation */}
       <Sidebar
         isOpen={isMobileSidebarOpen}

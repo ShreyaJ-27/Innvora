@@ -9,75 +9,85 @@ export interface StatusStyle {
   badgeBorder: string;
   dotColor: string;
   chartColor: string;
+  dotClass: string;
 }
 
+// Innvora warm status palette — restrained, operational
 export const STATUS_CONFIG: Record<InventoryStatus, StatusStyle> = {
   HEALTHY: {
     label: 'Healthy',
-    badgeBg: 'bg-emerald-50',
-    badgeText: 'text-emerald-700',
-    badgeBorder: 'border-emerald-200',
-    dotColor: 'bg-emerald-500',
-    chartColor: '#10b981', // emerald-500
+    badgeBg: 'bg-olive-50',
+    badgeText: 'text-olive-700',
+    badgeBorder: 'border-olive-200',
+    dotColor: 'bg-olive-500',
+    dotClass: 'bg-olive-400',
+    chartColor: '#7A9E5D', // muted sage green
   },
   REORDER_SOON: {
     label: 'Reorder Soon',
-    badgeBg: 'bg-amber-50',
-    badgeText: 'text-amber-700',
-    badgeBorder: 'border-amber-200',
-    dotColor: 'bg-amber-500',
-    chartColor: '#f59e0b', // amber-500
+    badgeBg: 'bg-terracotta-50',
+    badgeText: 'text-terracotta-700',
+    badgeBorder: 'border-terracotta-200',
+    dotColor: 'bg-terracotta-400',
+    dotClass: 'bg-terracotta-400',
+    chartColor: '#C6745A', // warm terracotta
   },
   CRITICAL: {
     label: 'Critical',
-    badgeBg: 'bg-rose-50',
-    badgeText: 'text-rose-700',
-    badgeBorder: 'border-rose-200',
-    dotColor: 'bg-rose-500',
-    chartColor: '#ef4444', // rose-500
+    badgeBg: 'bg-terracotta-100',
+    badgeText: 'text-terracotta-800',
+    badgeBorder: 'border-terracotta-300',
+    dotColor: 'bg-terracotta-600',
+    dotClass: 'bg-terracotta-600',
+    chartColor: '#8E4530', // dark rust
   },
   OVERSTOCKED: {
     label: 'Overstocked',
-    badgeBg: 'bg-indigo-50',
-    badgeText: 'text-indigo-700',
-    badgeBorder: 'border-indigo-200',
-    dotColor: 'bg-indigo-500',
-    chartColor: '#6366f1', // indigo-500
+    badgeBg: 'bg-sand-100',
+    badgeText: 'text-charcoal-600',
+    badgeBorder: 'border-sand-400',
+    dotColor: 'bg-charcoal-400',
+    dotClass: 'bg-charcoal-400',
+    chartColor: '#A89580', // warm stone
   },
 };
 
 export const URGENCY_CONFIG: Record<ReorderUrgency, StatusStyle> = {
   CRITICAL: {
     label: 'Critical',
-    badgeBg: 'bg-rose-50',
-    badgeText: 'text-rose-700',
-    badgeBorder: 'border-rose-200',
-    dotColor: 'bg-rose-500',
-    chartColor: '#ef4444',
+    badgeBg: 'bg-terracotta-100',
+    badgeText: 'text-terracotta-800',
+    badgeBorder: 'border-terracotta-300',
+    dotColor: 'bg-terracotta-600',
+    dotClass: 'bg-terracotta-600',
+    chartColor: '#8E4530',
   },
   REORDER_SOON: {
     label: 'Reorder Soon',
-    badgeBg: 'bg-amber-50',
-    badgeText: 'text-amber-700',
-    badgeBorder: 'border-amber-200',
-    dotColor: 'bg-amber-500',
-    chartColor: '#f59e0b',
+    badgeBg: 'bg-terracotta-50',
+    badgeText: 'text-terracotta-700',
+    badgeBorder: 'border-terracotta-200',
+    dotColor: 'bg-terracotta-400',
+    dotClass: 'bg-terracotta-400',
+    chartColor: '#C6745A',
   },
   HEALTHY: {
     label: 'Healthy',
-    badgeBg: 'bg-emerald-50',
-    badgeText: 'text-emerald-700',
-    badgeBorder: 'border-emerald-200',
-    dotColor: 'bg-emerald-500',
-    chartColor: '#10b981',
+    badgeBg: 'bg-olive-50',
+    badgeText: 'text-olive-700',
+    badgeBorder: 'border-olive-200',
+    dotColor: 'bg-olive-400',
+    dotClass: 'bg-olive-400',
+    chartColor: '#7A9E5D',
   },
   OVERSTOCKED: {
     label: 'Overstocked',
-    badgeBg: 'bg-indigo-50',
-    badgeText: 'text-indigo-700',
-    badgeBorder: 'border-indigo-200',
-    dotColor: 'bg-indigo-500',
-    chartColor: '#6366f1',
+    badgeBg: 'bg-sand-100',
+    badgeText: 'text-charcoal-600',
+    badgeBorder: 'border-sand-400',
+    dotColor: 'bg-charcoal-400',
+    dotClass: 'bg-charcoal-400',
+    chartColor: '#A89580',
   },
 };
 
@@ -92,44 +102,44 @@ export interface EventTypeStyle {
 export const EVENT_TYPE_CONFIG: Record<InventoryEventType, EventTypeStyle> = {
   SALE: {
     label: 'Sale',
-    badgeBg: 'bg-rose-50',
-    badgeText: 'text-rose-700',
-    badgeBorder: 'border-rose-200',
-    iconColor: 'text-rose-600',
+    badgeBg: 'bg-terracotta-50',
+    badgeText: 'text-terracotta-700',
+    badgeBorder: 'border-terracotta-200',
+    iconColor: 'text-terracotta-600',
   },
   RESTOCK: {
     label: 'Restock',
-    badgeBg: 'bg-emerald-50',
-    badgeText: 'text-emerald-700',
-    badgeBorder: 'border-emerald-200',
-    iconColor: 'text-emerald-600',
+    badgeBg: 'bg-olive-50',
+    badgeText: 'text-olive-700',
+    badgeBorder: 'border-olive-200',
+    iconColor: 'text-olive-600',
   },
   RETURN: {
-    label: 'Customer Return',
-    badgeBg: 'bg-emerald-50',
-    badgeText: 'text-emerald-700',
-    badgeBorder: 'border-emerald-200',
-    iconColor: 'text-emerald-600',
+    label: 'Return',
+    badgeBg: 'bg-olive-50',
+    badgeText: 'text-olive-700',
+    badgeBorder: 'border-olive-200',
+    iconColor: 'text-olive-600',
   },
   TRANSFER_IN: {
     label: 'Transfer In',
-    badgeBg: 'bg-blue-50',
-    badgeText: 'text-blue-700',
-    badgeBorder: 'border-blue-200',
-    iconColor: 'text-blue-600',
+    badgeBg: 'bg-sand-200',
+    badgeText: 'text-charcoal-700',
+    badgeBorder: 'border-sand-400',
+    iconColor: 'text-charcoal-600',
   },
   TRANSFER_OUT: {
     label: 'Transfer Out',
-    badgeBg: 'bg-blue-50',
-    badgeText: 'text-blue-700',
-    badgeBorder: 'border-blue-200',
-    iconColor: 'text-blue-600',
+    badgeBg: 'bg-sand-200',
+    badgeText: 'text-charcoal-600',
+    badgeBorder: 'border-sand-400',
+    iconColor: 'text-charcoal-500',
   },
   ADJUSTMENT: {
-    label: 'Cycle Count / Adj',
-    badgeBg: 'bg-amber-50',
-    badgeText: 'text-amber-700',
-    badgeBorder: 'border-amber-200',
-    iconColor: 'text-amber-600',
+    label: 'Adjustment',
+    badgeBg: 'bg-sand-100',
+    badgeText: 'text-charcoal-600',
+    badgeBorder: 'border-sand-400',
+    iconColor: 'text-charcoal-500',
   },
 };

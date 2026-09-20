@@ -5,12 +5,15 @@ import { InventoryFilters } from '../components/inventory/InventoryFilters';
 import { InventoryTable } from '../components/inventory/InventoryTable';
 import { ProductDetailsDrawer } from '../components/inventory/ProductDetailsDrawer';
 import { WhyReorderDrawer } from '../components/reorders/WhyReorderDrawer';
+import { AddProductModal } from '../components/inventory/AddProductModal';
+import { ImportInventoryModal } from '../components/inventory/ImportInventoryModal';
 import { ErrorState } from '../components/common/ErrorState';
+import { Button } from '../components/common/Button';
 import { useInventory } from '../hooks/useInventory';
 import { useReorders } from '../hooks/useReorders';
 import { ProductInventory } from '../types/inventory';
 import { ReorderRecommendation } from '../types/reorder';
-import { CheckCircle2, Clock, AlertTriangle, Package, Layers } from 'lucide-react';
+import { CheckCircle2, Clock, AlertTriangle, Package, Layers, Plus, Upload } from 'lucide-react';
 
 export interface InventoryProps {
   selectedLocation: string;
@@ -25,6 +28,8 @@ export const Inventory: React.FC<InventoryProps> = ({
   const [status, setStatus] = useState('ALL');
   const [selectedProduct, setSelectedProduct] = useState<ProductInventory | null>(null);
   const [whyReorderItem, setWhyReorderItem] = useState<ReorderRecommendation | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
   const {
     inventory,
@@ -39,7 +44,6 @@ export const Inventory: React.FC<InventoryProps> = ({
 
   const { reorders } = useReorders({ locationId: selectedLocation });
 
-  // Counts for top status strip
   const totalCount = inventory.length;
   const healthyCount = inventory.filter((i) => i.status === 'HEALTHY').length;
   const reorderSoonCount = inventory.filter((i) => i.status === 'REORDER_SOON').length;
@@ -50,79 +54,103 @@ export const Inventory: React.FC<InventoryProps> = ({
     ? reorders.find((r) => r.sku === selectedProduct.sku)
     : null;
 
+  const statusCards = [
+    {
+      label: 'All SKUs', count: totalCount, filter: 'ALL',
+      icon: <Package className="w-3.5 h-3.5" />,
+      active: 'border-charcoal-700 bg-sand-200',
+      inactive: 'border-sand-400 bg-sand-100',
+      textActive: 'text-charcoal-900',
+      textInactive: 'text-charcoal-500',
+    },
+    {
+      label: 'Healthy', count: healthyCount, filter: 'HEALTHY',
+      icon: <CheckCircle2 className="w-3.5 h-3.5" />,
+      active: 'border-olive-300 bg-olive-50',
+      inactive: 'border-sand-400 bg-sand-100',
+      textActive: 'text-olive-800',
+      textInactive: 'text-charcoal-500',
+    },
+    {
+      label: 'Reorder Soon', count: reorderSoonCount, filter: 'REORDER_SOON',
+      icon: <Clock className="w-3.5 h-3.5" />,
+      active: 'border-terracotta-200 bg-terracotta-50',
+      inactive: 'border-sand-400 bg-sand-100',
+      textActive: 'text-terracotta-700',
+      textInactive: 'text-charcoal-500',
+    },
+    {
+      label: 'Critical', count: criticalCount, filter: 'CRITICAL',
+      icon: <AlertTriangle className="w-3.5 h-3.5" />,
+      active: 'border-terracotta-400 bg-terracotta-100',
+      inactive: 'border-sand-400 bg-sand-100',
+      textActive: 'text-terracotta-800',
+      textInactive: 'text-charcoal-500',
+    },
+    {
+      label: 'Overstocked', count: overstockedCount, filter: 'OVERSTOCKED',
+      icon: <Layers className="w-3.5 h-3.5" />,
+      active: 'border-charcoal-500 bg-sand-300',
+      inactive: 'border-sand-400 bg-sand-100',
+      textActive: 'text-charcoal-800',
+      textInactive: 'text-charcoal-500',
+      extra: 'col-span-2 sm:col-span-1',
+    },
+  ];
+
   return (
     <PageContainer>
       <PageHeader
+        eyebrow="Stock Management"
         title="Inventory"
-        subtitle="Search and monitor inventory across every location."
+        subtitle="Monitor and manage stock levels across every fulfillment hub."
+        actions={
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              leftIcon={<Upload className="w-3.5 h-3.5" />}
+              onClick={() => setIsImportModalOpen(true)}
+            >
+              Import CSV
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              leftIcon={<Plus className="w-3.5 h-3.5" />}
+              onClick={() => setIsAddModalOpen(true)}
+            >
+              Add Product
+            </Button>
+          </div>
+        }
       />
 
-      {/* Summary Metrics Strip */}
+      {/* Status Filter Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
-        <div
-          onClick={() => setStatus('ALL')}
-          className={`p-3.5 bg-white rounded-xl border shadow-card cursor-pointer transition-all ${
-            status === 'ALL' ? 'border-blue-500 ring-2 ring-blue-100' : 'border-slate-200'
-          }`}
-        >
-          <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>Total SKUs</span>
-            <Package className="w-3.5 h-3.5 text-slate-400" />
-          </div>
-          <div className="text-xl font-bold text-slate-900 mt-1">{totalCount}</div>
-        </div>
-
-        <div
-          onClick={() => setStatus('HEALTHY')}
-          className={`p-3.5 bg-white rounded-xl border shadow-card cursor-pointer transition-all ${
-            status === 'HEALTHY' ? 'border-emerald-500 ring-2 ring-emerald-100' : 'border-slate-200'
-          }`}
-        >
-          <div className="flex items-center justify-between text-xs text-emerald-700 font-medium">
-            <span>Healthy</span>
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-          </div>
-          <div className="text-xl font-bold text-emerald-800 mt-1">{healthyCount}</div>
-        </div>
-
-        <div
-          onClick={() => setStatus('REORDER_SOON')}
-          className={`p-3.5 bg-white rounded-xl border shadow-card cursor-pointer transition-all ${
-            status === 'REORDER_SOON' ? 'border-amber-500 ring-2 ring-amber-100' : 'border-slate-200'
-          }`}
-        >
-          <div className="flex items-center justify-between text-xs text-amber-700 font-medium">
-            <span>Reorder Soon</span>
-            <Clock className="w-3.5 h-3.5 text-amber-500" />
-          </div>
-          <div className="text-xl font-bold text-amber-800 mt-1">{reorderSoonCount}</div>
-        </div>
-
-        <div
-          onClick={() => setStatus('CRITICAL')}
-          className={`p-3.5 bg-white rounded-xl border shadow-card cursor-pointer transition-all ${
-            status === 'CRITICAL' ? 'border-rose-500 ring-2 ring-rose-100' : 'border-slate-200'
-          }`}
-        >
-          <div className="flex items-center justify-between text-xs text-rose-700 font-medium">
-            <span>Critical</span>
-            <AlertTriangle className="w-3.5 h-3.5 text-rose-500" />
-          </div>
-          <div className="text-xl font-bold text-rose-800 mt-1">{criticalCount}</div>
-        </div>
-
-        <div
-          onClick={() => setStatus('OVERSTOCKED')}
-          className={`p-3.5 bg-white rounded-xl border shadow-card cursor-pointer transition-all col-span-2 sm:col-span-1 ${
-            status === 'OVERSTOCKED' ? 'border-indigo-500 ring-2 ring-indigo-100' : 'border-slate-200'
-          }`}
-        >
-          <div className="flex items-center justify-between text-xs text-indigo-700 font-medium">
-            <span>Overstocked</span>
-            <Layers className="w-3.5 h-3.5 text-indigo-500" />
-          </div>
-          <div className="text-xl font-bold text-indigo-800 mt-1">{overstockedCount}</div>
-        </div>
+        {statusCards.map((card) => {
+          const isActive = status === card.filter;
+          return (
+            <div
+              key={card.filter}
+              onClick={() => setStatus(card.filter)}
+              className={`p-3.5 rounded-xl border cursor-pointer transition-all ${card.extra ?? ''} ${
+                isActive ? card.active : card.inactive
+              }`}
+              style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}
+            >
+              <div className={`flex items-center justify-between text-xs font-medium mb-1.5 ${
+                isActive ? card.textActive : card.textInactive
+              }`}>
+                <span className="text-[10px] font-bold uppercase tracking-wider">{card.label}</span>
+                {card.icon}
+              </div>
+              <div className={`text-2xl font-extrabold leading-none ${
+                isActive ? card.textActive : 'text-charcoal-800'
+              }`}>{card.count}</div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Filter Toolbar */}
@@ -139,7 +167,7 @@ export const Inventory: React.FC<InventoryProps> = ({
         />
       </div>
 
-      {/* Table / Error Display */}
+      {/* Table or Error */}
       {error ? (
         <ErrorState message={error} onRetry={refetch} />
       ) : (
@@ -164,6 +192,18 @@ export const Inventory: React.FC<InventoryProps> = ({
         recommendation={whyReorderItem}
         isOpen={Boolean(whyReorderItem)}
         onClose={() => setWhyReorderItem(null)}
+      />
+
+      {/* Add Product Modal */}
+      <AddProductModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
+
+      {/* Import Inventory Manifest Modal */}
+      <ImportInventoryModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
       />
     </PageContainer>
   );

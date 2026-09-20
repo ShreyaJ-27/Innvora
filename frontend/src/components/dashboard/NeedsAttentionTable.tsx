@@ -19,11 +19,11 @@ export const NeedsAttentionTable: React.FC<NeedsAttentionTableProps> = ({
 }) => {
   const urgentItems = items
     .filter((i) => i.status === 'CRITICAL' || i.status === 'REORDER_SOON')
-    .slice(0, 5);
+    .slice(0, 6);
 
   const getRecommendedQty = (sku: string) => {
     const reorder = reorders.find((r) => r.sku === sku);
-    return reorder ? `${reorder.recommendedQuantity} units` : 'Calculating...';
+    return reorder ? `${reorder.recommendedQuantity} units` : '—';
   };
 
   return (
@@ -31,19 +31,19 @@ export const NeedsAttentionTable: React.FC<NeedsAttentionTableProps> = ({
       header={
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-rose-50 rounded text-rose-600">
+            <div className="p-1.5 bg-terracotta-50 border border-terracotta-200 rounded text-terracotta-600">
               <AlertCircle className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-semibold text-sm text-slate-900">Needs Immediate Attention</h3>
-              <p className="text-xs text-slate-500">Critical & Reorder-Soon items requiring PO release</p>
+              <h3 className="text-sm font-semibold text-charcoal-900">Needs Attention</h3>
+              <p className="text-[11px] text-charcoal-400">Critical and reorder-soon items</p>
             </div>
           </div>
           <Link
             to="/reorders"
-            className="text-xs font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 hover:underline"
+            className="text-xs font-medium text-charcoal-600 hover:text-charcoal-900 inline-flex items-center gap-1 transition-colors"
           >
-            <span>View all reorders</span>
+            View replenishment
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -53,69 +53,59 @@ export const NeedsAttentionTable: React.FC<NeedsAttentionTableProps> = ({
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
-              <th className="py-2.5 px-4">Product</th>
-              <th className="py-2.5 px-4">SKU</th>
-              <th className="py-2.5 px-4">Location</th>
-              <th className="py-2.5 px-4 text-right">Available Stock</th>
-              <th className="py-2.5 px-4 text-right">Reorder Point</th>
-              <th className="py-2.5 px-4 text-right">Days Left</th>
-              <th className="py-2.5 px-4 text-right">Recommended</th>
-              <th className="py-2.5 px-4 text-center">Status</th>
+            <tr className="border-b border-sand-300 text-charcoal-400 font-bold uppercase tracking-widest" style={{ backgroundColor: '#EDE5D8' }}>
+              <th className="py-2.5 px-4 text-[10px]">Product</th>
+              <th className="py-2.5 px-4 text-[10px]">SKU</th>
+              <th className="py-2.5 px-4 text-[10px] hidden md:table-cell">Location</th>
+              <th className="py-2.5 px-4 text-[10px] text-right">Available</th>
+              <th className="py-2.5 px-4 text-[10px] text-right hidden sm:table-cell">Days Left</th>
+              <th className="py-2.5 px-4 text-[10px] text-right hidden lg:table-cell">Reorder Qty</th>
+              <th className="py-2.5 px-4 text-[10px] text-center">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-slate-700">
+          <tbody className="divide-y divide-sand-200 text-charcoal-700">
             {isLoading ? (
               <tr>
-                <td colSpan={8} className="py-8 text-center text-slate-400">
-                  Loading critical SKUs...
+                <td colSpan={7} className="py-10 text-center text-charcoal-400 text-xs">
+                  Loading inventory data…
                 </td>
               </tr>
             ) : urgentItems.length === 0 ? (
               <tr>
-                <td colSpan={8} className="py-8 text-center text-slate-500 font-medium">
-                  All inventory healthy. No SKUs currently breach reorder thresholds!
+                <td colSpan={7} className="py-10 text-center text-charcoal-500 text-xs">
+                  All inventory within healthy thresholds. No immediate action needed.
                 </td>
               </tr>
             ) : (
               urgentItems.map((item) => (
                 <tr
                   key={item.id}
-                  className={`hover:bg-slate-50 transition-colors ${
-                    item.status === 'CRITICAL' ? 'bg-rose-50/20' : ''
+                  className={`transition-colors hover:bg-sand-200 ${
+                    item.status === 'CRITICAL' ? 'bg-terracotta-50/40' : ''
                   }`}
                 >
-                  <td className="py-3 px-4 font-semibold text-slate-900 max-w-xs truncate">
+                  <td className="py-3 px-4 font-medium text-charcoal-900 max-w-[200px] truncate">
                     {item.name}
                   </td>
-                  <td className="py-3 px-4 font-mono text-[11px] text-slate-500">{item.sku}</td>
-                  <td className="py-3 px-4 text-slate-600 truncate max-w-[140px]">
+                  <td className="py-3 px-4 font-mono text-[10px] text-charcoal-500">{item.sku}</td>
+                  <td className="py-3 px-4 text-charcoal-500 hidden md:table-cell truncate max-w-[120px]">
                     {item.locationName}
                   </td>
-                  <td className="py-3 px-4 text-right font-bold text-slate-900">
-                    <span
-                      className={
-                        item.status === 'CRITICAL' ? 'text-rose-600 font-extrabold' : 'text-slate-800'
-                      }
-                    >
+                  <td className="py-3 px-4 text-right font-bold">
+                    <span className={item.status === 'CRITICAL' ? 'text-terracotta-700' : 'text-charcoal-800'}>
                       {item.availableStock}
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-right font-medium text-slate-600">
-                    {item.reorderPoint}
-                  </td>
-                  <td className="py-3 px-4 text-right font-semibold">
-                    <span
-                      className={`px-1.5 py-0.5 rounded text-[11px] ${
-                        item.daysOfStock < 2
-                          ? 'bg-rose-100 text-rose-800 font-bold'
-                          : 'bg-amber-100 text-amber-800'
-                      }`}
-                    >
+                  <td className="py-3 px-4 text-right hidden sm:table-cell">
+                    <span className={`text-[11px] px-1.5 py-0.5 rounded border ${
+                      item.daysOfStock < 2
+                        ? 'bg-terracotta-100 text-terracotta-800 border-terracotta-300 font-bold'
+                        : 'bg-sand-200 text-charcoal-600 border-sand-400'
+                    }`}>
                       {item.daysOfStock}d
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-right font-bold text-blue-600">
+                  <td className="py-3 px-4 text-right text-charcoal-600 font-medium hidden lg:table-cell">
                     {getRecommendedQty(item.sku)}
                   </td>
                   <td className="py-3 px-4 text-center">

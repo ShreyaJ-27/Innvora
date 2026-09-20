@@ -1,32 +1,40 @@
 import React from 'react';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps {
+  children: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  className?: string;
   noPadding?: boolean;
+  onClick?: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({
   children,
   header,
   footer,
-  noPadding = false,
   className = '',
-  ...props
+  noPadding = false,
+  onClick,
 }) => {
   return (
     <div
-      className={`bg-white rounded-xl border border-slate-200/80 shadow-card overflow-hidden flex flex-col ${className}`}
-      {...props}
+      className={`bg-sand-100 border border-sand-400 rounded-xl overflow-hidden ${
+        onClick ? 'cursor-pointer hover:border-sand-500 transition-colors' : ''
+      } ${className}`}
+      style={{ boxShadow: '0 1px 3px 0 rgba(39,37,34,0.06)' }}
+      onClick={onClick}
     >
       {header && (
-        <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+        <div className="px-5 py-4 border-b border-sand-300">
           {header}
         </div>
       )}
-      <div className={`flex-1 ${noPadding ? '' : 'p-5'}`}>{children}</div>
+      <div className={noPadding ? '' : 'p-5'}>
+        {children}
+      </div>
       {footer && (
-        <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+        <div className="px-5 py-3 border-t border-sand-300 bg-sand-200">
           {footer}
         </div>
       )}

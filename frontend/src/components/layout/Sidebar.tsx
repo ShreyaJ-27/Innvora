@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Boxes,
@@ -11,7 +11,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  TrendingUp,
+  Warehouse,
 } from 'lucide-react';
 import { IconButton } from '../common/IconButton';
 
@@ -28,25 +28,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isCollapsed,
   onToggleCollapse,
 }) => {
+  const navigate = useNavigate();
+  
   const navItems = [
     { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { to: '/inventory', label: 'Inventory', icon: Boxes },
-    { to: '/reorders', label: 'Smart Reorders', icon: Sparkles, badge: 'AI' },
+    { to: '/reorders', label: 'Replenishment', icon: Sparkles },
     { to: '/activity', label: 'Activity', icon: Activity },
     { to: '/search', label: 'Search', icon: Search },
   ];
 
   const bottomItems = [
-    { label: 'Settings', icon: Settings, action: () => alert('Settings panel') },
-    { label: 'Help & Docs', icon: HelpCircle, action: () => alert('StockPulse Docs: v1.0 Operational Guide') },
+    { to: '/settings', label: 'Settings', icon: Settings },
+    { to: '/help', label: 'Help & Docs', icon: HelpCircle },
   ];
+
+  const activeClass = 'bg-sand-300 text-charcoal-900 font-semibold';
+  const inactiveClass = 'text-charcoal-500 hover:text-charcoal-900 hover:bg-sand-200';
 
   return (
     <>
       {/* Mobile Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-40 bg-charcoal-900/30 backdrop-blur-[2px] lg:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -54,42 +59,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col bg-white border-r border-slate-200 transition-all duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        } ${isCollapsed ? 'lg:w-20' : 'lg:w-64'} w-64 shadow-lg lg:shadow-none`}
+        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col
+          border-r border-sand-400 transition-all duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          ${isCollapsed ? 'lg:w-16' : 'lg:w-60'} w-60`}
+        style={{
+          backgroundColor: '#F8F4EC',
+          boxShadow: isOpen ? '4px 0 16px rgba(39,37,34,0.08)' : 'none',
+        }}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-100">
-          <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-sm">
-              <TrendingUp className="w-5 h-5" />
+        <div className="h-14 flex items-center justify-between px-4 border-b border-sand-400 shrink-0">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2.5 overflow-hidden group"
+          >
+            {/* Logo mark */}
+            <div className="w-8 h-8 rounded-lg bg-charcoal-900 flex items-center justify-center shrink-0">
+              <Warehouse className="w-4 h-4 text-sand-200" />
             </div>
             {!isCollapsed && (
-              <div className="flex flex-col">
-                <span className="font-bold text-base tracking-tight text-slate-900 leading-tight">
-                  Stock<span className="text-blue-600">Pulse</span>
+              <div className="flex flex-col overflow-hidden">
+                <span className="font-bold text-sm tracking-tight text-charcoal-900 leading-tight">
+                  Innvora
                 </span>
-                <span className="text-[10px] font-medium tracking-wide text-slate-400 uppercase">
-                  Inventory OS
+                <span className="text-[9px] font-semibold tracking-widest text-charcoal-400 uppercase">
+                  Inventory Ops
                 </span>
               </div>
             )}
-          </div>
+          </button>
 
-          {/* Close button on mobile */}
+          {/* Close on mobile */}
           <div className="lg:hidden">
             <IconButton aria-label="Close sidebar" onClick={onClose} size="sm">
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </IconButton>
           </div>
         </div>
 
         {/* Primary Navigation */}
-        <div className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+        <div className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
           {!isCollapsed && (
-            <div className="px-3 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+            <p className="px-2 pb-2 text-[9px] font-bold text-charcoal-400 uppercase tracking-widest">
               Operations
-            </div>
+            </p>
           )}
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -97,58 +111,48 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <NavLink
                 key={item.to}
                 to={item.to}
-                onClick={() => {
-                  if (window.innerWidth < 1024) onClose();
-                }}
+                onClick={() => { if (window.innerWidth < 1024) onClose(); }}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors group ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
-                  } ${isCollapsed ? 'justify-center' : ''}`
+                  `flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-colors
+                  ${isActive ? activeClass : inactiveClass}
+                  ${isCollapsed ? 'justify-center' : ''}`
                 }
                 title={isCollapsed ? item.label : undefined}
               >
-                <Icon
-                  className={`w-5 h-5 shrink-0 transition-colors ${
-                    isCollapsed ? '' : ''
-                  }`}
-                />
+                <Icon className="w-4 h-4 shrink-0" />
                 {!isCollapsed && <span className="flex-1 truncate">{item.label}</span>}
-                {!isCollapsed && item.badge && (
-                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 uppercase tracking-wider">
-                    {item.badge}
-                  </span>
-                )}
               </NavLink>
             );
           })}
         </div>
 
         {/* Bottom Utility Items */}
-        <div className="p-3 border-t border-slate-100 space-y-1">
+        <div className="p-2 border-t border-sand-400 space-y-0.5">
           {bottomItems.map((item) => {
             const Icon = item.icon;
             return (
-              <button
-                key={item.label}
-                onClick={item.action}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors ${
-                  isCollapsed ? 'justify-center' : ''
-                }`}
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                className={({ isActive }) =>
+                  `w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-colors
+                  ${isActive ? activeClass : inactiveClass}
+                  ${isCollapsed ? 'justify-center' : ''}`
+                }
                 title={isCollapsed ? item.label : undefined}
               >
-                <Icon className="w-5 h-5 shrink-0" />
+                <Icon className="w-4 h-4 shrink-0" />
                 {!isCollapsed && <span>{item.label}</span>}
-              </button>
+              </NavLink>
             );
           })}
 
-          {/* Collapse Toggle for Desktop / Tablet */}
-          <div className="hidden lg:flex pt-2 justify-end">
+          {/* Collapse toggle for desktop */}
+          <div className="hidden lg:flex pt-1 justify-end">
             <button
               onClick={onToggleCollapse}
-              className="p-1.5 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 text-xs flex items-center gap-1 w-full justify-center"
+              className="p-1.5 rounded-lg text-charcoal-400 hover:text-charcoal-700 hover:bg-sand-300 text-xs flex items-center gap-1 w-full justify-center transition-colors"
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               {isCollapsed ? (
@@ -156,7 +160,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               ) : (
                 <>
                   <ChevronLeft className="w-4 h-4" />
-                  <span className="text-xs">Collapse</span>
+                  <span className="text-[10px]">Collapse</span>
                 </>
               )}
             </button>

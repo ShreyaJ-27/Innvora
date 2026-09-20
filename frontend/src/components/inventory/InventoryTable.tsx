@@ -22,8 +22,8 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       sortable: true,
       render: (item) => (
         <div>
-          <div className="font-semibold text-slate-900 leading-tight">{item.name}</div>
-          <div className="text-xs text-slate-400 mt-0.5">{item.category}</div>
+          <div className="font-medium text-charcoal-900 leading-tight">{item.name}</div>
+          <div className="text-[10px] text-charcoal-400 mt-0.5 uppercase tracking-wider">{item.category}</div>
         </div>
       ),
     },
@@ -31,35 +31,33 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       key: 'sku',
       header: 'SKU',
       sortable: true,
-      render: (item) => <span className="font-mono text-xs text-slate-600">{item.sku}</span>,
+      render: (item) => <span className="font-mono text-[10px] text-charcoal-500">{item.sku}</span>,
     },
     {
       key: 'locationName',
-      header: 'Location',
+      header: 'Hub',
       sortable: true,
       render: (item) => (
-        <span className="text-xs text-slate-600 truncate max-w-[150px] inline-block">
+        <span className="text-xs text-charcoal-600 truncate max-w-[140px] inline-block">
           {item.locationName}
         </span>
       ),
     },
     {
       key: 'availableStock',
-      header: 'Available Stock',
+      header: 'Available',
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span
-          className={`font-bold font-mono ${
-            item.status === 'CRITICAL'
-              ? 'text-rose-600'
-              : item.status === 'REORDER_SOON'
-              ? 'text-amber-700'
-              : 'text-slate-800'
-          }`}
-        >
+        <span className={`font-bold font-mono text-sm ${
+          item.status === 'CRITICAL'
+            ? 'text-terracotta-700'
+            : item.status === 'REORDER_SOON'
+            ? 'text-terracotta-500'
+            : 'text-charcoal-800'
+        }`}>
           {item.availableStock}{' '}
-          <span className="text-[10px] font-normal text-slate-400">/ {item.currentStock}</span>
+          <span className="text-[10px] font-normal text-charcoal-400">/ {item.currentStock}</span>
         </span>
       ),
     },
@@ -68,23 +66,21 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       header: 'Reorder Point',
       sortable: true,
       align: 'right',
-      render: (item) => <span className="text-xs text-slate-600">{item.reorderPoint}</span>,
+      render: (item) => <span className="text-xs text-charcoal-500">{item.reorderPoint}</span>,
     },
     {
       key: 'daysOfStock',
-      header: 'Days of Stock',
+      header: 'Days Left',
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span
-          className={`px-2 py-0.5 rounded text-xs font-semibold ${
-            item.daysOfStock < 2
-              ? 'bg-rose-100 text-rose-800'
-              : item.daysOfStock < 5
-              ? 'bg-amber-100 text-amber-800'
-              : 'bg-slate-100 text-slate-700'
-          }`}
-        >
+        <span className={`text-[11px] px-1.5 py-0.5 rounded border font-semibold ${
+          item.daysOfStock < 2
+            ? 'bg-terracotta-100 text-terracotta-800 border-terracotta-300'
+            : item.daysOfStock < 5
+            ? 'bg-terracotta-50 text-terracotta-700 border-terracotta-200'
+            : 'bg-sand-200 text-charcoal-600 border-sand-400'
+        }`}>
           {item.daysOfStock}d
         </span>
       ),
@@ -98,11 +94,11 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
     },
     {
       key: 'lastUpdated',
-      header: 'Last Updated',
+      header: 'Updated',
       sortable: true,
       align: 'right',
       render: (item) => (
-        <span className="text-xs text-slate-400">{formatDate(item.lastUpdated)}</span>
+        <span className="text-[10px] text-charcoal-400">{formatDate(item.lastUpdated)}</span>
       ),
     },
   ];
@@ -114,9 +110,9 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       keyExtractor={(item) => item.id}
       isLoading={isLoading}
       onRowClick={onSelectProduct}
-      pageSize={8}
+      pageSize={10}
       emptyTitle="No inventory items yet"
-      emptyDescription="Inventory will appear here when stock is added."
+      emptyDescription="Stock data will appear here once inventory events are processed."
     />
   );
 };

@@ -60,7 +60,7 @@ export async function apiClient<T>(
     }
     const message = err instanceof Error ? err.message : 'Unknown error';
     throw new ApiError(
-      message || 'Network request to StockPulse API failed. Check your connection.',
+      message || 'Network request to Innvora API failed. Check your connection.',
       'NETWORK_ERROR'
     );
   }

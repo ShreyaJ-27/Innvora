@@ -1,43 +1,35 @@
 import React from 'react';
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { Button } from './Button';
 
-export interface ErrorStateProps {
+interface ErrorStateProps {
   title?: string;
   message?: string;
   onRetry?: () => void;
-  className?: string;
 }
 
 export const ErrorState: React.FC<ErrorStateProps> = ({
-  title = 'Data Unavailable',
-  message = 'Inventory data is temporarily unavailable. Please verify your connection or try again.',
+  title = 'Unable to Load Data',
+  message = 'There was an issue loading this data. Please try again.',
   onRetry,
-  className = '',
-}) => {
-  return (
-    <div
-      className={`flex flex-col items-center justify-center p-8 text-center bg-rose-50/50 rounded-xl border border-rose-200 ${className}`}
-      role="alert"
-    >
-      <div className="p-2.5 bg-rose-100 rounded-full mb-3 text-rose-600">
-        <AlertCircle className="w-6 h-6" />
-      </div>
-      <h3 className="text-sm font-semibold text-rose-900">{title}</h3>
-      <p className="mt-1 text-xs text-rose-700 max-w-sm">{message}</p>
-      {onRetry && (
-        <div className="mt-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onRetry}
-            leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
-            className="border-rose-300 text-rose-800 hover:bg-rose-100"
-          >
-            Retry
-          </Button>
-        </div>
-      )}
+}) => (
+  <div className="flex flex-col items-center justify-center py-16 px-4 text-center gap-4">
+    <div className="w-12 h-12 rounded-xl bg-terracotta-50 border border-terracotta-200 flex items-center justify-center">
+      <AlertTriangle className="w-5 h-5 text-terracotta-600" />
     </div>
-  );
-};
+    <div>
+      <p className="text-sm font-semibold text-charcoal-800">{title}</p>
+      <p className="text-xs text-charcoal-500 mt-1 max-w-sm">{message}</p>
+    </div>
+    {onRetry && (
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={onRetry}
+        leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
+      >
+        Try Again
+      </Button>
+    )}
+  </div>
+);

@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
+import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { Inventory } from './pages/Inventory';
 import { Reorders } from './pages/Reorders';
 import { Activity } from './pages/Activity';
 import { Search } from './pages/Search';
+import { Settings } from './pages/Settings';
+import { Help } from './pages/Help';
 
 export function App() {
   const [selectedLocation, setSelectedLocation] = useState<string>('ALL');
   const [eventTriggerKey, setEventTriggerKey] = useState<number>(0);
 
   const handleEventProcessed = () => {
-    // Increment trigger to force sub-views to refresh their datasets
     setEventTriggerKey((k) => k + 1);
   };
 
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public landing page */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* App shell — all authenticated/app routes */}
         <Route
           element={
             <AppShell
@@ -28,9 +34,6 @@ export function App() {
             />
           }
         >
-          {/* Index redirect to /dashboard */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
           <Route
             path="/dashboard"
             element={
@@ -86,9 +89,15 @@ export function App() {
             }
           />
 
-          {/* Catch-all route */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/help" element={<Help />} />
+
+          {/* Catch-all inside app shell */}
+          <Route path="/app/*" element={<Navigate to="/dashboard" replace />} />
         </Route>
+
+        {/* Global catch-all */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

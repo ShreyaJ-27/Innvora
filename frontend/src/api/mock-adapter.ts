@@ -212,7 +212,7 @@ class MockDatabase {
       previousStock: prevStock,
       newStock: newStock,
       timestamp: new Date().toISOString(),
-      source: event.source || 'StockPulse Demo Simulator',
+      source: event.source || 'Innvora Demo Simulator',
       referenceId: `SIM-${Math.floor(1000 + Math.random() * 9000)}`,
     };
 

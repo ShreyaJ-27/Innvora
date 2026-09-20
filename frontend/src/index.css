@@ -3,26 +3,155 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   body {
-    @apply font-sans antialiased text-slate-800 bg-slate-50;
+    @apply font-sans text-charcoal-900 bg-sand-200;
+    background-color: #E9E0D2;
+    color: #272522;
+  }
+  
+  /* Selection color — warm */
+  ::selection {
+    background-color: #D9CCB9;
+    color: #272522;
   }
 }
 
-/* Custom scrollbar for data tables and drawers */
+/* Custom warm scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #C4B49F;
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #A89580;
 }
+
+/* Innvora component layer */
+@layer components {
+  /* Warm card surface */
+  .inn-card {
+    @apply bg-sand-100 border border-sand-500 rounded-xl;
+    box-shadow: 0 1px 3px 0 rgba(39,37,34,0.06), 0 1px 2px -1px rgba(39,37,34,0.04);
+  }
+
+  /* Thin separator line */
+  .inn-separator {
+    @apply border-t border-sand-400;
+  }
+
+  /* Status indicator dot */
+  .inn-dot {
+    @apply w-2 h-2 rounded-full shrink-0;
+  }
+
+  /* Label uppercase track */
+  .inn-label {
+    @apply text-[10px] font-bold uppercase tracking-widest text-charcoal-400;
+  }
+
+  /* Operational band — full width horizontal data strip */
+  .inn-band {
+    @apply border-y border-sand-400 bg-sand-100 px-6 py-4;
+  }
+
+  /* Metric number style */
+  .inn-metric {
+    @apply text-3xl font-extrabold text-charcoal-900 leading-none;
+  }
+
+  /* Warm input base */
+  .inn-input {
+    @apply w-full px-3 py-2 bg-sand-50 border border-sand-500 rounded-lg text-sm text-charcoal-800
+           placeholder-charcoal-400 focus:outline-none focus:ring-1 focus:ring-charcoal-700
+           focus:border-charcoal-700 transition-colors;
+  }
+
+  /* Warm select base */
+  .inn-select {
+    @apply inn-input appearance-none cursor-pointer pr-8;
+  }
+
+  /* Primary CTA button */
+  .inn-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-charcoal-900 text-sand-100 text-sm font-semibold
+           hover:bg-charcoal-800 active:bg-charcoal-900
+           transition-colors focus:outline-none focus:ring-2 focus:ring-charcoal-900 focus:ring-offset-2;
+  }
+
+  /* Outline button */
+  .inn-btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-transparent text-charcoal-700 text-sm font-medium
+           border border-sand-500 hover:bg-sand-100 active:bg-sand-200
+           transition-colors focus:outline-none;
+  }
+
+  /* Warm tooltip */
+  .inn-tooltip {
+    @apply bg-sand-100 text-charcoal-900 border border-sand-400 rounded-lg shadow-panel
+           text-xs px-3 py-2;
+  }
+}
+
+/* Landing page specific styles */
+.landing-hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(233, 224, 210, 0.97) 0%,
+    rgba(233, 224, 210, 0.90) 40%,
+    rgba(233, 224, 210, 0.4) 70%,
+    rgba(233, 224, 210, 0) 100%
+  );
+}
+
+.landing-section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C4B49F, transparent);
+}
+
+/* Chart warm tooltip override */
+.recharts-default-tooltip {
+  background: #F8F4EC !important;
+  border: 1px solid #D7CABB !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(39,37,34,0.08) !important;
+}
+.recharts-tooltip-label {
+  color: #272522 !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+.recharts-tooltip-item {
+  color: #45413B !important;
+  font-size: 12px !important;
+}
+
+/* Animate-in utilities */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in-up { animation: fade-in-up 0.35s ease-out forwards; }
+.animate-fade-in    { animation: fade-in 0.2s ease-out forwards; }
+.animate-slide-right { animation: slide-in-right 0.3s ease-out forwards; }

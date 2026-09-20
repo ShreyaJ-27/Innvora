@@ -2,35 +2,53 @@ import React from 'react';
 
 export interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'slate' | 'blue' | 'emerald' | 'amber' | 'rose' | 'purple';
+  variant?: 'default' | 'healthy' | 'reorder' | 'critical' | 'overstocked' | 'info' | 'neutral';
   size?: 'sm' | 'md';
+  dot?: boolean;
   className?: string;
 }
 
+const VARIANT_STYLES: Record<string, string> = {
+  default:     'bg-sand-200 text-charcoal-600 border-sand-400',
+  healthy:     'bg-olive-50 text-olive-700 border-olive-200',
+  reorder:     'bg-terracotta-50 text-terracotta-700 border-terracotta-200',
+  critical:    'bg-terracotta-100 text-terracotta-800 border-terracotta-300',
+  overstocked: 'bg-sand-100 text-charcoal-600 border-sand-400',
+  info:        'bg-sand-200 text-charcoal-700 border-sand-500',
+  neutral:     'bg-sand-100 text-charcoal-500 border-sand-300',
+};
+
+const DOT_STYLES: Record<string, string> = {
+  default:     'bg-charcoal-400',
+  healthy:     'bg-olive-500',
+  reorder:     'bg-terracotta-400',
+  critical:    'bg-terracotta-600',
+  overstocked: 'bg-charcoal-400',
+  info:        'bg-charcoal-500',
+  neutral:     'bg-charcoal-300',
+};
+
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'slate',
-  size = 'md',
+  variant = 'default',
+  size = 'sm',
+  dot = false,
   className = '',
 }) => {
-  const variantStyles = {
-    slate: 'bg-slate-100 text-slate-700 border-slate-200',
-    blue: 'bg-blue-50 text-blue-700 border-blue-200',
-    emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    amber: 'bg-amber-50 text-amber-700 border-amber-200',
-    rose: 'bg-rose-50 text-rose-700 border-rose-200',
-    purple: 'bg-purple-50 text-purple-700 border-purple-200',
-  };
-
-  const sizeStyles = {
-    sm: 'text-[11px] px-1.5 py-0.5 font-medium',
-    md: 'text-xs px-2 py-0.5 font-semibold',
-  };
+  const sizeStyle = size === 'sm'
+    ? 'text-[10px] px-1.5 py-0.5 gap-1'
+    : 'text-xs px-2 py-0.5 gap-1.5';
 
   return (
     <span
-      className={`inline-flex items-center rounded-md border ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={`inline-flex items-center font-semibold uppercase tracking-wider border rounded
+        ${sizeStyle} ${VARIANT_STYLES[variant] ?? VARIANT_STYLES.default} ${className}`}
     >
+      {dot && (
+        <span
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${DOT_STYLES[variant] ?? DOT_STYLES.default}`}
+        />
+      )}
       {children}
     </span>
   );

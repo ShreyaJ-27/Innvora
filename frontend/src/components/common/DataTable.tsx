@@ -65,7 +65,6 @@ export function DataTable<T extends Record<string, any>>({
       if (aVal === bVal) return 0;
       if (aVal === null || aVal === undefined) return 1;
       if (bVal === null || bVal === undefined) return -1;
-
       if (typeof aVal === 'number' && typeof bVal === 'number') {
         return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
       }
@@ -84,7 +83,7 @@ export function DataTable<T extends Record<string, any>>({
 
   if (isLoading) {
     return (
-      <div className={`bg-white rounded-xl border border-slate-200 shadow-card ${className}`}>
+      <div className={`bg-sand-100 rounded-xl border border-sand-400 ${className}`} style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
         <SkeletonTable rows={pageSize > 6 ? 6 : pageSize} />
       </div>
     );
@@ -92,20 +91,18 @@ export function DataTable<T extends Record<string, any>>({
 
   if (data.length === 0) {
     return (
-      <div className={`bg-white rounded-xl border border-slate-200 shadow-card ${className}`}>
+      <div className={`bg-sand-100 rounded-xl border border-sand-400 ${className}`} style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
         <EmptyState title={emptyTitle} description={emptyDescription} />
       </div>
     );
   }
 
   return (
-    <div
-      className={`bg-white rounded-xl border border-slate-200/80 shadow-card overflow-hidden flex flex-col ${className}`}
-    >
+    <div className={`bg-sand-100 rounded-xl border border-sand-400 overflow-hidden flex flex-col ${className}`} style={{ boxShadow: '0 1px 3px rgba(39,37,34,0.06)' }}>
       <div className="overflow-x-auto w-full">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50/80 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <tr className="border-b border-sand-300 text-[10px] font-bold text-charcoal-400 uppercase tracking-widest" style={{ backgroundColor: '#EDE5D8' }}>
               {columns.map((col) => {
                 const isSorted = sortKey === col.key;
                 return (
@@ -113,19 +110,19 @@ export function DataTable<T extends Record<string, any>>({
                     key={col.key}
                     scope="col"
                     style={{ width: col.width }}
-                    className={`py-3 px-4 ${
+                    className={`py-2.5 px-4 ${
                       col.align === 'right'
                         ? 'text-right'
                         : col.align === 'center'
                         ? 'text-center'
                         : 'text-left'
-                    } ${col.sortable ? 'cursor-pointer select-none hover:bg-slate-100/80' : ''} ${
+                    } ${col.sortable ? 'cursor-pointer select-none hover:bg-sand-300/60' : ''} ${
                       col.className || ''
                     }`}
                     onClick={() => col.sortable && handleSort(col.key)}
                   >
                     <div
-                      className={`inline-flex items-center gap-1.5 ${
+                      className={`inline-flex items-center gap-1 ${
                         col.align === 'right'
                           ? 'justify-end'
                           : col.align === 'center'
@@ -135,15 +132,15 @@ export function DataTable<T extends Record<string, any>>({
                     >
                       <span>{col.header}</span>
                       {col.sortable && (
-                        <span className="text-slate-400">
+                        <span className="text-charcoal-400">
                           {isSorted ? (
                             sortDirection === 'asc' ? (
-                              <ChevronUp className="w-3.5 h-3.5 text-blue-600" />
+                              <ChevronUp className="w-3 h-3 text-charcoal-700" />
                             ) : (
-                              <ChevronDown className="w-3.5 h-3.5 text-blue-600" />
+                              <ChevronDown className="w-3 h-3 text-charcoal-700" />
                             )
                           ) : (
-                            <ChevronsUpDown className="w-3.5 h-3.5" />
+                            <ChevronsUpDown className="w-3 h-3" />
                           )}
                         </span>
                       )}
@@ -153,7 +150,7 @@ export function DataTable<T extends Record<string, any>>({
               })}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
+          <tbody className="divide-y divide-sand-200 text-sm text-charcoal-700">
             {paginatedData.map((item, index) => {
               const key = keyExtractor(item);
               return (
@@ -161,13 +158,13 @@ export function DataTable<T extends Record<string, any>>({
                   key={key}
                   onClick={() => onRowClick && onRowClick(item)}
                   className={`transition-colors ${
-                    onRowClick ? 'cursor-pointer hover:bg-blue-50/40' : 'hover:bg-slate-50/60'
+                    onRowClick ? 'cursor-pointer hover:bg-sand-200' : 'hover:bg-sand-200/60'
                   }`}
                 >
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      className={`py-3.5 px-4 ${
+                      className={`py-3 px-4 ${
                         col.align === 'right'
                           ? 'text-right'
                           : col.align === 'center'
@@ -186,39 +183,37 @@ export function DataTable<T extends Record<string, any>>({
       </div>
 
       {showPagination && totalPages > 1 && (
-        <div className="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+        <div className="px-4 py-3 bg-sand-200 border-t border-sand-300 flex items-center justify-between text-xs text-charcoal-500">
           <div>
             Showing{' '}
-            <span className="font-semibold text-slate-800">
+            <span className="font-semibold text-charcoal-800">
               {(currentPage - 1) * pageSize + 1}
             </span>{' '}
-            to{' '}
-            <span className="font-semibold text-slate-800">
+            –{' '}
+            <span className="font-semibold text-charcoal-800">
               {Math.min(currentPage * pageSize, sortedData.length)}
             </span>{' '}
-            of <span className="font-semibold text-slate-800">{sortedData.length}</span> results
+            of <span className="font-semibold text-charcoal-800">{sortedData.length}</span>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="sm"
               disabled={currentPage <= 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="p-1 px-2 text-xs"
             >
-              <ChevronLeft className="w-3.5 h-3.5 mr-0.5" /> Prev
+              <ChevronLeft className="w-3.5 h-3.5" /> Prev
             </Button>
-            <span className="px-2 font-medium text-slate-700">
-              Page {currentPage} of {totalPages}
+            <span className="px-2 font-medium text-charcoal-700">
+              {currentPage} / {totalPages}
             </span>
             <Button
               variant="outline"
               size="sm"
               disabled={currentPage >= totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="p-1 px-2 text-xs"
             >
-              Next <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
+              Next <ChevronRight className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>

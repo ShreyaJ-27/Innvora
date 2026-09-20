@@ -33,8 +33,9 @@ export const Activity: React.FC<ActivityProps> = ({
   return (
     <PageContainer>
       <PageHeader
+        eyebrow="Event Ledger"
         title="Inventory Activity"
-        subtitle="Track stock movements and inventory changes across your network."
+        subtitle="Real-time stock movement events across your fulfillment network."
       />
 
       <div className="space-y-6">
