@@ -39,7 +39,7 @@ Inventory is therefore not just a number. It is the current projection of a stre
 
 <p align="center">
   <img
-    src="docs/assets/innvora-hero.webp"
+    src="docs/Scre.webp"
     alt="Innvora — Intelligent Inventory Operations Platform"
     width="100%"
   />
