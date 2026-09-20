@@ -398,6 +398,199 @@
 }
 .animate-ticker       { animation: ticker-scroll 18s linear infinite; }
 .animate-hub          { animation: hub-transition 0.35s ease-out both; }
+.animate-float-slow   { animation: float-slow 4s ease-in-out infinite; }
+.animate-float-alt    { animation: float-slow 5s ease-in-out infinite reverse; }
+.animate-float-z      { animation: float-z 6s ease-in-out infinite; }
+.animate-pulse-glow   { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-orbit-slow   { animation: orbit-slow 14s linear infinite; }
+.animate-orbit-rev    { animation: orbit-slow 18s linear infinite reverse; }
+.animate-data-flow    { animation: data-flow 2.4s ease-in-out infinite; }
+.animate-glow-pulse   { animation: glow-pulse 3s ease-in-out infinite; }
+.animate-scan-line    { animation: scan-line 2.8s linear infinite; }
+.animate-particle     { animation: particle-float 4s ease-in-out infinite; }
+.animate-particle-alt { animation: particle-float 5.5s ease-in-out infinite reverse; }
+.animate-counter-up   { animation: counter-up 0.6s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes float-z {
+  0%, 100% { transform: translateY(0px) translateZ(0px); }
+  33% { transform: translateY(-5px) translateZ(12px); }
+  66% { transform: translateY(3px) translateZ(-5px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107,124,61,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(107,124,61,0); }
+}
+
+@keyframes orbit-slow {
+  from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+}
+
+@keyframes data-flow {
+  0%   { stroke-dashoffset: 300; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px 2px rgba(107,124,61,0.2), 0 0 30px 5px rgba(107,124,61,0.05); }
+  50%       { box-shadow: 0 0 18px 5px rgba(107,124,61,0.45), 0 0 60px 12px rgba(107,124,61,0.12); }
+}
+
+@keyframes scan-line {
+  0%   { transform: translateY(-100%) scaleX(1.2); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(800%) scaleX(1.2); opacity: 0; }
+}
+
+@keyframes particle-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  25%  { transform: translate(12px, -18px) scale(1.2); opacity: 1; }
+  50%  { transform: translate(-8px, -30px) scale(0.85); opacity: 0.4; }
+  75%  { transform: translate(16px, -12px) scale(1.1); opacity: 0.9; }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 3D & Isometric Utilities ──────────────────────────────────────────────── */
+.perspective-800  { perspective: 800px; }
+.perspective-1000 { perspective: 1000px; }
+.perspective-1200 { perspective: 1200px; }
+.perspective-1600 { perspective: 1600px; }
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 { transform: translateZ(10px); }
+.translate-z-20 { transform: translateZ(20px); }
+.translate-z-30 { transform: translateZ(30px); }
+.translate-z-40 { transform: translateZ(40px); }
+.translate-z-50 { transform: translateZ(50px); }
+.translate-z-60 { transform: translateZ(60px); }
+
+/* Isometric 3D Deck resting angle */
+.iso-deck {
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(11deg) rotateY(-9deg) rotateZ(1.5deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+}
+.iso-deck:hover {
+  transform: perspective(1200px) rotateX(4deg) rotateY(-3deg) rotateZ(0deg) scale(1.015);
+}
+
+/* 3D Tactile Card Hover */
+.card-3d-hover {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.2s ease;
+  transform-style: preserve-3d;
+}
+.card-3d-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 36px -14px rgba(39,37,34,0.22), 0 0 0 1px rgba(255,255,255,0.4) inset;
+}
+
+/* 3D Floating chip */
+.chip-3d-float {
+  box-shadow: 0 12px 28px -6px rgba(39,37,34,0.3), 0 4px 10px -2px rgba(39,37,34,0.15), inset 0 1px 1px rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+}
+
+/* 3D Bevel Edge */
+.bevel-3d {
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1px 0 rgba(39, 37, 34, 0.15),
+    0 12px 32px -10px rgba(39, 37, 34, 0.25);
+}
+
+/* 3D Arch Node Card */
+.arch-node-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s ease, border-color 0.25s ease;
+  position: relative;
+}
+.arch-node-3d:hover {
+  transform: translateY(-6px) perspective(600px) rotateX(4deg) scale(1.02);
+  box-shadow: 0 24px 48px -16px rgba(0,0,0,0.45), 0 0 0 1px rgba(140,122,101,0.4);
+}
+
+/* Pipeline Stage Card */
+.pipeline-stage-3d {
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.pipeline-stage-3d::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, currentColor, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pipeline-stage-3d:hover {
+  transform: translateX(4px);
+}
+.pipeline-stage-3d:hover::after {
+  opacity: 1;
+}
+
+/* Neon data flow line */
+.data-flow-line {
+  stroke-dasharray: 300;
+  animation: data-flow 2.4s ease-in-out infinite;
+}
+.data-flow-line-2 {
+  stroke-dasharray: 300;
+  animation: data-flow 2.4s ease-in-out 0.8s infinite;
+}
+.data-flow-line-3 {
+  stroke-dasharray: 300;
+  animation: data-flow 2.4s ease-in-out 1.6s infinite;
+}
+
+/* Glowing metric value */
+.metric-glow {
+  text-shadow: 0 0 20px currentColor;
+}
+
+/* Hero orb glow ring */
+.orb-glow-green {
+  box-shadow: 0 0 30px 10px rgba(107,124,61,0.25), 0 0 60px 20px rgba(107,124,61,0.1);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+.orb-glow-terracotta {
+  box-shadow: 0 0 30px 10px rgba(198,116,90,0.25), 0 0 60px 20px rgba(198,116,90,0.1);
+  animation: glow-pulse 4s ease-in-out infinite reverse;
+}
+
+/* Section depth layer */
+.section-depth {
+  position: relative;
+}
+.section-depth::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(140,122,101,0.6) 30%, rgba(198,180,159,0.8) 50%, rgba(140,122,101,0.6) 70%, transparent 100%);
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

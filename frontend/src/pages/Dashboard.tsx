@@ -20,6 +20,7 @@ import { ErrorState } from '../components/common/ErrorState';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { PageContainer } from '../components/layout/PageContainer';
 import { LOCATIONS } from '../components/layout/LocationSelector';
+import { TiltCard3D } from '../components/common/TiltCard3D';
 import { ProductInventory } from '../types/inventory';
 import { useInventoryHealth } from '../hooks/useInventoryHealth';
 import { useInventory } from '../hooks/useInventory';
