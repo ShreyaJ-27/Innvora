@@ -1,7 +1,7 @@
 import { ApiErrorResponse, ApiSuccessResponse } from '../types/api';
 
 // Use the deployed API Gateway URL — set via VITE_API_BASE_URL in .env.local
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '') ?? '';
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/+$/, '') ?? '';
 
 export class ApiError extends Error {
   code: string;
@@ -19,7 +19,7 @@ export async function apiClient<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const url = `${API_BASE_URL}/${endpoint.replace(/^\//, '')}`;
+  const url = `${API_BASE_URL}/${endpoint.replace(/^\/+/, '')}`;
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',

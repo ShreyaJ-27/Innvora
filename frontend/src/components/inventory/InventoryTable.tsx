@@ -115,8 +115,8 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
       isLoading={isLoading}
       onRowClick={onSelectProduct}
       pageSize={8}
-      emptyTitle="No inventory matches found"
-      emptyDescription="Try adjusting your search query, location selection, or health status filter."
+      emptyTitle="No inventory items yet"
+      emptyDescription="Inventory will appear here when stock is added."
     />
   );
 };

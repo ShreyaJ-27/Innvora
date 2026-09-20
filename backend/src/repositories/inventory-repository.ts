@@ -135,7 +135,9 @@ export class DynamoDbInventoryRepository implements InventoryRepository {
     );
 
     const items = (result.Items ?? []) as Record<string, unknown>[];
-    return items.map((item) => normalizeInventoryItem(item));
+    return items
+      .filter((item) => typeof item.PK === 'string' && item.PK.startsWith('LOCATION#'))
+      .map((item) => normalizeInventoryItem(item));
   }
 
   public async listInventoryByLocation(locationId: string): Promise<InventoryState[]> {

@@ -1,0 +1,10 @@
+{
+  "name": "stockpulse",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed:demo": "npx tsx scripts/seed-demo-data.ts",
+    "seed:reset": "npx tsx scripts/reset-demo-data.ts"
+  }
+}

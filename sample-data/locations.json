@@ -1,0 +1,20 @@
+[
+  {
+    "locationId": "LOC-BLR-01",
+    "locationName": "Bengaluru Tech Park Warehouse",
+    "region": "South",
+    "address": "Plot 14, EPIP Zone, Whitefield, Bengaluru, Karnataka 560066"
+  },
+  {
+    "locationId": "LOC-BOM-01",
+    "locationName": "Mumbai Central Fulfillment Hub",
+    "region": "West",
+    "address": "G Block, Bandra Kurla Complex, Mumbai, Maharashtra 400051"
+  },
+  {
+    "locationId": "LOC-DEL-02",
+    "locationName": "Delhi NCR Logistics Depot",
+    "region": "North",
+    "address": "Sector 18, Udyog Vihar Phase IV, Gurugram, Haryana 122016"
+  }
+]

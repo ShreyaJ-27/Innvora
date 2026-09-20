@@ -824,22 +824,26 @@
        ],
        "Resource": [
         {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":es:ap-south-1:119618549031:domain/stockpulse-events"
+          ]
          ]
         },
         {
          "Fn::Join": [
           "",
           [
+           "arn:",
            {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
+            "Ref": "AWS::Partition"
            },
-           "/*"
+           ":es:ap-south-1:119618549031:domain/stockpulse-events/*"
           ]
          ]
         }
@@ -868,22 +872,26 @@
        ],
        "Resource": [
         {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":es:ap-south-1:119618549031:domain/stockpulse-events"
+          ]
          ]
         },
         {
          "Fn::Join": [
           "",
           [
+           "arn:",
            {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
+            "Ref": "AWS::Partition"
            },
-           "/*"
+           ":es:ap-south-1:119618549031:domain/stockpulse-events/*"
           ]
          ]
         }
@@ -912,22 +920,26 @@
        ],
        "Resource": [
         {
-         "Fn::GetAtt": [
-          "StockPulseOpenSearchE1A70830",
-          "Arn"
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":es:ap-south-1:119618549031:domain/stockpulse-events"
+          ]
          ]
         },
         {
          "Fn::Join": [
           "",
           [
+           "arn:",
            {
-            "Fn::GetAtt": [
-             "StockPulseOpenSearchE1A70830",
-             "Arn"
-            ]
+            "Ref": "AWS::Partition"
            },
-           "/*"
+           ":es:ap-south-1:119618549031:domain/stockpulse-events/*"
           ]
          ]
         }
@@ -999,9 +1011,6 @@
      "SubnetIds": [
       {
        "Ref": "StockPulseVpcPrivateSubnet1SubnetC140FC60"
-      },
-      {
-       "Ref": "StockPulseVpcPrivateSubnet2Subnet6DC3ABE5"
       }
      ]
     }

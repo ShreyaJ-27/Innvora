@@ -54,7 +54,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:253:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:263:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -69,7 +69,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:254:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:264:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -84,7 +84,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:255:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:265:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -99,7 +99,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:266:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -114,7 +114,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:267:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -129,7 +129,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:268:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -144,7 +144,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:269:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -159,7 +159,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:5)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:270:5)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -402,7 +402,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Role2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:106:27)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:110:27)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -418,7 +418,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Role2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:111:27)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:115:27)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -434,7 +434,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Role2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:116:34)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:120:34)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -450,8 +450,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new LogGroup2 in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:138:19)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:148:26)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:142:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:152:26)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -467,8 +467,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:148:26)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:152:26)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -484,8 +484,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new LogGroup2 in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:138:19)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:149:23)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:142:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:153:23)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -501,8 +501,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:149:23)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:153:23)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -518,8 +518,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new LogGroup2 in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:138:19)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:150:23)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:142:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:154:23)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -535,8 +535,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:150:23)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:154:23)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -552,8 +552,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new LogGroup2 in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:138:19)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:151:24)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:142:19)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:155:24)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -569,8 +569,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:151:24)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:155:24)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -586,7 +586,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:152:30)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:156:30)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -602,7 +602,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new CustomResource2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:220:33)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:230:33)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -618,7 +618,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -634,7 +634,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -650,7 +650,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1064,7 +1064,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...NodejsFunction.addToRolePolicy in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:186:22)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:190:22)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1080,8 +1080,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:148:26)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:152:26)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1097,7 +1097,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...NodejsFunction.addEventSource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:226:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:236:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1113,8 +1113,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NodejsFunction in aws-cdk-lib...",
-        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:123:18)",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:151:24)",
+        "createFunction (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:127:18)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:155:24)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1130,7 +1130,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1146,7 +1146,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1162,7 +1162,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1247,7 +1247,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:232:17)"
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:242:17)"
       ]
     }
   ],
@@ -1260,7 +1260,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:244:32)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:254:32)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1276,7 +1276,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:251:14)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:261:14)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1292,7 +1292,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:244:32)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:254:32)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1306,7 +1306,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:245:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:255:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1322,7 +1322,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:245:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:255:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1338,7 +1338,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:245:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:255:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1354,7 +1354,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:246:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1370,7 +1370,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:247:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1386,7 +1386,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:248:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1402,7 +1402,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:249:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1418,7 +1418,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1434,7 +1434,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:251:14)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:261:14)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1448,7 +1448,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:251:38)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:261:38)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1464,7 +1464,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:251:38)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:261:38)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1480,7 +1480,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:251:38)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:261:38)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1496,7 +1496,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:246:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1510,7 +1510,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:246:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1526,7 +1526,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:246:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1542,7 +1542,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:246:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:256:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1558,7 +1558,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:247:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1572,7 +1572,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:247:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1588,7 +1588,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:247:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1604,7 +1604,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:247:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:257:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1620,7 +1620,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:248:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1634,7 +1634,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:248:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1650,7 +1650,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:248:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1666,7 +1666,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:248:37)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:258:37)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1682,7 +1682,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:249:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1696,7 +1696,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:249:42)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:42)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1712,7 +1712,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:249:42)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:42)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1728,7 +1728,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:249:42)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:259:42)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1744,7 +1744,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:15)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:15)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1758,7 +1758,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:39)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:39)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."
@@ -1774,7 +1774,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addResource in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:39)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:39)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)"
       ]
     }
@@ -1788,7 +1788,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:67)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:67)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1804,7 +1804,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:67)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:67)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals..."
@@ -1820,7 +1820,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:250:67)",
+        "new StockPulseStack (D:\\stock-pulse\\infrastructure\\lib\\stock-pulse-stack.ts:260:67)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:6:1)",
         "<anonymous> (D:\\stock-pulse\\infrastructure\\bin\\stock-pulse.ts:11:2)",
         "...node internals, tsx..."

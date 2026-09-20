@@ -9,7 +9,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint . --ext .ts --max-warnings 0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seed:demo": "tsx ../scripts/seed-demo-data.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.699.0",

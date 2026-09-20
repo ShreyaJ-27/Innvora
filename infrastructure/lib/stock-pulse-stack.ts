@@ -69,7 +69,11 @@ export class StockPulseStack extends cdk.Stack {
       capacity: { dataNodes: 1, dataNodeInstanceType: 't3.small.search' },
       ebs: { volumeSize: 10, volumeType: ec2.EbsDeviceVolumeType.GP3 },
       vpc,
-      vpcSubnets: [{ subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS }],
+      vpcSubnets: [
+        {
+          subnets: [vpc.privateSubnets[0]]
+        }
+      ],
       securityGroups: [openSearchSecurityGroup],
       zoneAwareness: { enabled: false },
       nodeToNodeEncryption: true,
@@ -190,6 +194,12 @@ export class StockPulseStack extends cdk.Stack {
     }));
 
     const domainResource = domain.node.defaultChild as opensearch.CfnDomain;
+    const domainPolicyArn = this.formatArn({
+      service: 'es',
+      region: this.region,
+      resource: 'domain',
+      resourceName: 'stockpulse-events'
+    });
     const processorPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: processorRoleName });
     const searchApiPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: searchApiRoleName });
     const indexInitializerPrincipalArn = this.formatArn({ service: 'iam', region: '', resource: 'role', resourceName: indexInitializerRoleName });
@@ -200,19 +210,19 @@ export class StockPulseStack extends cdk.Stack {
           Effect: 'Allow',
           Principal: { AWS: processorPrincipalArn },
           Action: ['es:ESHttpPut'],
-          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+          Resource: [domainPolicyArn, `${domainPolicyArn}/*`]
         },
         {
           Effect: 'Allow',
           Principal: { AWS: searchApiPrincipalArn },
           Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPost'],
-          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+          Resource: [domainPolicyArn, `${domainPolicyArn}/*`]
         },
         {
           Effect: 'Allow',
           Principal: { AWS: indexInitializerPrincipalArn },
           Action: ['es:ESHttpGet', 'es:ESHttpHead', 'es:ESHttpPut'],
-          Resource: [domain.domainArn, `${domain.domainArn}/*`]
+          Resource: [domainPolicyArn, `${domainPolicyArn}/*`]
         }
       ]
     };

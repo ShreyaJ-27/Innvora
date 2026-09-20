@@ -151,6 +151,33 @@ describe('inventory event processor', () => {
     await expect(processor.processEvent(buildEvent('SALE', -2, 'evt_missing'))).rejects.toThrow('Inventory record not found for event');
   });
 
+  it('initializes new inventory state on RESTOCK when inventory is missing', async () => {
+    let savedInventory: any = null;
+    const repo: InventoryRepository = {
+      getInventory: vi.fn().mockResolvedValue(null),
+      putInventory: vi.fn().mockImplementation(async (inv) => {
+        savedInventory = inv;
+        return inv;
+      }),
+      updateInventoryQuantity: vi.fn(),
+      listAllInventory: vi.fn(),
+      listInventoryByLocation: vi.fn(),
+      listLowStockInventory: vi.fn()
+    };
+
+    const processor = new InventoryEventProcessor({
+      inventoryRepository: repo,
+      processedEventStore: new InMemoryProcessedEventStore(),
+      indexer: new InMemoryEventIndexer()
+    });
+
+    const result = await processor.processEvent(buildEvent('RESTOCK', 45, 'evt_initial_restock'));
+    expect(result.quantity).toBe(45);
+    expect(result.availableQuantity).toBe(45);
+    expect(savedInventory).not.toBeNull();
+    expect(savedInventory.quantity).toBe(45);
+  });
+
   it('fails when DynamoDB update throws', async () => {
     const repo: InventoryRepository = {
       getInventory: vi.fn().mockResolvedValue(baseInventory),

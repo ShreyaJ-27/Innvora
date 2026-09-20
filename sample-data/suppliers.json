@@ -1,0 +1,26 @@
+[
+  {
+    "supplierId": "SUP-IND-01",
+    "name": "Bharat Electronics Components Ltd",
+    "leadTimeDays": 5,
+    "reliabilityScore": 96
+  },
+  {
+    "supplierId": "SUP-IND-02",
+    "name": "Zenith Power & Audio Solutions Mumbai",
+    "leadTimeDays": 7,
+    "reliabilityScore": 92
+  },
+  {
+    "supplierId": "SUP-IND-03",
+    "name": "Delta Cables & Ergonomics Pune",
+    "leadTimeDays": 4,
+    "reliabilityScore": 98
+  },
+  {
+    "supplierId": "SUP-IND-04",
+    "name": "Apex Peripherals & Smart Devices Noida",
+    "leadTimeDays": 10,
+    "reliabilityScore": 88
+  }
+]

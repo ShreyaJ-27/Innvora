@@ -55,20 +55,34 @@ export class InventoryEventProcessor {
       });
     }
 
-    const currentInventory = await this.dependencies.inventoryRepository.getInventory(
+    let currentInventory = await this.dependencies.inventoryRepository.getInventory(
       event.productId,
       event.locationId
     );
 
     if (!currentInventory) {
-      throw new AppError('Inventory record not found for event', {
-        statusCode: 404,
-        code: 'INVENTORY_NOT_FOUND',
-        details: {
+      if (['RESTOCK', 'ADJUSTMENT', 'TRANSFER_IN', 'RETURN'].includes(event.eventType)) {
+        currentInventory = {
           productId: event.productId,
-          locationId: event.locationId
-        }
-      });
+          sku: event.sku,
+          locationId: event.locationId,
+          quantity: 0,
+          reservedQuantity: 0,
+          availableQuantity: 0,
+          reorderPoint: 20,
+          safetyStock: 10,
+          lastUpdated: event.timestamp
+        };
+      } else {
+        throw new AppError('Inventory record not found for event', {
+          statusCode: 404,
+          code: 'INVENTORY_NOT_FOUND',
+          details: {
+            productId: event.productId,
+            locationId: event.locationId
+          }
+        });
+      }
     }
 
     const previousQuantity = currentInventory.quantity;
